@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/Base.astro";
+import OfferCard from "../components/OfferCard.astro";
+import CtaLink from "../components/CtaLink.astro";
+import { offers, plans, bundle, foundingOffer, terms } from "../site";
+---
+
+<Base title="Services & pricing" description="Fixed prices for websites with booking, monthly care plans, data checkups and owner dashboards.">
+  <section class="mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6">
+    <h1 class="text-4xl font-extrabold md:text-6xl">Services & pricing</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">
+      Fixed prices, written down before I start. Every build comes with its first month of care free, so you're never
+      left with a site nobody looks after.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-14 sm:px-6">
+    <h2 class="text-2xl font-bold">Builds</h2>
+    <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {offers.map((offer) => <OfferCard offer={offer} />)}
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-sunk">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <h2 class="text-2xl font-bold">Monthly plans</h2>
+      <p class="mt-2 text-muted">Month to month. Cancel with 30 days' notice.</p>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        {plans.map((offer) => <OfferCard offer={offer} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl gap-6 px-4 py-14 sm:px-6 md:grid-cols-2">
+    <article class="rounded-card border border-line bg-card p-8">
+      <p class="text-sm font-semibold uppercase tracking-wide text-accent">Bundle</p>
+      <h2 class="mt-2 text-2xl font-bold">{bundle.name}: {bundle.price}</h2>
+      <p class="mt-2 text-muted">{bundle.note}</p>
+    </article>
+    <article class="rounded-card border border-line bg-card p-8">
+      <p class="text-sm font-semibold uppercase tracking-wide text-accent-2">Founding clients</p>
+      <h2 class="mt-2 text-2xl font-bold">15% off for my first 3 clients</h2>
+      <p class="mt-2 text-muted">{foundingOffer}</p>
+    </article>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+    <h2 class="text-2xl font-bold">The fine print, in plain English</h2>
+    <ul class="mt-5 grid gap-3 md:grid-cols-2">
+      {terms.map((t) => <li class="rounded-control border border-line bg-card px-4 py-3 text-sm">{t}</li>)}
+    </ul>
+    <div class="mt-10">
+      <CtaLink href="/contact/#book">Book a free call</CtaLink>
+    </div>
+  </section>
+</Base>

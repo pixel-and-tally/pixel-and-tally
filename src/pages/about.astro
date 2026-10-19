@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaLink from "../components/CtaLink.astro";
+import { site } from "../site";
+---
+
+<Base title="About" description={`${site.owner} builds websites and dashboards for Charlotte restaurants and service businesses.`}>
+  <section class="mx-auto max-w-3xl px-4 pb-16 pt-14 sm:px-6">
+    <p class="text-sm font-semibold uppercase tracking-wide text-accent-2">About</p>
+    <h1 class="mt-3 text-4xl font-extrabold md:text-6xl">Hi, I'm Blake.</h1>
+    <div class="mt-8 flex flex-col gap-5 text-lg leading-relaxed">
+      <p>
+        I'm a Charlotte native and an NC State business and IT grad. By day I'm a business operations analyst, building
+        SQL and Tableau dashboards that sales directors use to run teams across four countries, for Fortune 500 utility
+        clients.
+      </p>
+      <p>
+        I also spent a summer in tax accounting at a Charlotte CPA firm, so I know what a P&L and a QuickBooks export
+        look like.
+      </p>
+      <p>
+        Now I bring the same work to local owners: a site that gets you booked, and numbers you can read in five
+        minutes. Most web freelancers can't build a dashboard, and most analysts don't build websites. I do both.
+      </p>
+      <p>
+        You text me, I answer. Fixed prices agreed up front, plain-English explanations, no account managers and no long
+        contracts. I use modern tools, AI included, to work faster, but you're always dealing with me.
+      </p>
+    </div>
+
+    <h2 class="mt-12 text-2xl font-bold">Who I work with</h2>
+    <p class="mt-3 text-lg text-muted">
+      Owner-run restaurants, salons, barbers, detailers, cleaners, trades and studios with 1 to 20 staff. {site.serviceArea}
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-3">
+      <CtaLink href="/contact/#book">Book a free call</CtaLink>
+      {site.linkedin && <CtaLink href={site.linkedin} variant="ghost">LinkedIn</CtaLink>}
+    </div>
+  </section>
+</Base>

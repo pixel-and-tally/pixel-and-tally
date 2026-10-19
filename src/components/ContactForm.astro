@@ -1,0 +1,152 @@
+---
+// Netlify Forms: Netlify finds this form in the built HTML (data-netlify) and
+// stores submissions in the site's Forms tab. Turn on email notifications there.
+// Without JavaScript the browser's own validation still runs.
+const fields = [
+  { id: "name", label: "Your name", type: "text", autocomplete: "name", error: "Tell me your name." },
+  { id: "email", label: "Email", type: "email", autocomplete: "email", error: "Enter an email I can reply to, like you@business.com." },
+  { id: "business", label: "Business name", type: "text", autocomplete: "organization", error: "Tell me the name of your business." },
+  { id: "location", label: "City and state", type: "text", autocomplete: "address-level2", error: "Tell me where the business is. I work with US businesses only.", hint: "I work with US businesses only." },
+] as const;
+---
+
+<form
+  id="message"
+  name="contact"
+  method="POST"
+  action="/thanks/"
+  data-netlify="true"
+  netlify-honeypot="company-website"
+  novalidate
+  class="flex flex-col gap-5 rounded-card border border-line bg-card p-6 sm:p-8"
+  data-contact-form
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="hidden">
+    <label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div
+    data-form-error
+    role="alert"
+    hidden
+    class="rounded-control border border-danger/30 bg-danger/5 px-4 py-3 text-sm font-medium text-danger"
+  >
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    {
+      fields.map((f) => (
+        <div class="flex flex-col gap-1.5">
+          <label for={f.id} class="text-sm font-semibold">
+            {f.label}
+          </label>
+          <input
+            id={f.id}
+            name={f.id}
+            type={f.type}
+            autocomplete={f.autocomplete}
+            required
+            data-error={f.error}
+            aria-describedby={`${f.id}-error${"hint" in f ? ` ${f.id}-hint` : ""}`}
+            class="rounded-control border border-line bg-paper px-3.5 py-2.5 text-base outline-none focus:border-ink aria-[invalid=true]:border-danger"
+          />
+          {"hint" in f && (
+            <p id={`${f.id}-hint`} class="text-xs text-muted">
+              {f.hint}
+            </p>
+          )}
+          <p id={`${f.id}-error`} class="text-sm text-danger" hidden />
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="flex flex-col gap-1.5">
+    <label for="interest" class="text-sm font-semibold">What do you need help with?</label>
+    <select
+      id="interest"
+      name="interest"
+      required
+      data-error="Pick the closest option. Not sure is fine."
+      aria-describedby="interest-error"
+      class="rounded-control border border-line bg-paper px-3.5 py-2.5 text-base outline-none focus:border-ink aria-[invalid=true]:border-danger"
+    >
+      <option value="">Choose one</option>
+      <option>A new website or booking</option>
+      <option>Fixing my current website</option>
+      <option>A dashboard or my numbers</option>
+      <option>Both web and data</option>
+      <option>Not sure yet</option>
+    </select>
+    <p id="interest-error" class="text-sm text-danger" hidden></p>
+  </div>
+
+  <div class="flex flex-col gap-1.5">
+    <label for="details" class="text-sm font-semibold">What's going on?</label>
+    <textarea
+      id="details"
+      name="details"
+      rows="5"
+      required
+      minlength="10"
+      data-error="A sentence or two is plenty. What's not working today?"
+      aria-describedby="details-error"
+      class="rounded-control border border-line bg-paper px-3.5 py-2.5 text-base outline-none focus:border-ink aria-[invalid=true]:border-danger"
+      placeholder="For example: people keep calling to book and I miss half of them."></textarea>
+    <p id="details-error" class="text-sm text-danger" hidden></p>
+  </div>
+
+  <button
+    type="submit"
+    class="inline-flex w-full items-center justify-center rounded-control bg-accent px-5 py-3 text-base font-semibold text-inverse transition-colors hover:bg-accent-strong sm:w-fit"
+  >
+    Send it to Blake
+  </button>
+  <p class="text-xs text-muted">I reply within one business day. Your details are only used to reply to you.</p>
+</form>
+
+<script>
+  // Inline errors, a form-level summary, and focus on the first bad field.
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  if (form) {
+    const summary = form.querySelector<HTMLElement>("[data-form-error]")!;
+    const controls = Array.from(
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("[required]"),
+    );
+
+    const show = (el: (typeof controls)[number]) => {
+      const msg = document.getElementById(`${el.id}-error`);
+      const bad = !el.checkValidity();
+      el.setAttribute("aria-invalid", String(bad));
+      if (msg) {
+        msg.textContent = bad ? (el.dataset.error ?? "Check this field.") : "";
+        msg.hidden = !bad;
+      }
+      return bad;
+    };
+
+    controls.forEach((el) => {
+      el.addEventListener("blur", () => {
+        if (el.value) show(el);
+      });
+      el.addEventListener("input", () => {
+        if (el.getAttribute("aria-invalid") === "true") show(el);
+      });
+    });
+
+    form.addEventListener("submit", (event) => {
+      const bad = controls.filter(show);
+      if (bad.length === 0) {
+        summary.hidden = true;
+        return;
+      }
+      event.preventDefault();
+      summary.textContent =
+        bad.length === 1 ? "One field needs a fix before this can send." : `${bad.length} fields need a fix before this can send.`;
+      summary.hidden = false;
+      bad[0].focus();
+      bad[0].scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+  }
+</script>

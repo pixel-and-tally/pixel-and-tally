@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import BookingEmbed from "../components/BookingEmbed.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { site } from "../site";
+---
+
+<Base title="Contact" description={`Book a free ${site.callLength} call or send ${site.owner} a note.`}>
+  <section class="mx-auto max-w-4xl px-4 pb-8 pt-14 sm:px-6">
+    <h1 class="text-4xl font-extrabold md:text-6xl">Let's talk</h1>
+    <p class="mt-4 max-w-2xl text-lg text-muted">
+      Pick a time for a free {site.callLength} call, or send a note and I'll get back to you within one business day.
+      {site.phone && <>You can also text me at <a href={`sms:${site.phone}`} class="font-semibold text-ink underline">{site.phone}</a>.</>}
+    </p>
+  </section>
+
+  <section id="book" class="mx-auto max-w-4xl scroll-mt-24 px-4 pb-12 sm:px-6">
+    <h2 class="mb-4 text-2xl font-bold">Book a call</h2>
+    <BookingEmbed />
+  </section>
+
+  <section class="mx-auto max-w-4xl scroll-mt-24 px-4 pb-16 sm:px-6">
+    <h2 class="mb-4 text-2xl font-bold">Or send a note</h2>
+    <ContactForm />
+  </section>
+</Base>
