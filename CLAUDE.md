@@ -14,7 +14,9 @@ This repo is also the template for client sites: a client re-skin should only to
 ## Stack
 
 - Astro 5 static site, Tailwind 4 (CSS-first tokens in `src/theme.css`), TypeScript strict.
-- Hosted on Netlify (`netlify.toml`). Contact form uses Netlify Forms (`data-netlify`).
+- Hosted on Vercel (`@astrojs/vercel`, `vercel.json`). Pages are static; only `src/pages/api/contact.ts`
+  runs as a function. It emails form notes through Resend (env: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`,
+  optional `CONTACT_FROM_EMAIL`). Validation lives in `src/lib/contact.ts`.
 - Booking is a Cal.com inline embed, switched on by `site.calLink` in `src/site.ts`.
 - Node 22. `npm run dev`, `npm run verify` (astro check + vitest + build).
 - `vite` is pinned via `overrides` in package.json so Tailwind's Vite plugin and Astro share one

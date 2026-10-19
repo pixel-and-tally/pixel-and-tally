@@ -1,7 +1,8 @@
 ---
-// Netlify Forms: Netlify finds this form in the built HTML (data-netlify) and
-// stores submissions in the site's Forms tab. Turn on email notifications there.
-// Without JavaScript the browser's own validation still runs.
+// Posts to /api/contact (a Vercel function), which emails the note to the owner.
+// With JavaScript the form sends in place and shows errors inline; without it,
+// the browser's own validation runs and the endpoint redirects.
+import { honeypotField } from "../lib/contact";
 const fields = [
   { id: "name", label: "Your name", type: "text", autocomplete: "name", error: "Tell me your name." },
   { id: "email", label: "Email", type: "email", autocomplete: "email", error: "Enter an email I can reply to, like you@business.com." },
@@ -14,21 +15,19 @@ const fields = [
   id="message"
   name="contact"
   method="POST"
-  action="/thanks/"
-  data-netlify="true"
-  netlify-honeypot="company-website"
+  action="/api/contact"
   novalidate
   class="flex flex-col gap-5 rounded-card border border-line bg-card p-6 sm:p-8"
   data-contact-form
 >
-  <input type="hidden" name="form-name" value="contact" />
-  <p class="hidden">
-    <label>Leave this empty: <input name="company-website" tabindex="-1" autocomplete="off" /></label>
+  <p class="hidden" aria-hidden="true">
+    <label>Leave this empty: <input name={honeypotField} tabindex="-1" autocomplete="off" /></label>
   </p>
 
   <div
     data-form-error
     role="alert"
+    tabindex="-1"
     hidden
     class="rounded-control border border-danger/30 bg-danger/5 px-4 py-3 text-sm font-medium text-danger"
   >
@@ -99,6 +98,7 @@ const fields = [
 
   <button
     type="submit"
+    data-submit
     class="inline-flex w-full items-center justify-center rounded-control bg-accent px-5 py-3 text-base font-semibold text-inverse transition-colors hover:bg-accent-strong sm:w-fit"
   >
     Send it to Blake
@@ -135,18 +135,64 @@ const fields = [
       });
     });
 
-    form.addEventListener("submit", (event) => {
+    const button = form.querySelector<HTMLButtonElement>("[data-submit]")!;
+    const sendFailed =
+      "That didn't send. Please try again in a minute, or message me on LinkedIn if it keeps happening.";
+
+    const showSummary = (text: string, focus: HTMLElement) => {
+      summary.textContent = text;
+      summary.hidden = false;
+      focus.focus();
+      focus.scrollIntoView({ block: "center", behavior: "smooth" });
+    };
+
+    // A no-JavaScript submit that failed comes back as ?error=1.
+    if (new URLSearchParams(location.search).has("error")) {
+      summary.textContent = sendFailed;
+      summary.hidden = false;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
       const bad = controls.filter(show);
-      if (bad.length === 0) {
-        summary.hidden = true;
+      if (bad.length > 0) {
+        showSummary(
+          bad.length === 1 ? "One field needs a fix before this can send." : `${bad.length} fields need a fix before this can send.`,
+          bad[0],
+        );
         return;
       }
-      event.preventDefault();
-      summary.textContent =
-        bad.length === 1 ? "One field needs a fix before this can send." : `${bad.length} fields need a fix before this can send.`;
-      summary.hidden = false;
-      bad[0].focus();
-      bad[0].scrollIntoView({ block: "center", behavior: "smooth" });
+
+      summary.hidden = true;
+      button.disabled = true;
+      button.textContent = "Sending...";
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (res.ok) {
+          location.href = "/thanks/";
+          return;
+        }
+        const body = (await res.json().catch(() => ({}))) as { invalid?: string[] };
+        const firstBad = body.invalid?.map((id) => controls.find((c) => c.id === id)).find((c) => c);
+        if (firstBad) {
+          body.invalid!.forEach((id) => {
+            const c = controls.find((el) => el.id === id);
+            if (c) show(c);
+          });
+          showSummary("Something in the form needs a fix before this can send.", firstBad);
+        } else {
+          showSummary(sendFailed, summary);
+        }
+      } catch {
+        showSummary(sendFailed, summary);
+      } finally {
+        button.disabled = false;
+        button.textContent = "Send it to Blake";
+      }
     });
   }
 </script>
