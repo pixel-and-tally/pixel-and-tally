@@ -129,7 +129,7 @@ export const tally: Offer[] = [
     name: "Owner Dashboard",
     price: "$1,500",
     cadence: "one-time",
-    summary: "One live dashboard from up to 3 sources (say POS, booking and your labor sheet): weekly sales, best and worst sellers, labor %, busy hours. Setup call and handoff included.",
+    summary: "One live dashboard from up to 3 sources (say POS, booking and your labor sheet): weekly sales, best and worst sellers, labor %, busy hours. A private web page that updates every night and works on your phone, or built in Tableau or Power BI if you use them. Setup call and handoff included.",
     includes: [],
     turnaround: "about 3 weeks",
   },
@@ -203,7 +203,7 @@ export const offers = [...pixel, ...tally, ...automations];
 export const expertise = [
   { area: "Websites & booking", detail: "HTML, CSS and JavaScript, built for phones, wired to booking and ordering." },
   { area: "SQL & data", detail: "Cleaning and joining messy exports from POS, booking and spreadsheet tools." },
-  { area: "Dashboards", detail: "Tableau, Power BI and Looker, the same tools I use at my day job." },
+  { area: "Dashboards", detail: "Tableau and Power BI if you already pay for them. Otherwise a custom live dashboard we build and host, with no license to buy." },
   { area: "Automation & APIs", detail: "Python and workflow tools that move data between the apps you already pay for." },
   { area: "Money side", detail: "Excel, QuickBooks and a summer at a Charlotte CPA firm, so a P&L makes sense to me." },
 ] as const;
