@@ -20,7 +20,9 @@ This repo is also the template for client sites: a client re-skin should only to
 - Call booking is built in (no Cal.com): `src/lib/schedule.ts`, ported from Mint Coupe's booking calendar,
   turns `availability` in `src/site.ts` into open days and times (Eastern). The visitor's pick is re-checked
   on the server and emailed with an .ics file; Blake confirms by reply. No database, so no double-booking guard.
-- Site sections are three tabs: Pixel (`/pixel/`, web), Tally (`/tally/`, data, workflows and API connections), Both (`/both/`).
+- Site sections are three tabs: Pixel (`/pixel/`, web), Tally (`/tally/`, data, workflows and API connections), Pixel & Tally (`/pixel-and-tally/`, a pick-your-own builder:
+  a GET form to `/contact/?order=...` with a live receipt total). Home is the landing page; Blake's photo sits in
+  the "Talk to the owner" consult section, not the hero.
 - Node 22. `npm run dev`, `npm run verify` (astro check + vitest + build).
 - `vite` is pinned via `overrides` in package.json so Tailwind's Vite plugin and Astro share one
   version (otherwise `astro check` fails on mismatched plugin types).
@@ -43,6 +45,6 @@ This repo is also the template for client sites: a client re-skin should only to
 - Look (Blake picked "bold" 2026-10-20 and asked for something unlike a normal website): cream paper,
   ink outlines with hard offset shadows (`.sticker`), expanded Archivo caps, one color per tab (Pixel tomato,
   Tally mint, Both mustard), and a restaurant theme: prices as POS receipts (`Receipt`), steps as order
-  tickets on a rail (`TicketRail`), the bundle as a combo. Avoid generic SaaS patterns (feature grids with
+  tickets on a rail (`TicketRail`), the bundle as a combo discount in the builder. Avoid generic SaaS patterns (feature grids with
   checkmarks, pricing-card rows).
 - Commit messages say what changed for the visitor, in plain English.

@@ -44,7 +44,7 @@ export const site = {
   tabs: [
     { href: "/pixel/", label: "Pixel", blurb: "Websites" },
     { href: "/tally/", label: "Tally", blurb: "Data + automation" },
-    { href: "/both/", label: "Both", blurb: "Site + numbers" },
+    { href: "/pixel-and-tally/", label: "Pixel & Tally", blurb: "Pick your own" },
   ],
   nav: [
     { href: "/about/", label: "About" },
@@ -198,12 +198,34 @@ export const shoutouts = [
 ] as const;
 
 export const offers = [...pixel, ...tally, ...automations];
+
+// What Blake is good at, for the owner section on the home and about pages.
+export const expertise = [
+  { area: "Websites & booking", detail: "HTML, CSS and JavaScript, built for phones, wired to booking and ordering." },
+  { area: "SQL & data", detail: "Cleaning and joining messy exports from POS, booking and spreadsheet tools." },
+  { area: "Dashboards", detail: "Tableau, Power BI and Looker, the same tools I use at my day job." },
+  { area: "Automation & APIs", detail: "Python and workflow tools that move data between the apps you already pay for." },
+  { area: "Money side", detail: "Excel, QuickBooks and a summer at a Charlotte CPA firm, so a P&L makes sense to me." },
+] as const;
+
+// The pick-your-own builder: every item a visitor can add to an order, grouped like a menu.
+export const builderGroups = [
+  { title: "Pixel / Builds", tone: "pixel", items: pixel },
+  { title: "Pixel / Monthly", tone: "pixel", items: pixelPlans },
+  { title: "Tally / Numbers", tone: "tally", items: tally },
+  { title: "Tally / Automation", tone: "tally", items: automations },
+  { title: "Tally / Monthly", tone: "tally", items: tallyPlans },
+] as const;
+
+/** "$1,800" -> 1800 */
+export const priceAmount = (price: string) => Number(price.replace(/[^0-9.]/g, ""));
 export const plans = [...pixelPlans, ...tallyPlans];
 
 export const bundle = {
   name: "Starter Site + Data Checkup",
   price: "$1,950",
   saves: "$150",
+  items: ["Starter Site", "Data Checkup"],
 };
 
 export const foundingOffer =

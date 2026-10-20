@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Tabs from "../components/Tabs.astro";
 import Receipt from "../components/Receipt.astro";
-import CtaLink from "../components/CtaLink.astro";
+import AskOwner from "../components/AskOwner.astro";
 import { pixel, pixelPlans, work } from "../site";
 ---
 
@@ -44,6 +44,6 @@ import { pixel, pixelPlans, work } from "../site";
   </section>
 
   <section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
-    <CtaLink href="/contact/?for=pixel">Book a call about a website</CtaLink>
+    <AskOwner topic="pixel" />
   </section>
 </Base>

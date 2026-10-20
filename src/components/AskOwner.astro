@@ -1,0 +1,21 @@
+---
+// "Not seeing what you need?" callout under each price list.
+import CtaLink from "./CtaLink.astro";
+import { site, availability } from "../site";
+
+interface Props {
+  topic: string;
+}
+const { topic } = Astro.props;
+---
+
+<div class="sticker flex flex-col gap-6 bg-accent-3 p-6 md:flex-row md:items-center md:justify-between md:p-8">
+  <div>
+    <p class="font-display text-3xl leading-none font-black uppercase [font-stretch:125%]">Not seeing what you need?</p>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed">
+      Got questions, or something that isn't on the menu? Pick a slot for a free {availability.callMinutes}-minute face to
+      face with {site.firstName}, the owner, and we'll run through it together.
+    </p>
+  </div>
+  <CtaLink href={`/contact/?for=${topic}`} variant="secondary" class="shrink-0">Pick a slot</CtaLink>
+</div>

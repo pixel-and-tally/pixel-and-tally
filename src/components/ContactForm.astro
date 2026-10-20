@@ -17,7 +17,7 @@ const fields = [
 const interests = [
   { value: "pixel", label: "Pixel: a website" },
   { value: "tally", label: "Tally: my numbers or automations" },
-  { value: "both", label: "Both" },
+  { value: "custom", label: "Pixel & Tally: a mix of both" },
   { value: "unsure", label: "Not sure yet" },
 ] as const;
 
@@ -230,12 +230,18 @@ const chip =
       return true;
     };
 
-    // Preselect "What are you looking at?" from ?for=pixel|tally|both.
+    // Preselect "What are you looking at?" from ?for=pixel|tally|custom, and carry over
+    // anything picked on the Pixel & Tally builder (?order=...) into the note.
     const params = new URLSearchParams(location.search);
     const wanted = params.get("for");
     const interest = form.querySelector<HTMLSelectElement>("#interest")!;
     const match = Array.from(interest.options).find((o) => o.dataset.key === wanted);
     if (match) interest.value = match.value;
+    const order = params.getAll("order").filter(Boolean);
+    const details = form.querySelector<HTMLTextAreaElement>("#details")!;
+    if (order.length && !details.value) {
+      details.value = `My order: ${order.join(", ")}.\n\n`;
+    }
 
     // ----- Field errors -----
     const show = (el: (typeof controls)[number]) => {
