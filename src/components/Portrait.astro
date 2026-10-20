@@ -1,0 +1,23 @@
+---
+import { site } from "../site";
+
+interface Props {
+  class?: string;
+}
+const { class: className = "h-28 w-28" } = Astro.props;
+const initials = site.owner.split(" ").map((p) => p[0]).join("");
+---
+
+{
+  site.photo ? (
+    <img src={site.photo} alt={site.owner} class:list={["rounded-full object-cover", className]} />
+  ) : (
+    <div
+      role="img"
+      aria-label={site.owner}
+      class:list={["grid place-items-center rounded-full bg-accent-2 font-display text-3xl font-semibold text-inverse", className]}
+    >
+      {initials}
+    </div>
+  )
+}

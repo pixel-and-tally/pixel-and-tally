@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import Tabs from "../components/Tabs.astro";
+import CtaLink from "../components/CtaLink.astro";
+import { bundle, foundingOffer, terms } from "../site";
+---
+
+<Base title="Both: site and numbers" description="A website and a data checkup from one person, for one price.">
+  <div class="mx-auto max-w-5xl px-4 pt-10 sm:px-6"><Tabs /></div>
+
+  <section class="mx-auto max-w-5xl px-4 pt-12 sm:px-6">
+    <h1 class="max-w-3xl text-4xl leading-tight md:text-5xl">The site brings people in. The numbers tell you what they're worth.</h1>
+    <div class="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed">
+      <p>
+        Most owners hire a web person, then later wonder whether the site did anything. When the same person builds the
+        site and reads the numbers, you get a straight answer: how many people booked, what they spent, and what to
+        change next.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-12 max-w-5xl px-4 sm:px-6">
+    <div class="rounded-card bg-ink p-8 text-inverse md:p-10">
+      <p class="font-display text-3xl font-semibold">{bundle.name}</p>
+      <p class="mt-2 font-display text-5xl font-semibold">{bundle.price}</p>
+      <p class="mt-4 max-w-xl text-inverse/80">
+        A Starter Site (up to 5 pages, booking or ordering, Google profile cleanup, first month of care free) plus a
+        Data Checkup a few weeks after launch, once there's something to measure. That's {bundle.saves} less than
+        buying them separately.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-12 grid max-w-5xl gap-10 px-4 sm:px-6 md:grid-cols-2">
+    <div>
+      <h2 class="text-2xl">Founding clients</h2>
+      <p class="mt-3 text-lg leading-relaxed">{foundingOffer}</p>
+    </div>
+    <div>
+      <h2 class="text-2xl">The fine print</h2>
+      <ul class="mt-3 list-disc space-y-1.5 pl-5">
+        {terms.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-14 max-w-5xl px-4 sm:px-6">
+    <CtaLink href="/contact/?for=both" variant="secondary">Book a call</CtaLink>
+  </section>
+</Base>

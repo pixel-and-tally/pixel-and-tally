@@ -5,15 +5,15 @@
  * Rules: no em dashes, no invented reviews, stats or client names. Leave a
  * field empty ("") rather than guess; the pages hide anything that is empty.
  */
+import type { Availability } from "./lib/schedule";
 
 export type Offer = {
   name: string;
-  line: "web" | "data";
   price: string;
   cadence: "one-time" | "monthly";
   summary: string;
   includes: string[];
-  turnaround: string;
+  turnaround?: string;
 };
 
 export type WorkItem = {
@@ -27,150 +27,144 @@ export const site = {
   name: "Pixel & Tally",
   tagline: "Design & analytics. Sit back, I've got it.",
   owner: "Blake Turner",
+  firstName: "Blake",
   url: "https://pixelandtally.com",
   description:
-    "Websites that get you booked and dashboards that show where the money goes, for Charlotte restaurants and service businesses. One real person from start to finish.",
-  location: "Charlotte, NC",
+    "Blake Turner builds websites that take bookings and dashboards that show where the money goes, for Charlotte restaurants and small businesses.",
   serviceArea: "Charlotte first, and any US business remotely.",
 
   // Contact. Empty values are hidden on the site.
   email: "",
   phone: "",
   linkedin: "https://www.linkedin.com/in/blakewturner",
+  // Path under public/, e.g. "/blake.jpg". Until set, the site shows initials.
+  photo: "",
 
-  // Cal.com booking. Set to your event path, e.g. "pixelandtally/intro-call"
-  // (the part after cal.com/). While empty, the site shows a placeholder that
-  // points people to the contact form instead.
-  calLink: "",
-  callLength: "20-minute",
-
+  // The three tabs, then the rest.
+  tabs: [
+    { href: "/pixel/", label: "Pixel", blurb: "Websites" },
+    { href: "/tally/", label: "Tally", blurb: "Your numbers" },
+    { href: "/both/", label: "Both", blurb: "Site + numbers" },
+  ],
   nav: [
-    { href: "/services/", label: "Services & pricing" },
     { href: "/about/", label: "About" },
     { href: "/contact/", label: "Contact" },
   ],
 } as const;
 
-export const offers: Offer[] = [
+// When visitors can request a call (Eastern time). Blake: set your real hours.
+export const availability: Availability = {
+  timeZone: "America/New_York",
+  callMinutes: 20,
+  stepMinutes: 30,
+  noticeHours: 18,
+  daysAhead: 14,
+  weekly: {
+    1: [["12:00", "13:00"], ["17:30", "19:30"]],
+    2: [["12:00", "13:00"], ["17:30", "19:30"]],
+    3: [["12:00", "13:00"], ["17:30", "19:30"]],
+    4: [["12:00", "13:00"], ["17:30", "19:30"]],
+    5: [["12:00", "13:00"]],
+    6: [["10:00", "13:00"]],
+  },
+};
+
+export const pixel: Offer[] = [
   {
     name: "Starter Site",
-    line: "web",
     price: "$1,800",
     cadence: "one-time",
-    summary: "A clean, fast site that lets customers book or order without calling.",
+    summary: "Up to 5 pages. Customers can book, order or find your hours without calling.",
     includes: [
-      "Up to 5 pages, built for phones first",
-      "Online booking or a menu and order link",
-      "Google Business Profile cleanup",
+      "Built for phones first",
+      "Online booking, or a menu and order link",
+      "Google Business Profile cleaned up",
       "Basic local SEO",
       "First month of Care free",
     ],
-    turnaround: "2 weeks",
+    turnaround: "about 2 weeks",
   },
   {
     name: "Booking Site",
-    line: "web",
     price: "$3,200",
     cadence: "one-time",
-    summary: "For businesses that run on appointments and want deposits up front.",
+    summary: "Up to 10 pages, for businesses that run on appointments and want deposits up front.",
     includes: [
-      "Up to 10 pages",
       "Booking with deposits or payments",
-      "Reviews section (real reviews only)",
+      "A reviews section (real ones only)",
       "Email signup",
       "Visitor analytics",
       "First month of Care free",
     ],
     turnaround: "3 to 4 weeks",
   },
-  {
-    name: "Data Checkup",
-    line: "data",
-    price: "$300",
-    cadence: "one-time",
-    summary: "A quick, honest look at your numbers and the three changes worth making.",
-    includes: [
-      "I pull your POS, booking or spreadsheet exports",
-      "A 60-minute call",
-      "A one-page write-up with the 3 changes worth making",
-    ],
-    turnaround: "1 week",
-  },
-  {
-    name: "Owner Dashboard",
-    line: "data",
-    price: "$1,500",
-    cadence: "one-time",
-    summary: "One live dashboard you can read in five minutes, built from the tools you already use.",
-    includes: [
-      "Up to 3 sources, like POS, booking and a labor sheet",
-      "Weekly sales, best and worst sellers",
-      "Labor % and busy hours",
-      "Setup call and handoff",
-    ],
-    turnaround: "3 weeks",
-  },
 ];
 
-export const plans: Offer[] = [
+export const pixelPlans: Offer[] = [
   {
     name: "Care",
-    line: "web",
     price: "$95",
     cadence: "monthly",
-    summary: "Your site stays up, safe and current.",
-    includes: [
-      "Hosting, security updates and backups",
-      "Uptime monitoring",
-      "30 minutes of edits a month",
-      "Text-me support",
-    ],
-    turnaround: "Monthly",
+    summary: "Hosting, security updates, backups and uptime checks, plus 30 minutes of edits a month. Text me when something needs changing.",
+    includes: [],
   },
   {
     name: "Care Plus",
-    line: "web",
     price: "$195",
     cadence: "monthly",
-    summary: "Everything in Care, plus a little marketing every month.",
-    includes: [
-      "Everything in Care",
-      "2 hours of edits a month",
-      "One Google profile post a month",
-      "A one-page monthly report: visits, bookings, calls",
-    ],
-    turnaround: "Monthly",
-  },
-  {
-    name: "Dashboard Care",
-    line: "data",
-    price: "$150",
-    cadence: "monthly",
-    summary: "Your dashboard keeps working when your tools change.",
-    includes: [
-      "Data refresh and fixes when sources change",
-      "One 30-minute review call a month",
-    ],
-    turnaround: "Monthly",
+    summary: "Everything in Care, 2 hours of edits, one Google profile post a month, and a one-page report on visits, bookings and calls.",
+    includes: [],
   },
 ];
+
+export const tally: Offer[] = [
+  {
+    name: "Data Checkup",
+    price: "$300",
+    cadence: "one-time",
+    summary: "I pull your POS, booking or spreadsheet exports, we talk for an hour, and you get one page with the 3 changes worth making.",
+    includes: [],
+    turnaround: "about 1 week",
+  },
+  {
+    name: "Owner Dashboard",
+    price: "$1,500",
+    cadence: "one-time",
+    summary: "One live dashboard from up to 3 sources (say POS, booking and your labor sheet): weekly sales, best and worst sellers, labor %, busy hours. Setup call and handoff included.",
+    includes: [],
+    turnaround: "about 3 weeks",
+  },
+];
+
+export const tallyPlans: Offer[] = [
+  {
+    name: "Dashboard Care",
+    price: "$150",
+    cadence: "monthly",
+    summary: "I keep the data flowing and fix things when your tools change, and we do a 30-minute review call each month.",
+    includes: [],
+  },
+];
+
+export const offers = [...pixel, ...tally];
+export const plans = [...pixelPlans, ...tallyPlans];
 
 export const bundle = {
   name: "Starter Site + Data Checkup",
   price: "$1,950",
-  note: "Saves $150. The site gets you booked; the checkup shows what the bookings are worth.",
+  saves: "$150",
 };
 
 export const foundingOffer =
-  "My first 3 clients get 15% off any build in exchange for an honest testimonial and permission to write up the project.";
+  "My first 3 clients get 15% off any build. In return I ask for an honest review and permission to write up how it went.";
 
 export const terms = [
-  "Fixed price, agreed before any work starts.",
-  "50% deposit to start, 50% at launch.",
-  "One revision round per deliverable.",
-  "Work outside the package is $85/hour, quoted before I start.",
+  "The price is fixed and agreed before I start.",
+  "Half to start, half at launch.",
+  "One round of revisions on everything I deliver.",
+  "Anything outside the package is $85/hour, and I quote it first.",
   "Monthly plans are month to month. Cancel with 30 days' notice.",
-  "You own your domain and your site.",
+  "You own your domain and your site. Always.",
 ];
 
 // Real projects only. Blake: check these summaries and add links when ready.
@@ -188,28 +182,3 @@ export const work: WorkItem[] = [
     url: "",
   },
 ];
-
-export const steps = [
-  {
-    title: "A 20-minute call",
-    body: "You tell me what's not working. I tell you, in plain English, what I'd do and what it costs.",
-  },
-  {
-    title: "A fixed price",
-    body: "You get one page with the scope, price and launch date. No surprises later.",
-  },
-  {
-    title: "I build it",
-    body: "You see progress along the way and text me whenever. One revision round is built in.",
-  },
-  {
-    title: "Launch and look after",
-    body: "I launch it, show you how it works, and keep it running on a monthly plan if you want.",
-  },
-];
-
-/** Cal.com is configured once a calLink is set. */
-export function bookingUrl(calLink: string = site.calLink): string {
-  const path = calLink.trim().replace(/^https?:\/\/(app\.)?cal\.com\//, "").replace(/^\/+/, "");
-  return path ? `https://cal.com/${path}` : "";
-}

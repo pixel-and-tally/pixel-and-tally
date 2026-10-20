@@ -4,7 +4,7 @@
  * Components only use these tokens (bg-paper, text-ink, bg-accent, font-display...),
  * never raw hex values.
  */
-@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=Public+Sans:wght@400..700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -31,12 +31,12 @@
   --color-success: #1f7a4d;
 
   /* Type */
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, serif;
+  --font-body: "Public Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* Shape */
-  --radius-card: 1.25rem;
-  --radius-control: 0.75rem;
+  --radius-card: 0.5rem;
+  --radius-control: 0.375rem;
 }
 
 @layer base {
@@ -52,7 +52,8 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     text-wrap: balance;
   }
 

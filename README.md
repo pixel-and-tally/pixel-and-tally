@@ -13,7 +13,7 @@ npm run verify   # type check, tests, production build
 | To change | Edit |
 | --- | --- |
 | Colors, fonts, corner radius | `src/theme.css` |
-| Business details, prices, shared copy, Cal.com link | `src/site.ts` |
+| Business details, prices, shared copy, call hours | `src/site.ts` |
 | A page | `src/pages/*.astro` |
 
 ## Going live (one-time setup)
@@ -25,5 +25,5 @@ npm run verify   # type check, tests, production build
    - `CONTACT_FROM_EMAIL` (optional, after verifying pixelandtally.com in Resend): e.g. `Pixel & Tally <hello@pixelandtally.com>`
 
    Then redeploy. Until these are set the form shows a "didn't send" message instead of losing notes silently.
-3. **Cal.com:** create an event (e.g. "Intro call", 20 min), then set `calLink` in `src/site.ts` to the part after `cal.com/`, like `pixelandtally/intro-call`.
+3. **Call hours:** set `availability.weekly` in `src/site.ts` to the times you can take calls (Eastern). Requests arrive by email with a calendar file; reply to confirm.
 4. **Domain:** Vercel > Settings > Domains > add `pixelandtally.com`, then add the DNS records Vercel shows at your registrar. HTTPS is automatic.

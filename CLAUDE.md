@@ -17,7 +17,10 @@ This repo is also the template for client sites: a client re-skin should only to
 - Hosted on Vercel (`@astrojs/vercel`, `vercel.json`). Pages are static; only `src/pages/api/contact.ts`
   runs as a function. It emails form notes through Resend (env: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`,
   optional `CONTACT_FROM_EMAIL`). Validation lives in `src/lib/contact.ts`.
-- Booking is a Cal.com inline embed, switched on by `site.calLink` in `src/site.ts`.
+- Call booking is built in (no Cal.com): `src/lib/schedule.ts`, ported from Mint Coupe's booking calendar,
+  turns `availability` in `src/site.ts` into open days and times (Eastern). The visitor's pick is re-checked
+  on the server and emailed with an .ics file; Blake confirms by reply. No database, so no double-booking guard.
+- Site sections are three tabs: Pixel (`/pixel/`, web), Tally (`/tally/`, data), Both (`/both/`).
 - Node 22. `npm run dev`, `npm run verify` (astro check + vitest + build).
 - `vite` is pinned via `overrides` in package.json so Tailwind's Vite plugin and Astro share one
   version (otherwise `astro check` fails on mismatched plugin types).
@@ -35,5 +38,7 @@ This repo is also the template for client sites: a client re-skin should only to
   so a client re-skin is one file.
 - Prices live only in `src/site.ts`; `tests/site.test.ts` pins the agreed price sheet, so update
   both together when prices change.
-- Copy is direct and plain: short sentences, first person ("I"), no corporate fluff.
+- Copy is direct and plain: short sentences, first person ("I"), no corporate fluff. Blake presents as one
+  person under a brand name, never "we". Avoid template tells: uppercase eyebrow labels, checkmark feature
+  grids, pricing-card rows. Prices are shown menu-style (`PriceList`).
 - Commit messages say what changed for the visitor, in plain English.

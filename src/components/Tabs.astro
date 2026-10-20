@@ -1,0 +1,27 @@
+---
+// The Pixel / Tally / Both switcher at the top of each service page.
+import { site } from "../site";
+
+const path = Astro.url.pathname;
+---
+
+<nav aria-label="Services" class="flex gap-1 border-b border-line">
+  {
+    site.tabs.map((t) => {
+      const current = path.startsWith(t.href);
+      return (
+        <a
+          href={t.href}
+          aria-current={current ? "page" : undefined}
+          class:list={[
+            "-mb-px border-b-2 px-4 py-3 sm:px-6",
+            current ? "border-accent text-ink" : "border-transparent text-muted hover:text-ink",
+          ]}
+        >
+          <span class="block font-display text-xl font-semibold">{t.label}</span>
+          <span class="block text-xs">{t.blurb}</span>
+        </a>
+      );
+    })
+  }
+</nav>

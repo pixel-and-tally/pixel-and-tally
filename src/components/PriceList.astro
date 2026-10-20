@@ -1,0 +1,31 @@
+---
+// Prices laid out like a menu: name, dotted leader, price, then a plain description.
+import type { Offer } from "../site";
+
+interface Props {
+  offers: Offer[];
+}
+const { offers } = Astro.props;
+---
+
+<dl class="divide-y divide-line border-y border-line">
+  {
+    offers.map((o) => (
+      <div class="py-6">
+        <dt class="flex items-baseline gap-3">
+          <span class="font-display text-2xl font-semibold">{o.name}</span>
+          <span aria-hidden="true" class="mb-1.5 flex-1 border-b-2 border-dotted border-line" />
+          <span class="font-display text-2xl font-semibold whitespace-nowrap">
+            {o.price}
+            {o.cadence === "monthly" && <span class="font-body text-base font-normal text-muted"> a month</span>}
+          </span>
+        </dt>
+        <dd class="mt-2 max-w-2xl text-muted">
+          <p>{o.summary}</p>
+          {o.includes.length > 0 && <p class="mt-2">{o.includes.join(". ")}.</p>}
+          {o.turnaround && <p class="mt-2 text-sm italic">Usually done in {o.turnaround}.</p>}
+        </dd>
+      </div>
+    ))
+  }
+</dl>

@@ -1,18 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { bookingUrl, offers, plans, work } from "../src/site";
-
-describe("bookingUrl", () => {
-  it("is empty until a Cal.com link is set", () => {
-    expect(bookingUrl("")).toBe("");
-    expect(bookingUrl("   ")).toBe("");
-  });
-
-  it("accepts a bare path or a full Cal.com URL", () => {
-    expect(bookingUrl("pixelandtally/intro")).toBe("https://cal.com/pixelandtally/intro");
-    expect(bookingUrl("https://cal.com/pixelandtally/intro")).toBe("https://cal.com/pixelandtally/intro");
-    expect(bookingUrl("https://app.cal.com/pixelandtally/intro")).toBe("https://cal.com/pixelandtally/intro");
-  });
-});
+import { offers, plans, work } from "../src/site";
 
 describe("price sheet", () => {
   it("matches the agreed prices", () => {
