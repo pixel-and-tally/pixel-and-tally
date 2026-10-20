@@ -168,9 +168,9 @@ export const automations: Offer[] = [
   },
   {
     name: "API Connection",
-    price: "$1,200",
+    price: "From $800",
     cadence: "one-time",
-    summary: "A custom link between two systems when there's no ready-made one, like pulling POS sales into your dashboard every night.",
+    summary: "A custom link between two systems when there's no ready-made one, like pulling POS sales into your dashboard every night. Simple connections are $800; I quote yours on the call.",
     includes: [
       "Connects to your tools' APIs with your own keys",
       "Retries and an alert if something breaks",
@@ -217,7 +217,7 @@ export const builderGroups = [
   { title: "Tally / Monthly", tone: "tally", items: tallyPlans },
 ] as const;
 
-/** "$1,800" -> 1800 */
+/** "$1,800" -> 1800, "From $800" -> 800 */
 export const priceAmount = (price: string) => Number(price.replace(/[^0-9.]/g, ""));
 export const plans = [...pixelPlans, ...tallyPlans];
 

@@ -10,7 +10,7 @@ describe("price sheet", () => {
       "Data Checkup": "$300",
       "Owner Dashboard": "$1,500",
       "Workflow Setup": "$450",
-      "API Connection": "$1,200",
+      "API Connection": "From $800",
       Care: "$95",
       "Care Plus": "$195",
       "Dashboard Care": "$150",

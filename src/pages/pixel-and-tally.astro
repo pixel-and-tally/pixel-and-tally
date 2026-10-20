@@ -45,6 +45,7 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
                     name="order"
                     value={o.name}
                     data-price={priceAmount(o.price)}
+                    data-from={o.price.startsWith("From") ? "" : undefined}
                     data-cadence={o.cadence}
                     class="peer sr-only"
                   />
@@ -145,7 +146,7 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
           const name = document.createElement("span");
           name.textContent = `1x ${b.value}`;
           const price = document.createElement("span");
-          price.textContent = money(Number(b.dataset.price)) + (b.dataset.cadence === "monthly" ? "/mo" : "");
+          price.textContent = (b.dataset.from !== undefined ? "FROM " : "") + money(Number(b.dataset.price)) + (b.dataset.cadence === "monthly" ? "/mo" : "");
           li.append(name, price);
           return li;
         }),
@@ -153,7 +154,8 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
       const hasCombo = bundle.items.every((n) => picked.some((b) => b.value === n));
       const sum = (cadence: string) =>
         picked.filter((b) => b.dataset.cadence === cadence).reduce((t, b) => t + Number(b.dataset.price), 0);
-      once.textContent = money(sum("one-time") - (hasCombo ? savings : 0));
+      const fromPrice = picked.some((b) => b.dataset.from !== undefined);
+      once.textContent = (fromPrice ? "FROM " : "") + money(sum("one-time") - (hasCombo ? savings : 0));
       monthly.textContent = `${money(sum("monthly"))}/mo`;
       combo.hidden = !hasCombo;
       empty.hidden = picked.length > 0;
