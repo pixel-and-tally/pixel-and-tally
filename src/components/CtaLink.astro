@@ -6,16 +6,16 @@ interface Props {
 }
 const { href, variant = "primary", class: className = "" } = Astro.props;
 const styles = {
-  primary: "bg-accent text-inverse hover:bg-accent-strong",
-  secondary: "bg-ink text-inverse hover:bg-ink/85",
-  ghost: "border border-line bg-card text-ink hover:border-ink",
+  primary: "bg-accent text-ink",
+  secondary: "bg-ink text-inverse",
+  ghost: "bg-card text-ink",
 };
 ---
 
 <a
   href={href}
   class:list={[
-    "inline-flex items-center justify-center gap-2 rounded-control px-5 py-3 text-base font-semibold transition-colors",
+    "inline-flex items-center justify-center gap-2 rounded-control border-[3px] border-ink px-6 py-3 text-base font-extrabold uppercase tracking-wide shadow-hard-sm transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard active:translate-x-0 active:translate-y-0 active:shadow-none",
     styles[variant],
     className,
   ]}><slot /></a

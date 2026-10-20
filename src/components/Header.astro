@@ -6,37 +6,37 @@ const path = Astro.url.pathname;
 const links = [...site.tabs, ...site.nav];
 ---
 
-<header class="border-b border-line bg-paper">
-  <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex items-center gap-2 font-display text-2xl font-semibold">
-      <Logo class="h-7 w-7" />
+<header class="border-b-[3px] border-ink bg-paper">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <a href="/" class="flex items-center gap-2 font-display text-xl font-black uppercase [font-stretch:125%]">
+      <Logo class="h-8 w-8" />
       <span>{site.name}</span>
     </a>
 
-    <nav aria-label="Main" class="hidden items-center gap-5 md:flex">
+    <nav aria-label="Main" class="hidden items-center gap-6 md:flex">
       {
         links.map((item) => (
           <a
             href={item.href}
             aria-current={path.startsWith(item.href) ? "page" : undefined}
-            class="text-[15px] text-muted underline-offset-8 hover:text-ink aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:decoration-2"
+            class="font-bold uppercase underline-offset-[6px] hover:underline aria-[current=page]:underline aria-[current=page]:decoration-[3px] aria-[current=page]:decoration-accent"
           >
             {item.label}
           </a>
         ))
       }
-      <a href="/contact/" class="rounded-control bg-ink px-4 py-2 text-[15px] font-semibold text-inverse hover:bg-ink/85">
+      <a href="/contact/" class="rounded-control border-[3px] border-ink bg-ink px-4 py-2 font-extrabold uppercase text-inverse shadow-hard-sm">
         Book a call
       </a>
     </nav>
 
     <details class="relative md:hidden">
-      <summary class="cursor-pointer list-none rounded-control border border-line px-3 py-2 text-sm font-medium [&::-webkit-details-marker]:hidden">
+      <summary class="cursor-pointer list-none rounded-control border-[3px] border-ink bg-card px-4 py-1.5 font-extrabold uppercase [&::-webkit-details-marker]:hidden">
         Menu
       </summary>
-      <nav aria-label="Main" class="absolute right-0 z-40 mt-2 flex w-56 flex-col rounded-card border border-line bg-card p-2 shadow-lg">
-        {links.map((item) => <a href={item.href} class="rounded-control px-3 py-2 hover:bg-sunk">{item.label}</a>)}
-        <a href="/contact/" class="mt-1 rounded-control bg-ink px-3 py-2 text-center font-semibold text-inverse">Book a call</a>
+      <nav aria-label="Main" class="sticker absolute right-0 z-40 mt-3 flex w-60 flex-col bg-card p-2">
+        {links.map((item) => <a href={item.href} class="rounded-xl px-3 py-2 font-bold uppercase hover:bg-sunk">{item.label}</a>)}
+        <a href="/contact/" class="mt-1 rounded-control bg-ink px-3 py-2 text-center font-extrabold uppercase text-inverse">Book a call</a>
       </nav>
     </details>
   </div>

@@ -2,72 +2,71 @@
 import Base from "../layouts/Base.astro";
 import Portrait from "../components/Portrait.astro";
 import CtaLink from "../components/CtaLink.astro";
-import { site, availability } from "../site";
+import Marquee from "../components/Marquee.astro";
+import TicketRail from "../components/TicketRail.astro";
+import { site, availability, steps, shoutouts } from "../site";
+
+const tabs = [
+  { ...site.tabs[0], tone: "bg-accent", tilt: "md:-rotate-2", line: "A website that takes bookings and orders while you're busy.", price: "From $1,800" },
+  { ...site.tabs[1], tone: "bg-accent-2", tilt: "md:rotate-1", line: "Your sales, labor and bookings on one page you can read in five minutes.", price: "$300 checkup / $1,500 dashboard" },
+  { ...site.tabs[2], tone: "bg-accent-3", tilt: "md:-rotate-1", line: "The site brings people in. The numbers tell you what they're worth.", price: "Combo $1,950" },
+];
 ---
 
 <Base>
-  <section class="mx-auto max-w-5xl px-4 pt-14 sm:px-6 md:pt-20">
-    <div class="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
-      <Portrait class="h-24 w-24 shrink-0 md:h-32 md:w-32" />
-      <div>
-        <h1 class="text-5xl leading-[1.05] md:text-6xl">Hey, I'm {site.firstName}.</h1>
-        <p class="mt-5 max-w-2xl text-xl leading-relaxed">
-          I build websites for Charlotte restaurants and small businesses, and I help owners make sense of their
-          numbers. Most people who do one can't do the other. I do both, and you deal with me the whole way.
-        </p>
-        <div class="mt-8 flex flex-wrap items-center gap-4">
-          <CtaLink href="/contact/" variant="secondary">Book a {availability.callMinutes}-minute video call</CtaLink>
-          <a href="#what" class="font-semibold underline decoration-accent decoration-2 underline-offset-4">What I do</a>
-        </div>
+  <section class="mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-10 sm:px-6 md:grid-cols-[1.35fr_1fr] md:items-center md:pt-16">
+    <div>
+      <h1 class="text-[clamp(3.25rem,9vw,7.5rem)] leading-[0.88]">
+        Get booked.<br /><span class="text-accent">Know your numbers.</span>
+      </h1>
+      <p class="mt-7 max-w-xl text-xl leading-relaxed">
+        I'm {site.firstName}. I build websites for Charlotte restaurants and small businesses, and I make sense of their
+        sales data. Most people who do one can't do the other. You deal with me, start to finish.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <CtaLink href="/contact/">Book a {availability.callMinutes}-min video call</CtaLink>
+        <CtaLink href="#menu" variant="ghost">See the menu</CtaLink>
       </div>
     </div>
+    <Portrait class="aspect-[4/5] w-full max-w-[260px] justify-self-center md:max-w-none" />
   </section>
 
-  <section id="what" class="mx-auto mt-20 max-w-5xl scroll-mt-8 px-4 sm:px-6">
-    <h2 class="text-3xl">Pick what you need</h2>
-    <div class="mt-6 grid border-y border-line md:grid-cols-3 md:divide-x md:divide-line">
-      <a href="/pixel/" class="group border-b border-line py-8 md:border-b-0 md:pr-8">
-        <p class="font-display text-4xl font-semibold text-accent">Pixel</p>
-        <p class="mt-3 text-lg">
-          A website that lets customers book, order or find your hours without calling you.
-        </p>
-        <p class="mt-4 text-sm text-muted">From $1,800, then $95 a month to keep it running.</p>
-        <p class="mt-4 font-semibold group-hover:underline">See Pixel →</p>
-      </a>
-      <a href="/tally/" class="group border-b border-line py-8 md:border-b-0 md:px-8">
-        <p class="font-display text-4xl font-semibold text-accent-2">Tally</p>
-        <p class="mt-3 text-lg">
-          Your sales, labor and bookings on one page, so you know which nights and items actually make money.
-        </p>
-        <p class="mt-4 text-sm text-muted">A checkup is $300. A live dashboard is $1,500.</p>
-        <p class="mt-4 font-semibold group-hover:underline">See Tally →</p>
-      </a>
-      <a href="/both/" class="group py-8 md:pl-8">
-        <p class="font-display text-4xl font-semibold">Both</p>
-        <p class="mt-3 text-lg">
-          The site brings in the bookings. The numbers tell you what they're worth. One person handles both.
-        </p>
-        <p class="mt-4 text-sm text-muted">Starter Site and a Data Checkup together for $1,950.</p>
-        <p class="mt-4 font-semibold group-hover:underline">See Both →</p>
-      </a>
+  <Marquee items={shoutouts} />
+
+  <section id="menu" class="mx-auto max-w-6xl scroll-mt-6 px-4 pt-20 sm:px-6">
+    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">Pick your order</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        tabs.map((t) => (
+          <a href={t.href} class:list={["sticker group flex flex-col p-6 transition-transform hover:-translate-y-1", t.tone, t.tilt]}>
+            <span class="font-mono text-xs font-bold uppercase">{t.blurb}</span>
+            <span class="mt-4 font-display text-5xl leading-none font-black uppercase [font-stretch:125%]">{t.label}</span>
+            <span class="mt-4 flex-1 text-lg leading-snug">{t.line}</span>
+            <span class="mt-6 flex items-center justify-between border-t-[3px] border-ink pt-3 font-mono text-sm font-bold uppercase">
+              {t.price}
+              <span aria-hidden="true" class="text-2xl transition-transform group-hover:translate-x-1">→</span>
+            </span>
+          </a>
+        ))
+      }
     </div>
   </section>
 
-  <section class="mx-auto mt-20 grid max-w-5xl gap-10 px-4 sm:px-6 md:grid-cols-[1fr_2fr]">
-    <h2 class="text-3xl">How I work</h2>
-    <div class="flex flex-col gap-4 text-lg leading-relaxed">
-      <p>
-        We start with a short call. You tell me what's annoying you, whether that's missed calls, an old site, or not
-        knowing if Tuesdays are worth staying open. I tell you what I'd do and what it costs.
-      </p>
-      <p>
-        You get the price in writing before I start, and it doesn't change. You can text me while I work, and when it's
-        done I walk you through it. If you want, I keep it running for a monthly fee you can cancel any time.
-      </p>
-      <p class="text-muted">
-        I'm new to doing this on my own, so there are no client reviews here yet, and I'm not going to make any up.
-        My first three clients get 15% off in exchange for an honest one.
-      </p>
+  <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">How an order goes</h2>
+    <div class="mt-12"><TicketRail steps={steps} /></div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+    <div class="sticker flex flex-col gap-6 bg-card p-8 md:flex-row md:items-center md:justify-between md:p-10">
+      <div>
+        <p class="font-mono text-sm font-bold uppercase">Reviews so far: 0</p>
+        <p class="mt-3 max-w-2xl text-2xl leading-snug font-bold">
+          I'm new to doing this on my own, and I'm not going to make reviews up. My first three clients get 15% off in
+          exchange for an honest one.
+        </p>
+      </div>
+      <CtaLink href="/both/" variant="secondary" class="shrink-0">Founding deal</CtaLink>
     </div>
   </section>
 </Base>

@@ -1,0 +1,52 @@
+---
+// Prices printed like a POS receipt: monospace line items and a torn bottom edge.
+import type { Offer } from "../site";
+
+interface Props {
+  title: string;
+  ticket: string;
+  offers: Offer[];
+  footer?: string;
+  tone?: "pixel" | "tally" | "both";
+}
+const { title, ticket, offers, footer = "Price fixed before I start", tone = "pixel" } = Astro.props;
+const stripe = { pixel: "bg-accent", tally: "bg-accent-2", both: "bg-accent-3" }[tone];
+---
+
+<div class="min-w-0 drop-shadow-[6px_6px_0_var(--color-ink)]">
+  <div class="receipt-edge border-x-[3px] border-t-[3px] border-ink bg-card font-mono text-[15px]">
+    <div class:list={["border-b-[3px] border-ink px-5 py-3", stripe]}>
+      <p class="flex justify-between text-sm font-bold uppercase"><span>{title}</span><span>{ticket}</span></p>
+    </div>
+    <dl class="px-5">
+      {
+        offers.map((o) => (
+          <div class="border-b-2 border-dashed border-hairline py-5 last:border-b-0">
+            <dt class="flex items-baseline gap-2 font-bold uppercase">
+              <span>{o.name}</span>
+              <span aria-hidden="true" class="min-w-0 flex-1 overflow-hidden whitespace-nowrap text-muted">
+                ..................................................
+              </span>
+              <span class="whitespace-nowrap">
+                {o.price}
+                {o.cadence === "monthly" && "/mo"}
+              </span>
+            </dt>
+            <dd class="mt-2 leading-relaxed text-muted">
+              {o.summary}
+              {o.includes.length > 0 && (
+                <ul class="mt-2">
+                  {o.includes.map((i) => (
+                    <li>+ {i}</li>
+                  ))}
+                </ul>
+              )}
+              {o.turnaround && <p class="mt-2 text-ink">READY IN: {o.turnaround.toUpperCase()}</p>}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="mx-5 border-t-[3px] border-double border-ink pt-3 text-center text-sm font-bold uppercase">*** {footer} ***</p>
+  </div>
+</div>

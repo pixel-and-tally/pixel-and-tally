@@ -4,12 +4,13 @@ import CtaLink from "../components/CtaLink.astro";
 ---
 
 <Base title="Thanks" noindex>
-  <section class="mx-auto max-w-2xl px-4 py-24 text-center sm:px-6">
-    <h1 class="text-4xl md:text-5xl">Got it. Thanks!</h1>
-    <p class="mt-4 text-lg text-muted">
-      Your note is with me. If you picked a time, I'll confirm it by email. Either way, you'll hear back within one
-      business day.
+  <section class="mx-auto max-w-3xl px-4 py-24 sm:px-6">
+    <p class="font-mono text-sm font-bold uppercase">Order received</p>
+    <h1 class="mt-3 text-[clamp(3rem,9vw,6rem)]">Got it. <span class="text-accent">Thanks!</span></h1>
+    <p class="mt-6 text-xl leading-relaxed">
+      Your note is with me. If you picked a time, I'll confirm it by email with a video link. Either way, you'll hear back
+      within one business day.
     </p>
-    <div class="mt-8"><CtaLink href="/" variant="ghost">Back to the home page</CtaLink></div>
+    <div class="mt-10"><CtaLink href="/" variant="ghost">Back to the home page</CtaLink></div>
   </section>
 </Base>

@@ -5,16 +5,16 @@ import { site, availability } from "../site";
 ---
 
 <Base title="Book a call" description={`Book a free ${availability.callMinutes}-minute video call with ${site.owner}, or send a note.`}>
-  <section class="mx-auto max-w-3xl px-4 pb-6 pt-14 sm:px-6">
-    <h1 class="text-4xl md:text-5xl">Let's talk</h1>
-    <p class="mt-4 max-w-2xl text-lg leading-relaxed">
-      The first call is free, face to face on video, and there's no pitch deck. You tell me what's going on, I tell you what I'd do and what it
-      would cost. If it's not a fit, I'll say so.
-      {site.phone && <> You can also text me at <a href={`sms:${site.phone}`} class="font-semibold underline">{site.phone}</a>.</>}
+  <section class="mx-auto max-w-4xl px-4 pb-10 pt-12 sm:px-6">
+    <h1 class="text-[clamp(3rem,9vw,6.5rem)]">Let's <span class="text-accent">talk.</span></h1>
+    <p class="mt-6 max-w-2xl text-xl leading-relaxed">
+      The first call is free, face to face on video, and there's no pitch deck. You tell me what's going on, I tell you
+      what I'd do and what it would cost. If it's not a fit, I'll say so.
+      {site.phone && <> You can also text me at <a href={`sms:${site.phone}`} class="font-bold underline">{site.phone}</a>.</>}
     </p>
   </section>
 
-  <section class="mx-auto max-w-3xl px-4 sm:px-6">
+  <section class="mx-auto max-w-4xl px-4 sm:px-6">
     <ContactForm />
   </section>
 </Base>

@@ -145,6 +145,22 @@ export const tallyPlans: Offer[] = [
   },
 ];
 
+export const steps = [
+  { title: "We talk", body: "A free 20-minute video call. You tell me what's annoying you. I tell you what I'd do and what it costs." },
+  { title: "Price in writing", body: "One page with the scope, the price and the launch date. It doesn't change later." },
+  { title: "I build it", body: "You see it come together and you can text me any time. One round of changes is included." },
+  { title: "Launch", body: "I launch it and walk you through it, then keep it running each month if you want." },
+] as const;
+
+export const shoutouts = [
+  "Charlotte native",
+  "Text me, I answer",
+  "Fixed prices",
+  "Websites that book",
+  "Numbers that make sense",
+  "One real person",
+] as const;
+
 export const offers = [...pixel, ...tally];
 export const plans = [...pixelPlans, ...tallyPlans];
 

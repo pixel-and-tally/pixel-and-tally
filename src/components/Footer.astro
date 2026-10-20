@@ -4,20 +4,21 @@ import { site } from "../site";
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-20 border-t border-line">
-  <div class="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-10 text-sm text-muted sm:px-6 md:flex-row md:justify-between">
-    <div class="max-w-sm">
-      <p class="font-display text-lg font-semibold text-ink">{site.name}</p>
-      <p class="mt-1">{site.tagline}</p>
-      <p class="mt-3">Run by {site.owner}, a Charlotte native. US businesses only.</p>
+<footer class="mt-24 border-t-[3px] border-ink bg-ink text-inverse">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <p class="font-display text-[clamp(2.5rem,9vw,7rem)] leading-[0.9] font-black uppercase [font-stretch:125%]">
+      Sit back,<br /><span class="text-accent">I've got it.</span>
+    </p>
+    <div class="mt-10 flex flex-col gap-6 font-mono text-sm md:flex-row md:justify-between">
+      <p class="max-w-sm">{site.name} is {site.owner}, a Charlotte native. US businesses only.</p>
+      <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2 uppercase">
+        {[...site.tabs, ...site.nav].map((item) => <a href={item.href} class="hover:text-accent">{item.label}</a>)}
+        <a href="/privacy/" class="hover:text-accent">Privacy</a>
+        {site.linkedin && <a href={site.linkedin} class="hover:text-accent">LinkedIn</a>}
+        {site.email && <a href={`mailto:${site.email}`} class="hover:text-accent">{site.email}</a>}
+        {site.phone && <a href={`sms:${site.phone}`} class="hover:text-accent">Text {site.phone}</a>}
+      </nav>
     </div>
-    <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2">
-      {[...site.tabs, ...site.nav].map((item) => <a href={item.href} class="hover:text-ink">{item.label}</a>)}
-      <a href="/privacy/" class="hover:text-ink">Privacy</a>
-      {site.linkedin && <a href={site.linkedin} class="hover:text-ink">LinkedIn</a>}
-      {site.email && <a href={`mailto:${site.email}`} class="hover:text-ink">{site.email}</a>}
-      {site.phone && <a href={`sms:${site.phone}`} class="hover:text-ink">Text {site.phone}</a>}
-    </nav>
+    <p class="mt-10 font-mono text-xs opacity-70">© {year} {site.name}</p>
   </div>
-  <p class="pb-8 text-center text-xs text-muted">© {year} {site.name}</p>
 </footer>

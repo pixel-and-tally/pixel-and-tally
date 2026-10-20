@@ -1,25 +1,26 @@
 ---
-// The Pixel / Tally / Both switcher at the top of each service page.
+// The Pixel / Tally / Both switcher: three stickers, the current one lifted.
 import { site } from "../site";
 
 const path = Astro.url.pathname;
+const tone = ["bg-accent", "bg-accent-2", "bg-accent-3"];
 ---
 
-<nav aria-label="Services" class="flex gap-1 border-b border-line">
+<nav aria-label="Services" class="flex gap-2 sm:gap-3">
   {
-    site.tabs.map((t) => {
+    site.tabs.map((t, i) => {
       const current = path.startsWith(t.href);
       return (
         <a
           href={t.href}
           aria-current={current ? "page" : undefined}
           class:list={[
-            "-mb-px border-b-2 px-4 py-3 sm:px-6",
-            current ? "border-accent text-ink" : "border-transparent text-muted hover:text-ink",
+            "flex-1 rounded-card border-[3px] border-ink px-3 py-2 transition-transform sm:flex-none sm:px-5 sm:py-2.5",
+            current ? [tone[i], "-translate-y-1 shadow-hard"] : "bg-card hover:-translate-y-0.5 hover:shadow-hard-sm",
           ]}
         >
-          <span class="block font-display text-xl font-semibold">{t.label}</span>
-          <span class="block text-xs">{t.blurb}</span>
+          <span class="block font-display text-xl sm:text-2xl leading-none font-black uppercase [font-stretch:125%]">{t.label}</span>
+          <span class="mt-1 hidden font-mono text-xs uppercase sm:block">{t.blurb}</span>
         </a>
       );
     })

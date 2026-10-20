@@ -1,0 +1,24 @@
+---
+// "How I work" as order tickets clipped to a kitchen rail.
+interface Props {
+  steps: readonly { title: string; body: string }[];
+}
+const { steps } = Astro.props;
+const tilt = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2"];
+---
+
+<div class="relative">
+  <div aria-hidden="true" class="absolute inset-x-0 top-3 hidden h-3 rounded-full border-[3px] border-ink bg-hairline md:block"></div>
+  <ol class="relative grid gap-6 md:grid-cols-4 md:gap-5">
+    {
+      steps.map((s, i) => (
+        <li class:list={["sticker origin-top bg-card p-5 pt-8 md:mt-0", tilt[i % tilt.length]]}>
+          <span aria-hidden="true" class="absolute -top-2 left-1/2 hidden h-6 w-10 -translate-x-1/2 rounded-md border-[3px] border-ink bg-accent-3 md:block" />
+          <p class="font-mono text-xs font-bold uppercase">Ticket #{String(i + 1).padStart(2, "0")}</p>
+          <h3 class="mt-3 text-2xl">{s.title}</h3>
+          <p class="mt-3 leading-relaxed">{s.body}</p>
+        </li>
+      ))
+    }
+  </ol>
+</div>

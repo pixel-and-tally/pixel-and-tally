@@ -39,6 +39,10 @@ This repo is also the template for client sites: a client re-skin should only to
 - Prices live only in `src/site.ts`; `tests/site.test.ts` pins the agreed price sheet, so update
   both together when prices change.
 - Copy is direct and plain: short sentences, first person ("I"), no corporate fluff. Blake presents as one
-  person under a brand name, never "we". Avoid template tells: uppercase eyebrow labels, checkmark feature
-  grids, pricing-card rows. Prices are shown menu-style (`PriceList`).
+  person under a brand name, never "we".
+- Look (Blake picked "bold" 2026-10-20 and asked for something unlike a normal website): cream paper,
+  ink outlines with hard offset shadows (`.sticker`), expanded Archivo caps, one color per tab (Pixel tomato,
+  Tally mint, Both mustard), and a restaurant theme: prices as POS receipts (`Receipt`), steps as order
+  tickets on a rail (`TicketRail`), the bundle as a combo. Avoid generic SaaS patterns (feature grids with
+  checkmarks, pricing-card rows).
 - Commit messages say what changed for the visitor, in plain English.

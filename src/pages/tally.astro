@@ -1,53 +1,60 @@
 ---
 import Base from "../layouts/Base.astro";
 import Tabs from "../components/Tabs.astro";
-import PriceList from "../components/PriceList.astro";
+import Receipt from "../components/Receipt.astro";
 import CtaLink from "../components/CtaLink.astro";
 import { tally, tallyPlans } from "../site";
 
 const questions = [
   "Which nights are worth staying open?",
-  "Which menu items or services actually carry the business?",
+  "Which items or services carry the business?",
   "Is labor eating the margin on slow days?",
   "When are you busiest, and are you staffed for it?",
 ];
+const tilt = ["-rotate-2", "rotate-1", "rotate-2", "-rotate-1"];
 ---
 
 <Base title="Tally: your numbers" description="Data checkups and owner dashboards built from your POS, booking and labor exports.">
-  <div class="mx-auto max-w-5xl px-4 pt-10 sm:px-6"><Tabs /></div>
+  <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6"><Tabs /></div>
 
-  <section class="mx-auto max-w-5xl px-4 pt-12 sm:px-6">
-    <h1 class="max-w-3xl text-4xl leading-tight md:text-5xl">Your numbers, on one page you can read in five minutes.</h1>
-    <div class="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed">
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
+    <h1 class="max-w-5xl text-[clamp(2.75rem,7vw,6rem)]">
+      Your numbers on one page. <span class="text-accent-2">Read it in five minutes.</span>
+    </h1>
+    <div class="mt-8 grid gap-6 text-lg leading-relaxed md:grid-cols-2">
       <p>
         Your POS, booking app and spreadsheets already know a lot about your business. They just don't talk to each
         other, and nobody has time to dig. I pull the exports, clean them up, and turn them into answers.
       </p>
       <p>
-        This is what I do at my day job: SQL and Tableau dashboards that sales directors use to run teams in four
-        countries. I also spent a summer at a Charlotte CPA firm, so a P&L or a QuickBooks export doesn't scare me.
+        This is my day job: SQL and Tableau dashboards that sales directors use to run teams in four countries. I also
+        spent a summer at a Charlotte CPA firm, so a P&L or a QuickBooks export doesn't scare me.
       </p>
     </div>
   </section>
 
-  <section class="mx-auto mt-12 max-w-5xl px-4 sm:px-6">
-    <h2 class="text-2xl">The kind of questions it answers</h2>
-    <ul class="mt-4 grid gap-x-10 gap-y-3 text-lg md:grid-cols-2">
-      {questions.map((q) => <li class="border-l-4 border-accent-2 pl-4">{q}</li>)}
+  <section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
+    <h2 class="text-[clamp(2rem,5vw,3.5rem)]">Questions it answers</h2>
+    <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        questions.map((q, i) => (
+          <li class:list={["sticker flex aspect-square items-end bg-accent-2 p-5 text-2xl leading-tight font-bold", tilt[i]]}>{q}</li>
+        ))
+      }
     </ul>
   </section>
 
-  <section class="mx-auto mt-14 max-w-5xl px-4 sm:px-6">
-    <h2 class="mb-2 text-2xl">Prices</h2>
-    <PriceList offers={tally} />
-    <h2 class="mb-2 mt-12 text-2xl">Keeping it running</h2>
-    <PriceList offers={tallyPlans} />
-    <p class="mt-6 max-w-2xl text-muted">
-      Not sure you need a dashboard? Start with the checkup. It's the fastest way to see what your data can tell you.
-    </p>
+  <section class="mx-auto mt-20 grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-start">
+    <Receipt title="Tally / Builds" ticket="No. 03" offers={tally} tone="tally" />
+    <div class="flex min-w-0 flex-col gap-10">
+      <Receipt title="Tally / Monthly" ticket="No. 04" offers={tallyPlans} tone="tally" footer="Cancel any time, 30 days' notice" />
+      <p class="text-lg leading-relaxed">
+        Not sure you need a dashboard? Start with the checkup. It's the fastest way to see what your data can tell you.
+      </p>
+    </div>
   </section>
 
-  <section class="mx-auto mt-14 max-w-5xl px-4 sm:px-6">
-    <CtaLink href="/contact/?for=tally" variant="secondary">Book a call about your numbers</CtaLink>
+  <section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
+    <CtaLink href="/contact/?for=tally">Book a call about your numbers</CtaLink>
   </section>
 </Base>
