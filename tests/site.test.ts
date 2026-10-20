@@ -9,9 +9,12 @@ describe("price sheet", () => {
       "Booking Site": "$3,200",
       "Data Checkup": "$300",
       "Owner Dashboard": "$1,500",
+      "Workflow Setup": "$450",
+      "API Connection": "$1,200",
       Care: "$95",
       "Care Plus": "$195",
       "Dashboard Care": "$150",
+      "Automation Care": "$75",
     });
   });
 });

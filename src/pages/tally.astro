@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import Tabs from "../components/Tabs.astro";
 import Receipt from "../components/Receipt.astro";
 import CtaLink from "../components/CtaLink.astro";
-import { tally, tallyPlans } from "../site";
+import { tally, tallyPlans, automations } from "../site";
 
 const questions = [
   "Which nights are worth staying open?",
@@ -14,7 +14,7 @@ const questions = [
 const tilt = ["-rotate-2", "rotate-1", "rotate-2", "-rotate-1"];
 ---
 
-<Base title="Tally: your numbers" description="Data checkups and owner dashboards built from your POS, booking and labor exports.">
+<Base title="Tally: data and automation" description="Data checkups, owner dashboards, workflow automations and API connections for small businesses.">
   <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6"><Tabs /></div>
 
   <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
@@ -45,16 +45,29 @@ const tilt = ["-rotate-2", "rotate-1", "rotate-2", "-rotate-1"];
   </section>
 
   <section class="mx-auto mt-20 grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-start">
-    <Receipt title="Tally / Builds" ticket="No. 03" offers={tally} tone="tally" />
+    <Receipt title="Tally / Numbers" ticket="No. 03" offers={tally} tone="tally" />
     <div class="flex min-w-0 flex-col gap-10">
-      <Receipt title="Tally / Monthly" ticket="No. 04" offers={tallyPlans} tone="tally" footer="Cancel any time, 30 days' notice" />
       <p class="text-lg leading-relaxed">
         Not sure you need a dashboard? Start with the checkup. It's the fastest way to see what your data can tell you.
       </p>
     </div>
   </section>
 
+  <section class="mx-auto mt-24 max-w-6xl px-4 sm:px-6">
+    <h2 class="max-w-4xl text-[clamp(2rem,5vw,3.5rem)]">Make your tools <span class="text-accent-2">talk to each other.</span></h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed">
+      If you're copying bookings into a spreadsheet, retyping orders into QuickBooks, or texting reminders by hand, that's
+      a job a workflow can do. I connect the apps you already pay for so the data moves on its own, and when there's no
+      ready-made connection, I write one against their API.
+    </p>
+  </section>
+
+  <section class="mx-auto mt-12 grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-start">
+    <Receipt title="Tally / Automation" ticket="No. 04" offers={automations} tone="tally" />
+    <Receipt title="Tally / Monthly" ticket="No. 05" offers={tallyPlans} tone="tally" footer="Cancel any time, 30 days' notice" />
+  </section>
+
   <section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
-    <CtaLink href="/contact/?for=tally">Book a call about your numbers</CtaLink>
+    <CtaLink href="/contact/?for=tally">Book a call about your numbers or workflows</CtaLink>
   </section>
 </Base>

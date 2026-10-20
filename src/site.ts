@@ -43,7 +43,7 @@ export const site = {
   // The three tabs, then the rest.
   tabs: [
     { href: "/pixel/", label: "Pixel", blurb: "Websites" },
-    { href: "/tally/", label: "Tally", blurb: "Your numbers" },
+    { href: "/tally/", label: "Tally", blurb: "Data + automation" },
     { href: "/both/", label: "Both", blurb: "Site + numbers" },
   ],
   nav: [
@@ -143,6 +143,41 @@ export const tallyPlans: Offer[] = [
     summary: "I keep the data flowing and fix things when your tools change, and we do a 30-minute review call each month.",
     includes: [],
   },
+  {
+    name: "Automation Care",
+    price: "$75",
+    cadence: "monthly",
+    summary: "I watch your workflows and connections, fix them when a tool changes, and make one small change a month.",
+    includes: [],
+  },
+];
+
+// Workflows and API connections live on the Tally tab: they move the same data the dashboards read.
+export const automations: Offer[] = [
+  {
+    name: "Workflow Setup",
+    price: "$450",
+    cadence: "one-time",
+    summary: "One automation between tools you already use, so a busywork step happens on its own. Built on Zapier or Make in your account, so you own it.",
+    includes: [
+      "Example: a new booking lands in your spreadsheet and the customer gets a reminder text",
+      "Example: a new order or invoice shows up in QuickBooks without retyping",
+      "Tested with real data, plus a short video showing how it works",
+    ],
+    turnaround: "about 1 week",
+  },
+  {
+    name: "API Connection",
+    price: "$1,200",
+    cadence: "one-time",
+    summary: "A custom link between two systems when there's no ready-made one, like pulling POS sales into your dashboard every night.",
+    includes: [
+      "Connects to your tools' APIs with your own keys",
+      "Retries and an alert if something breaks",
+      "Written up so anyone can maintain it",
+    ],
+    turnaround: "about 2 weeks",
+  },
 ];
 
 export const steps = [
@@ -158,10 +193,11 @@ export const shoutouts = [
   "Fixed prices",
   "Websites that book",
   "Numbers that make sense",
+  "Busywork on autopilot",
   "One real person",
 ] as const;
 
-export const offers = [...pixel, ...tally];
+export const offers = [...pixel, ...tally, ...automations];
 export const plans = [...pixelPlans, ...tallyPlans];
 
 export const bundle = {
