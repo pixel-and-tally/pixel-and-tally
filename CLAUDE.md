@@ -40,8 +40,9 @@ This repo is also the template for client sites: a client re-skin should only to
   so a client re-skin is one file.
 - Prices live only in `src/site.ts`; `tests/site.test.ts` pins the agreed price sheet, so update
   both together when prices change.
-- Copy is direct and plain: short sentences, first person ("I"), no corporate fluff. Blake presents as one
-  person under a brand name, never "we".
+- Copy is direct and plain: short sentences, first person ("I"), no corporate fluff. Voice (Blake chose 2026-10-20): Blake is the owner
+  and the person clients talk to ("I" for the consult, texts, his background); the work is "we" (we build, we launch).
+  Never name, picture or invent team members, and no fake team page.
 - Look (Blake picked "bold" 2026-10-20 and asked for something unlike a normal website): cream paper,
   ink outlines with hard offset shadows (`.sticker`), expanded Archivo caps, one color per tab (Pixel tomato,
   Tally mint, Both mustard), and a restaurant theme: prices as POS receipts (`Receipt`), steps as order

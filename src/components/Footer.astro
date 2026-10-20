@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
       Sit back,<br /><span class="text-accent">I've got it.</span>
     </p>
     <div class="mt-10 flex flex-col gap-6 font-mono text-sm md:flex-row md:justify-between">
-      <p class="max-w-sm">{site.name} is {site.owner}, a Charlotte native. US businesses only.</p>
+      <p class="max-w-sm">{site.name} is owned and run by {site.owner}, a Charlotte native. US businesses only.</p>
       <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2 uppercase">
         {[...site.tabs, ...site.nav].map((item) => <a href={item.href} class="hover:text-accent">{item.label}</a>)}
         <a href="/privacy/" class="hover:text-accent">Privacy</a>

@@ -121,7 +121,7 @@ export const tally: Offer[] = [
     name: "Data Checkup",
     price: "$300",
     cadence: "one-time",
-    summary: "I pull your POS, booking or spreadsheet exports, we talk for an hour, and you get one page with the 3 changes worth making.",
+    summary: "We pull your POS, booking or spreadsheet exports, you and I talk for an hour, and you get one page with the 3 changes worth making.",
     includes: [],
     turnaround: "about 1 week",
   },
@@ -183,8 +183,8 @@ export const automations: Offer[] = [
 export const steps = [
   { title: "We talk", body: "A free 20-minute video call. You tell me what's annoying you. I tell you what I'd do and what it costs." },
   { title: "Price in writing", body: "One page with the scope, the price and the launch date. It doesn't change later." },
-  { title: "I build it", body: "You see it come together and you can text me any time. One round of changes is included." },
-  { title: "Launch", body: "I launch it and walk you through it, then keep it running each month if you want." },
+  { title: "We build it", body: "You see it come together and you can text me any time. One round of changes is included." },
+  { title: "Launch", body: "We launch it, I walk you through it, and we keep it running each month if you want." },
 ] as const;
 
 export const shoutouts = [
