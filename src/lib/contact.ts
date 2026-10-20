@@ -56,7 +56,7 @@ export function contactEmailText(m: ContactMessage): string {
     `Call: ${callLabel(m) || "None requested, reply by email"}`,
     "",
     m.details,
-    ...(m.callDate ? ["", "The call isn't confirmed until you reply. The attached file adds it to your calendar."] : []),
+    ...(m.callDate ? ["", "The call isn't confirmed until you reply with a video link. The attached file adds it to your calendar."] : []),
   ].join("\n");
 }
 

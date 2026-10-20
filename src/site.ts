@@ -52,7 +52,7 @@ export const site = {
   ],
 } as const;
 
-// When visitors can request a call (Eastern time). Blake: set your real hours.
+// When visitors can request a call (Eastern time). Weekdays only; calls are face to face over video.
 export const availability: Availability = {
   timeZone: "America/New_York",
   callMinutes: 20,
@@ -60,12 +60,11 @@ export const availability: Availability = {
   noticeHours: 18,
   daysAhead: 14,
   weekly: {
-    1: [["12:00", "13:00"], ["17:30", "19:30"]],
-    2: [["12:00", "13:00"], ["17:30", "19:30"]],
-    3: [["12:00", "13:00"], ["17:30", "19:30"]],
-    4: [["12:00", "13:00"], ["17:30", "19:30"]],
-    5: [["12:00", "13:00"]],
-    6: [["10:00", "13:00"]],
+    1: [["09:00", "17:00"]],
+    2: [["09:00", "17:00"]],
+    3: [["09:00", "17:00"]],
+    4: [["09:00", "17:00"]],
+    5: [["09:00", "17:00"]],
   },
 };
 
