@@ -14,7 +14,7 @@ This repo is also the template for client sites: a client re-skin should only to
 ## Stack
 
 - Astro 5 static site, Tailwind 4 (CSS-first tokens in `src/theme.css`), TypeScript strict.
-- Hosted on Vercel (`@astrojs/vercel`, `vercel.json`). Pages are static; only `src/pages/api/contact.ts`
+- Hosted on Netlify free plan (`@astrojs/netlify`, `netlify.toml`; Blake moved off Vercel 2026-11-13 because Vercel needs Pro for a private org repo and for business use). Pages are static; only `src/pages/api/contact.ts`
   runs as a function. It emails form notes through Resend (env: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`,
   optional `CONTACT_FROM_EMAIL`). Validation lives in `src/lib/contact.ts`.
 - Call booking is built in (no Cal.com): `src/lib/schedule.ts`, ported from Mint Coupe's booking calendar,

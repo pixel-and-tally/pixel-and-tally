@@ -15,7 +15,7 @@
     "verify": "npm run check && npm run test && npm run build"
   },
   "dependencies": {
-    "@astrojs/vercel": "^8.2.11",
+    "@astrojs/netlify": "^6.6.5",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^5.18.2",
     "tailwindcss": "^4.3.3"
