@@ -1,0 +1,25 @@
+---
+interface Props {
+  items: readonly string[];
+  class?: string;
+}
+const { items, class: className = "bg-ink text-inverse" } = Astro.props;
+const run = [...items, ...items];
+---
+
+<div class:list={["overflow-hidden border-y-[3px] border-ink py-3", className]} aria-hidden="true">
+  <div class="marquee font-display text-xl font-black uppercase [font-stretch:125%]">
+    {
+      [run, run].map((r) => (
+        <span class="flex shrink-0">
+          {r.map((t) => (
+            <span class="flex items-center px-6">
+              {t}
+              <span class="ml-12 inline-block h-3 w-3 bg-current" />
+            </span>
+          ))}
+        </span>
+      ))
+    }
+  </div>
+</div>

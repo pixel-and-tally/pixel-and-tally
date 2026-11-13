@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import Tabs from "../components/Tabs.astro";
+import Receipt from "../components/Receipt.astro";
+import AskOwner from "../components/AskOwner.astro";
+import { pixel, pixelPlans, work } from "../site";
+---
+
+<Base title="Pixel: websites" description="Websites with online booking for Charlotte restaurants and small businesses, with fixed prices and monthly care.">
+  <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6"><Tabs /></div>
+
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
+    <h1 class="max-w-5xl text-[clamp(2.75rem,7vw,6rem)]">
+      Your site should take bookings <span class="text-accent">while you work.</span>
+    </h1>
+    <div class="mt-8 grid gap-6 text-lg leading-relaxed md:grid-cols-2">
+      <p>
+        If people have to call to book, order or ask your hours, you're losing some of them. We build simple, fast sites
+        that work on a phone, take bookings or orders, and show up properly on Google.
+      </p>
+      <p>Every site comes with its first month of care free, so it doesn't go stale the day after launch.</p>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-16 grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-start">
+    <Receipt title="Pixel / Builds" ticket="No. 01" offers={pixel} tone="pixel" />
+    <Receipt title="Pixel / Monthly" ticket="No. 02" offers={pixelPlans} tone="pixel" footer="Cancel any time, 30 days' notice" />
+  </section>
+
+  <section class="mx-auto mt-20 max-w-6xl px-4 sm:px-6">
+    <h2 class="text-[clamp(2rem,5vw,3.5rem)]">Sites I've built</h2>
+    <ul class="mt-8 grid gap-6 md:grid-cols-2">
+      {
+        work.map((w, i) => (
+          <li class:list={["sticker bg-card p-6", i % 2 ? "md:rotate-1" : "md:-rotate-1"]}>
+            <p class="font-mono text-xs font-bold uppercase">{w.kind}</p>
+            <p class="mt-2 font-display text-3xl font-black uppercase [font-stretch:125%]">{w.name}</p>
+            <p class="mt-3 text-lg">{w.summary}</p>
+            {w.url && <a href={w.url} class="mt-4 inline-block font-bold underline decoration-accent decoration-[3px]">Visit the site</a>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
+    <AskOwner topic="pixel" />
+  </section>
+</Base>

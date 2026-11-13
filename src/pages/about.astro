@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+import Portrait from "../components/Portrait.astro";
+import CtaLink from "../components/CtaLink.astro";
+import { site, expertise } from "../site";
+---
+
+<Base title="About" description={`${site.owner} builds websites and dashboards for Charlotte restaurants and small businesses.`}>
+  <section class="mx-auto grid max-w-6xl gap-12 px-4 pt-12 sm:px-6 md:grid-cols-[1fr_1.4fr]">
+    <Portrait class="aspect-[4/5] w-full max-w-sm" />
+    <div>
+      <h1 class="text-[clamp(3rem,8vw,6rem)]">Meet the <span class="text-accent">owner.</span></h1>
+      <div class="mt-8 flex flex-col gap-5 text-lg leading-relaxed">
+        <p>I'm {site.owner}. I grew up in Charlotte and studied business and IT at NC State.</p>
+        <p>
+          By day I'm a business operations analyst. I build the SQL and Tableau dashboards that sales directors use to run
+          teams across four countries, for Fortune 500 utility clients. Before that I did data work at UNC Health and spent
+          a summer in tax accounting at a Charlotte CPA firm.
+        </p>
+        <p>
+          I started Pixel & Tally to bring that same work to local owners. Pixel is the website side. Tally is the numbers
+          and automation. Most web shops can't build a dashboard, and most analysts don't build websites, so we do both.
+        </p>
+        <p>
+          Every project starts with a call with me. I gather what you need, take it back, and we build it to fit. When you
+          text, I'm the one who answers. There's no account manager and no one you get handed off to.
+        </p>
+      </div>
+      <h2 class="mt-12 text-3xl">What I'm good at</h2>
+      <dl class="mt-5 divide-y-2 divide-dashed divide-hairline border-y-[3px] border-ink">
+        {
+          expertise.map((e) => (
+            <div class="grid gap-1 py-4 sm:grid-cols-[12rem_1fr] sm:gap-6">
+              <dt class="font-mono text-sm font-bold uppercase">{e.area}</dt>
+              <dd class="leading-relaxed">{e.detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <div class="sticker mt-10 bg-sunk p-6">
+        <p class="font-mono text-sm font-bold uppercase">Who I work with</p>
+        <p class="mt-3 text-lg leading-relaxed">
+          Owner-run restaurants, salons, barbers, detailers, cleaners, trades and studios, usually 1 to 20 people on staff.
+          {site.serviceArea}
+        </p>
+      </div>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <CtaLink href="/contact/">Book a free consult with me</CtaLink>
+        {site.linkedin && <CtaLink href={site.linkedin} variant="ghost">LinkedIn</CtaLink>}
+      </div>
+    </div>
+  </section>
+</Base>

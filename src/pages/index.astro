@@ -1,0 +1,109 @@
+---
+import Base from "../layouts/Base.astro";
+import Portrait from "../components/Portrait.astro";
+import HeroTicket from "../components/HeroTicket.astro";
+import CtaLink from "../components/CtaLink.astro";
+import Marquee from "../components/Marquee.astro";
+import TicketRail from "../components/TicketRail.astro";
+import { site, availability, steps, shoutouts, expertise } from "../site";
+
+const tabs = [
+  { ...site.tabs[0], tone: "bg-accent", tilt: "md:-rotate-2", line: "A website that takes bookings and orders while you're busy.", price: "From $1,800" },
+  { ...site.tabs[1], tone: "bg-accent-2", tilt: "md:rotate-1", line: "Your numbers on one page, and your tools wired together so the busywork does itself.", price: "From $300" },
+  { ...site.tabs[2], tone: "bg-accent-3", tilt: "md:-rotate-1", line: "Pick what you need from both sides of the menu and build your own package.", price: "Build your own" },
+];
+---
+
+<Base>
+  <section class="mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-10 sm:px-6 md:grid-cols-[1.35fr_1fr] md:items-center md:pt-16">
+    <div>
+      <h1 class="text-[clamp(3.25rem,9vw,7.5rem)] leading-[0.88]">
+        Get booked.<br /><span class="text-accent">Know your numbers.</span>
+      </h1>
+      <p class="mt-7 max-w-xl text-xl leading-relaxed">
+        I'm {site.firstName}, the owner. We build websites for Charlotte restaurants and small businesses, and we make
+        sense of their sales data. Most shops do one or the other. We do both, and you deal with me from the first call to
+        launch.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <CtaLink href="/contact/">Book a {availability.callMinutes}-min video call</CtaLink>
+        <CtaLink href="#menu" variant="ghost">See the menu</CtaLink>
+      </div>
+    </div>
+    <HeroTicket />
+  </section>
+
+  <Marquee items={shoutouts} />
+
+  <section id="menu" class="mx-auto max-w-6xl scroll-mt-6 px-4 pt-20 sm:px-6">
+    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">Pick your order</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        tabs.map((t) => (
+          <a href={t.href} class:list={["sticker group flex flex-col p-6 transition-transform hover:-translate-y-1", t.tone, t.tilt]}>
+            <span class="font-mono text-xs font-bold uppercase">{t.blurb}</span>
+            <span class="mt-4 font-display text-5xl leading-none font-black uppercase [font-stretch:125%]">{t.label}</span>
+            <span class="mt-4 flex-1 text-lg leading-snug">{t.line}</span>
+            <span class="mt-6 flex items-center justify-between border-t-[3px] border-ink pt-3 font-mono text-sm font-bold uppercase">
+              {t.price}
+              <span aria-hidden="true" class="text-2xl transition-transform group-hover:translate-x-1">→</span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">How an order goes</h2>
+    <div class="mt-12"><TicketRail steps={steps} /></div>
+  </section>
+
+  <section id="owner" class="mx-auto grid max-w-6xl gap-10 px-4 pt-24 sm:px-6 md:grid-cols-[1fr_1.3fr] md:items-center">
+    <Portrait class="aspect-[4/5] w-full max-w-sm justify-self-center md:justify-self-start" />
+    <div>
+      <p class="font-mono text-sm font-bold uppercase">Free {availability.callMinutes}-minute consult</p>
+      <h2 class="mt-3 text-[clamp(2.5rem,6vw,4.5rem)]">Talk to the <span class="text-accent">owner.</span></h2>
+      <p class="mt-6 text-lg leading-relaxed">
+        Your first call is with me, {site.owner}, face to face on video. I'll ask how your business runs, what's
+        annoying you, and what you want more of. Then I take your order back to the kitchen, and we build the site,
+        dashboard or workflow around how you actually work. No templates, and I stay your contact the whole way.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <CtaLink href="/contact/">Book the free consult</CtaLink>
+        <CtaLink href="/about/" variant="ghost">More about me</CtaLink>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">What I'm good at</h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed">
+      Charlotte native, NC State business and IT grad, and a business operations analyst by day, building the dashboards
+      sales directors use to run teams in four countries.
+    </p>
+    <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+      {
+        expertise.map((e, i) => (
+          <li class:list={["sticker bg-card p-5", i % 2 ? "lg:rotate-1" : "lg:-rotate-1"]}>
+            <p class="font-display text-lg leading-none font-black uppercase [font-stretch:110%]">{e.area}</p>
+            <p class="mt-3 text-sm leading-relaxed">{e.detail}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+    <div class="sticker flex flex-col gap-6 bg-card p-8 md:flex-row md:items-center md:justify-between md:p-10">
+      <div>
+        <p class="font-mono text-sm font-bold uppercase">Reviews so far: 0</p>
+        <p class="mt-3 max-w-2xl text-2xl leading-snug font-bold">
+          I'm new to doing this on my own, and I'm not going to make reviews up. My first three clients get 15% off in
+          exchange for an honest one.
+        </p>
+      </div>
+      <CtaLink href="/pixel-and-tally/" variant="secondary" class="shrink-0">Founding deal</CtaLink>
+    </div>
+  </section>
+</Base>

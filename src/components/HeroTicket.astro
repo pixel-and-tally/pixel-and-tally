@@ -1,0 +1,31 @@
+---
+// The hero's order ticket: what a visitor "orders" from Pixel & Tally. Decorative, no numbers implied.
+const lines = [
+  ["1x", "Website that books"],
+  ["1x", "Dashboard you can read"],
+  ["1x", "Busywork on autopilot"],
+  ["1x", "Owner who picks up"],
+];
+---
+
+<div class="w-full max-w-sm rotate-2 justify-self-center drop-shadow-[8px_8px_0_var(--color-ink)] md:max-w-none" aria-hidden="true">
+  <div class="receipt-edge border-x-[3px] border-t-[3px] border-ink bg-card font-mono">
+    <div class="border-b-[3px] border-ink bg-accent px-5 py-3">
+      <p class="flex justify-between text-sm font-bold uppercase"><span>Order up</span><span>Table: you</span></p>
+    </div>
+    <ul class="flex flex-col gap-3 px-5 py-5 text-[15px] font-bold uppercase">
+      {
+        lines.map(([qty, item]) => (
+          <li class="flex gap-3 border-b-2 border-dashed border-hairline pb-3 last:border-b-0">
+            <span>{qty}</span>
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mx-5 border-t-[3px] border-double border-ink pt-4">
+      <span class="block text-sm font-bold uppercase">Served by</span>
+      <span class="mt-1 block font-display text-3xl leading-none font-black uppercase [font-stretch:125%]">A real person</span>
+    </div>
+  </div>
+</div>

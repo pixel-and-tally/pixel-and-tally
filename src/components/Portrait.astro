@@ -1,0 +1,22 @@
+---
+import { site } from "../site";
+
+interface Props {
+  class?: string;
+  tilt?: boolean;
+}
+const { class: className = "", tilt = true } = Astro.props;
+---
+
+<figure class:list={["sticker overflow-hidden bg-accent", tilt && "rotate-2", className]}>
+  {
+    site.photo ? (
+      <img src={site.photo} alt={site.owner} class="h-full w-full object-cover" />
+    ) : (
+      <div role="img" aria-label={`Photo of ${site.owner} coming soon`} class="flex h-full w-full flex-col justify-between p-6">
+        <span class="font-mono text-sm font-bold uppercase">Photo coming soon</span>
+        <span class="font-display text-[clamp(4rem,12vw,9rem)] leading-none font-black [font-stretch:125%]">BT</span>
+      </div>
+    )
+  }
+</figure>

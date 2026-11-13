@@ -1,0 +1,332 @@
+---
+// Posts to /api/contact (a Vercel function), which emails the note to the owner.
+// The call picker is Mint Coupe's date-then-time pattern: open days as chips,
+// then the open start times for that day, all in Eastern time. With JavaScript
+// the form sends in place and shows errors inline; without it, the browser's
+// own validation runs, the call picker is skipped, and the endpoint redirects.
+import { honeypotField } from "../lib/contact";
+import { availability } from "../site";
+
+const fields = [
+  { id: "name", label: "Your name", type: "text", autocomplete: "name", error: "Tell me your name." },
+  { id: "email", label: "Email", type: "email", autocomplete: "email", error: "Enter an email I can reply to, like you@business.com." },
+  { id: "business", label: "Business name", type: "text", autocomplete: "organization", error: "Tell me the name of your business." },
+  { id: "location", label: "City and state", type: "text", autocomplete: "address-level2", error: "Tell me where the business is. I work with US businesses only.", hint: "I work with US businesses only." },
+] as const;
+
+const interests = [
+  { value: "pixel", label: "Pixel: a website" },
+  { value: "tally", label: "Tally: my numbers or automations" },
+  { value: "custom", label: "Pixel & Tally: a mix of both" },
+  { value: "unsure", label: "Not sure yet" },
+] as const;
+
+const control =
+  "rounded-xl border-[3px] border-ink bg-paper px-4 py-3 text-base outline-none focus:bg-card focus:shadow-hard-sm aria-[invalid=true]:border-danger aria-[invalid=true]:bg-danger/5";
+const chip =
+  "relative cursor-pointer rounded-xl border-[3px] border-ink bg-card px-3.5 py-2 font-mono text-sm font-bold uppercase whitespace-nowrap transition-transform hover:-translate-y-0.5 has-[:checked]:-translate-y-0.5 has-[:checked]:bg-accent has-[:checked]:shadow-hard-sm has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-accent";
+---
+
+<form
+  id="message"
+  name="contact"
+  method="POST"
+  action="/api/contact"
+  novalidate
+  class="sticker flex flex-col gap-10 bg-card p-5 sm:p-8"
+  data-contact-form
+>
+  <p class="hidden" aria-hidden="true">
+    <label>Leave this empty: <input name={honeypotField} tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div
+    data-form-error
+    role="alert"
+    tabindex="-1"
+    hidden
+    class="rounded-xl border-[3px] border-danger bg-danger/5 px-4 py-3 font-bold text-danger"
+  >
+  </div>
+
+  <fieldset class="flex min-w-0 flex-col gap-4" data-call-picker data-availability={JSON.stringify(availability)}>
+    <legend class="font-display text-3xl font-black uppercase [font-stretch:125%]">1. Pick a time for a {availability.callMinutes}-minute video call</legend>
+    <p class="font-mono text-sm">
+      Weekdays, Eastern time. It's face to face on video, and I'll email you the link. Rather just send a note? Skip this part.
+    </p>
+    <noscript><p class="text-sm">Turn on JavaScript to pick a time, or just send the note and I'll email you some.</p></noscript>
+
+    <div>
+      <p id="day-label" class="mb-2 text-sm font-bold uppercase">Day</p>
+      <div role="radiogroup" aria-labelledby="day-label" class="-mx-1 flex gap-3 overflow-x-auto px-1 pt-1 pb-2" data-days></div>
+    </div>
+    <div data-times-wrap hidden>
+      <p id="time-label" class="mb-2 text-sm font-bold uppercase">Time (Eastern)</p>
+      <div role="radiogroup" aria-labelledby="time-label" aria-describedby="callTime-error" class="flex flex-wrap gap-3 pt-1" tabindex="-1" data-times></div>
+      <p id="callTime-error" class="mt-2 text-sm font-bold text-danger" hidden></p>
+    </div>
+    <button type="button" data-clear-call hidden class="w-fit font-mono text-sm underline">Clear the time</button>
+  </fieldset>
+
+  <fieldset class="flex min-w-0 flex-col gap-5">
+    <legend class="font-display text-3xl font-black uppercase [font-stretch:125%]">2. Tell me about the business</legend>
+    <div class="grid gap-5 sm:grid-cols-2">
+      {
+        fields.map((f) => (
+          <div class="flex flex-col gap-1.5">
+            <label for={f.id} class="text-sm font-bold uppercase">
+              {f.label}
+            </label>
+            <input
+              id={f.id}
+              name={f.id}
+              type={f.type}
+              autocomplete={f.autocomplete}
+              required
+              data-error={f.error}
+              aria-describedby={`${f.id}-error${"hint" in f ? ` ${f.id}-hint` : ""}`}
+              class={control}
+            />
+            {"hint" in f && (
+              <p id={`${f.id}-hint`} class="font-mono text-xs">
+                {f.hint}
+              </p>
+            )}
+            <p id={`${f.id}-error`} class="text-sm font-bold text-danger" hidden />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="interest" class="text-sm font-bold uppercase">What are you looking at?</label>
+      <select
+        id="interest"
+        name="interest"
+        required
+        data-error="Pick the closest option. Not sure is fine."
+        aria-describedby="interest-error"
+        class={control}
+      >
+        <option value="">Choose one</option>
+        {interests.map((i) => <option value={i.label} data-key={i.value}>{i.label}</option>)}
+      </select>
+      <p id="interest-error" class="text-sm font-bold text-danger" hidden></p>
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="details" class="text-sm font-bold uppercase">What's going on?</label>
+      <textarea
+        id="details"
+        name="details"
+        rows="5"
+        required
+        minlength="10"
+        data-error="A sentence or two is plenty. What's not working today?"
+        aria-describedby="details-error"
+        class={control}
+        placeholder="For example: people keep calling to book and I miss half of them."></textarea>
+      <p id="details-error" class="text-sm font-bold text-danger" hidden></p>
+    </div>
+  </fieldset>
+
+  <div class="flex flex-col gap-2">
+    <button
+      type="submit"
+      data-submit
+      class="inline-flex w-full items-center justify-center rounded-control border-[3px] border-ink bg-accent px-8 py-4 text-lg font-extrabold uppercase tracking-wide shadow-hard-sm transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard disabled:opacity-60 sm:w-fit"
+    >
+      Send it to Blake
+    </button>
+    <p class="font-mono text-xs">I reply within one business day. Your details are only used to reply to you.</p>
+  </div>
+</form>
+
+<template id="chip-template">
+  <label class={chip}><input type="radio" class="sr-only" /><span></span></label>
+</template>
+
+<script>
+  import { availableTimes, bookableDates, formatTime, type Availability } from "../lib/schedule";
+
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  if (form) {
+    const summary = form.querySelector<HTMLElement>("[data-form-error]")!;
+    const button = form.querySelector<HTMLButtonElement>("[data-submit]")!;
+    const controls = Array.from(
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("[required]"),
+    );
+    const sendFailed =
+      "That didn't send. Please try again in a minute, or message me on LinkedIn if it keeps happening.";
+
+    // ----- Call picker -----
+    const picker = form.querySelector<HTMLElement>("[data-call-picker]")!;
+    const cfg = JSON.parse(picker.dataset.availability!) as Availability;
+    const daysEl = picker.querySelector<HTMLElement>("[data-days]")!;
+    const timesWrap = picker.querySelector<HTMLElement>("[data-times-wrap]")!;
+    const timesEl = picker.querySelector<HTMLElement>("[data-times]")!;
+    const timeError = picker.querySelector<HTMLElement>("#callTime-error")!;
+    const clear = picker.querySelector<HTMLButtonElement>("[data-clear-call]")!;
+    const template = document.querySelector<HTMLTemplateElement>("#chip-template")!;
+
+    const makeChip = (name: string, value: string, label: string) => {
+      const node = template.content.firstElementChild!.cloneNode(true) as HTMLLabelElement;
+      const input = node.querySelector("input")!;
+      input.name = name;
+      input.value = value;
+      node.querySelector("span")!.textContent = label;
+      return { node, input };
+    };
+
+    const dayLabel = (date: string) =>
+      new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" }).format(
+        new Date(`${date}T12:00:00Z`),
+      );
+
+    const setTimeError = (msg: string) => {
+      timeError.textContent = msg;
+      timeError.hidden = !msg;
+    };
+
+    const showTimes = (date: string) => {
+      timesEl.replaceChildren();
+      for (const t of availableTimes(date, cfg, new Date())) {
+        const { node, input } = makeChip("callTime", t, formatTime(t));
+        input.addEventListener("change", () => setTimeError(""));
+        timesEl.append(node);
+      }
+      timesWrap.hidden = false;
+      clear.hidden = false;
+    };
+
+    const dates = bookableDates(cfg, new Date());
+    if (dates.length === 0) {
+      daysEl.textContent = "No open times in the next two weeks. Send a note and I'll find one.";
+    }
+    for (const d of dates) {
+      const { node, input } = makeChip("callDate", d, dayLabel(d));
+      input.addEventListener("change", () => {
+        setTimeError("");
+        showTimes(d);
+      });
+      daysEl.append(node);
+    }
+
+    clear.addEventListener("click", () => {
+      picker.querySelectorAll<HTMLInputElement>("input[type=radio]").forEach((r) => (r.checked = false));
+      timesEl.replaceChildren();
+      timesWrap.hidden = true;
+      clear.hidden = true;
+      setTimeError("");
+    });
+
+    const callIsValid = () => {
+      const day = picker.querySelector<HTMLInputElement>("input[name=callDate]:checked");
+      const time = picker.querySelector<HTMLInputElement>("input[name=callTime]:checked");
+      if (day && !time) {
+        setTimeError("Pick a time for that day, or clear it to just send a note.");
+        return false;
+      }
+      return true;
+    };
+
+    // Preselect "What are you looking at?" from ?for=pixel|tally|custom, and carry over
+    // anything picked on the Pixel & Tally builder (?order=...) into the note.
+    const params = new URLSearchParams(location.search);
+    const wanted = params.get("for");
+    const interest = form.querySelector<HTMLSelectElement>("#interest")!;
+    const match = Array.from(interest.options).find((o) => o.dataset.key === wanted);
+    if (match) interest.value = match.value;
+    const order = params.getAll("order").filter(Boolean);
+    const details = form.querySelector<HTMLTextAreaElement>("#details")!;
+    if (order.length && !details.value) {
+      details.value = `My order: ${order.join(", ")}.\n\n`;
+    }
+
+    // ----- Field errors -----
+    const show = (el: (typeof controls)[number]) => {
+      const msg = document.getElementById(`${el.id}-error`);
+      const bad = !el.checkValidity();
+      el.setAttribute("aria-invalid", String(bad));
+      if (msg) {
+        msg.textContent = bad ? (el.dataset.error ?? "Check this field.") : "";
+        msg.hidden = !bad;
+      }
+      return bad;
+    };
+
+    controls.forEach((el) => {
+      el.addEventListener("blur", () => {
+        if (el.value) show(el);
+      });
+      el.addEventListener("input", () => {
+        if (el.getAttribute("aria-invalid") === "true") show(el);
+      });
+    });
+
+    const showSummary = (text: string, focus: HTMLElement) => {
+      summary.textContent = text;
+      summary.hidden = false;
+      focus.focus();
+      focus.scrollIntoView({ block: "center", behavior: "smooth" });
+    };
+
+    // A no-JavaScript submit that failed comes back as ?error=1.
+    if (params.has("error")) {
+      summary.textContent = sendFailed;
+      summary.hidden = false;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const callOk = callIsValid();
+      const bad = controls.filter(show);
+      if (!callOk || bad.length > 0) {
+        const count = bad.length + (callOk ? 0 : 1);
+        showSummary(
+          count === 1 ? "One thing needs a fix before this can send." : `${count} things need a fix before this can send.`,
+          callOk ? bad[0] : timesEl,
+        );
+        return;
+      }
+
+      summary.hidden = true;
+      button.disabled = true;
+      button.textContent = "Sending...";
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (res.ok) {
+          location.href = "/thanks/";
+          return;
+        }
+        const body = (await res.json().catch(() => ({}))) as { invalid?: string[] };
+        if (body.invalid?.includes("callTime")) {
+          setTimeError("That time just closed. Pick another one.");
+          const day = picker.querySelector<HTMLInputElement>("input[name=callDate]:checked");
+          if (day) showTimes(day.value);
+          showSummary("That time is no longer open.", timesEl);
+          return;
+        }
+        const firstBad = body.invalid?.map((id) => controls.find((c) => c.id === id)).find((c) => c);
+        if (firstBad) {
+          body.invalid!.forEach((id) => {
+            const c = controls.find((el) => el.id === id);
+            if (c) show(c);
+          });
+          showSummary("Something in the form needs a fix before this can send.", firstBad);
+        } else {
+          showSummary(sendFailed, summary);
+        }
+      } catch {
+        showSummary(sendFailed, summary);
+      } finally {
+        button.disabled = false;
+        button.textContent = "Send it to Blake";
+      }
+    });
+  }
+</script>

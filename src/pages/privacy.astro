@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../site";
+
+const updated = "October 19, 2026";
+---
+
+<Base title="Privacy" description={`How ${site.name} handles the information you send.`}>
+  <section class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+    <h1 class="text-4xl font-extrabold">Privacy</h1>
+    <p class="mt-2 text-sm text-muted">Last updated {updated}</p>
+    <div class="mt-8 flex flex-col gap-5 leading-relaxed">
+      <p>
+        When you use the contact form, I get what you type: your name, email, business, location, message, and
+        the call time you picked, if any. I use this only to reply to you and to do the work you ask for.
+      </p>
+      <p>
+        I don't sell or share your information. Form notes are delivered to my inbox by Resend, and the site is
+        hosted on Vercel. Each has its own privacy policy.
+      </p>
+      <p>This site doesn't use advertising trackers.</p>
+      <p>
+        Want your information deleted? Send a note through the <a href="/contact/" class="underline">contact page</a>
+        and I'll remove it.
+      </p>
+    </div>
+  </section>
+</Base>

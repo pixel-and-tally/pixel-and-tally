@@ -1,0 +1,116 @@
+/*
+ * THE THEME FILE. Re-skinning this site for a client starts and ends here.
+ * Change the font import, the color tokens and the type/shape tokens below.
+ * Components only use these tokens (bg-paper, text-ink, bg-accent, font-display...),
+ * never raw hex values.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Space+Mono:wght@400;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces */
+  --color-paper: #fff6e9; /* page background, warm cream */
+  --color-card: #fffdf8; /* receipts and tickets */
+  --color-sunk: #f6e9d4; /* alternate section background */
+  --color-line: #151515; /* borders are ink: everything is outlined */
+  --color-hairline: #e4d6bf; /* quiet dividers */
+
+  /* Text */
+  --color-ink: #151515;
+  --color-muted: #5c5346;
+  --color-inverse: #fff6e9;
+
+  /* Brand. One color per tab. */
+  --color-accent: #ff5a36; /* Pixel: tomato */
+  --color-accent-strong: #e2401d;
+  --color-accent-2: #2ec4a6; /* Tally: mint */
+  --color-accent-3: #ffd23f; /* Both: mustard */
+
+  /* Feedback */
+  --color-danger: #c4210f;
+  --color-success: #1f7a4d;
+
+  /* Type. Display uses Archivo's width axis: expanded for headlines. */
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  /* Shape */
+  --radius-card: 1.25rem;
+  --radius-control: 999px;
+  --shadow-hard: 6px 6px 0 var(--color-ink);
+  --shadow-hard-sm: 3px 3px 0 var(--color-ink);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-stretch: 125%;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* An outlined, hard-shadowed "sticker". Used for tickets, tabs and buttons. */
+  .sticker {
+    border: 3px solid var(--color-ink);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-hard);
+  }
+
+  /* Torn receipt edge for price lists. */
+  .receipt-edge {
+    --tooth: 14px;
+    mask:
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--tooth) 100%;
+    padding-bottom: calc(var(--tooth) / 2 + 1.5rem);
+  }
+
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 32s linear infinite;
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      animation: none;
+    }
+  }
+}

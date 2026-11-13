@@ -1,0 +1,28 @@
+---
+// The Pixel / Tally / Both switcher: three stickers, the current one lifted.
+import { site } from "../site";
+
+const path = Astro.url.pathname;
+const tone = ["bg-accent", "bg-accent-2", "bg-accent-3"];
+---
+
+<nav aria-label="Services" class="flex gap-2 sm:gap-3">
+  {
+    site.tabs.map((t, i) => {
+      const current = path.startsWith(t.href);
+      return (
+        <a
+          href={t.href}
+          aria-current={current ? "page" : undefined}
+          class:list={[
+            "flex-1 rounded-card border-[3px] border-ink px-3 py-2 transition-transform sm:flex-none sm:px-5 sm:py-2.5",
+            current ? [tone[i], "-translate-y-1 shadow-hard"] : "bg-card hover:-translate-y-0.5 hover:shadow-hard-sm",
+          ]}
+        >
+          <span class="block font-display text-xl sm:text-2xl leading-none font-black uppercase [font-stretch:125%]">{t.label}</span>
+          <span class="mt-1 hidden font-mono text-xs uppercase sm:block">{t.blurb}</span>
+        </a>
+      );
+    })
+  }
+</nav>

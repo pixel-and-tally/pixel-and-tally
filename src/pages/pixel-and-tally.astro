@@ -1,0 +1,168 @@
+---
+// Pick-your-own package. Visitors tick items like a menu and a live receipt adds them up.
+// It is a plain GET form to /contact/, so it still works without JavaScript: the contact
+// page reads the picked items from ?order= and drops them into the note.
+import Base from "../layouts/Base.astro";
+import Tabs from "../components/Tabs.astro";
+import CtaLink from "../components/CtaLink.astro";
+import { builderGroups, bundle, foundingOffer, priceAmount, terms } from "../site";
+
+const tone = { pixel: "has-[:checked]:bg-accent", tally: "has-[:checked]:bg-accent-2" } as const;
+const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
+---
+
+<Base title="Pixel & Tally: build your own" description="Pick the website, data and automation pieces you need and see the price add up.">
+  <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6"><Tabs /></div>
+
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
+    <h1 class="max-w-5xl text-[clamp(2.75rem,7vw,6rem)]">
+      Build your own <span class="bg-accent-3 px-2 [box-decoration-break:clone]">Pixel & Tally.</span>
+    </h1>
+    <p class="mt-8 max-w-3xl text-lg leading-relaxed">
+      Pick what you need from both sides of the menu and watch the price add up. Nothing here is a commitment. Send it
+      over and we'll go through it together on a free call, then I'll put the final price in writing.
+    </p>
+  </section>
+
+  <form action="/contact/" method="GET" class="mx-auto mt-14 grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr] lg:items-start" data-builder>
+    <input type="hidden" name="for" value="custom" />
+
+    <div class="flex min-w-0 flex-col gap-10">
+      {
+        builderGroups.map((g) => (
+          <fieldset class="min-w-0">
+            <legend class="font-mono text-sm font-bold uppercase">{g.title}</legend>
+            <div class="mt-3 grid gap-4 sm:grid-cols-2">
+              {g.items.map((o) => (
+                <label
+                  class:list={[
+                    "sticker group relative flex cursor-pointer flex-col bg-card p-5 transition-transform hover:-translate-y-0.5 has-[:checked]:-translate-y-1 has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-accent",
+                    tone[g.tone],
+                  ]}
+                >
+                  <input
+                    type="checkbox"
+                    name="order"
+                    value={o.name}
+                    data-price={priceAmount(o.price)}
+                    data-from={o.price.startsWith("From") ? "" : undefined}
+                    data-cadence={o.cadence}
+                    class="peer sr-only"
+                  />
+                  <span class="flex items-start justify-between gap-3">
+                    <span class="font-display text-xl leading-none font-black uppercase [font-stretch:125%]">{o.name}</span>
+                    <span
+                      aria-hidden="true"
+                      class="grid h-7 w-7 shrink-0 place-items-center rounded-md border-[3px] border-ink bg-card text-transparent group-has-[:checked]:text-ink"
+                    >
+                      ✕
+                    </span>
+                  </span>
+                  <span class="mt-2 font-mono text-sm font-bold">
+                    {o.price}
+                    {o.cadence === "monthly" ? "/mo" : ""}
+                  </span>
+                  <span class="mt-3 text-sm leading-relaxed">{o.summary}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ))
+      }
+    </div>
+
+    <aside class="min-w-0 lg:sticky lg:top-6">
+      <div class="drop-shadow-[6px_6px_0_var(--color-ink)]">
+        <div class="receipt-edge border-x-[3px] border-t-[3px] border-ink bg-card font-mono text-[15px]">
+          <div class="border-b-[3px] border-ink bg-accent-3 px-5 py-3">
+            <p class="flex justify-between text-sm font-bold uppercase"><span>Your order</span><span>No. 00</span></p>
+          </div>
+          <div class="px-5 py-4" aria-live="polite">
+            <p data-empty class="text-muted">Nothing picked yet. Tap anything on the menu.</p>
+            <ul data-lines class="flex flex-col gap-2"></ul>
+            <div data-totals hidden class="mt-4 flex flex-col gap-1 border-t-2 border-dashed border-hairline pt-4">
+              <p data-combo hidden class="flex justify-between text-success">
+                <span>COMBO: {bundle.name.toUpperCase()}</span><span>-{bundle.saves}</span>
+              </p>
+              <p class="flex justify-between font-bold"><span>ONE-TIME</span><span data-once>$0</span></p>
+              <p class="flex justify-between font-bold"><span>MONTHLY</span><span data-monthly>$0/mo</span></p>
+            </div>
+          </div>
+          <p class="mx-5 border-t-[3px] border-double border-ink pt-3 text-center text-sm font-bold uppercase">
+            *** Final price in writing after our call ***
+          </p>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="mt-8 inline-flex w-full items-center justify-center rounded-control border-[3px] border-ink bg-accent px-6 py-4 text-lg font-extrabold uppercase tracking-wide shadow-hard-sm transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard"
+      >
+        Send my order and book a call
+      </button>
+      <p class="mt-3 font-mono text-xs">Founding clients: 15% off any build. Not sure what to pick? Send it empty.</p>
+    </aside>
+  </form>
+
+  <section class="mx-auto mt-24 grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-start">
+    <div class="sticker -rotate-1 bg-accent p-8">
+      <p class="font-mono text-sm font-bold uppercase">Founding clients</p>
+      <p class="mt-3 font-display text-4xl leading-none font-black uppercase [font-stretch:125%]">15% off</p>
+      <p class="mt-4 text-lg leading-relaxed">{foundingOffer}</p>
+    </div>
+    <div class="font-mono">
+      <p class="text-sm font-bold uppercase">The fine print</p>
+      <ul class="mt-4 space-y-3">
+        {terms.map((t) => <li class="border-b-2 border-dashed border-hairline pb-3">{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
+    <CtaLink href="/contact/?for=custom">Just book a call</CtaLink>
+  </section>
+</Base>
+
+<script>
+  import { bundle } from "../site";
+
+  const form = document.querySelector<HTMLFormElement>("[data-builder]");
+  if (form) {
+    const boxes = Array.from(form.querySelectorAll<HTMLInputElement>("input[name=order]"));
+    const lines = form.querySelector<HTMLUListElement>("[data-lines]")!;
+    const empty = form.querySelector<HTMLElement>("[data-empty]")!;
+    const totals = form.querySelector<HTMLElement>("[data-totals]")!;
+    const combo = form.querySelector<HTMLElement>("[data-combo]")!;
+    const once = form.querySelector<HTMLElement>("[data-once]")!;
+    const monthly = form.querySelector<HTMLElement>("[data-monthly]")!;
+    const money = (n: number) => `$${n.toLocaleString("en-US")}`;
+    const savings = Number(bundle.saves.replace(/[^0-9]/g, ""));
+
+    const render = () => {
+      const picked = boxes.filter((b) => b.checked);
+      lines.replaceChildren(
+        ...picked.map((b) => {
+          const li = document.createElement("li");
+          li.className = "flex justify-between gap-3 uppercase";
+          const name = document.createElement("span");
+          name.textContent = `1x ${b.value}`;
+          const price = document.createElement("span");
+          price.textContent = (b.dataset.from !== undefined ? "FROM " : "") + money(Number(b.dataset.price)) + (b.dataset.cadence === "monthly" ? "/mo" : "");
+          li.append(name, price);
+          return li;
+        }),
+      );
+      const hasCombo = bundle.items.every((n) => picked.some((b) => b.value === n));
+      const sum = (cadence: string) =>
+        picked.filter((b) => b.dataset.cadence === cadence).reduce((t, b) => t + Number(b.dataset.price), 0);
+      const fromPrice = picked.some((b) => b.dataset.from !== undefined);
+      once.textContent = (fromPrice ? "FROM " : "") + money(sum("one-time") - (hasCombo ? savings : 0));
+      monthly.textContent = `${money(sum("monthly"))}/mo`;
+      combo.hidden = !hasCombo;
+      empty.hidden = picked.length > 0;
+      totals.hidden = picked.length === 0;
+    };
+
+    boxes.forEach((b) => b.addEventListener("change", render));
+    render();
+  }
+</script>
