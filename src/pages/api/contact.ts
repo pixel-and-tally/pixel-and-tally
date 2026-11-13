@@ -2,10 +2,10 @@ import type { APIRoute } from "astro";
 import { parseContact, sendContactEmail } from "../../lib/contact";
 import { availability } from "../../site";
 
-// Runs as a Vercel function; every other page is static HTML.
+// Runs as a Netlify function; every other page is static HTML.
 export const prerender = false;
 
-// Set these in Vercel > Project > Settings > Environment Variables.
+// Set these in Netlify > Site configuration > Environment variables.
 // CONTACT_FROM_EMAIL can stay unset until the domain is verified in Resend.
 // Read at request time, so changing a value only needs a redeploy, not a code change.
 const config = () => ({
