@@ -38,7 +38,7 @@ export const site = {
   phone: "",
   linkedin: "https://www.linkedin.com/in/blakewturner",
   // Path under public/, e.g. "/blake.jpg". Until set, the site shows initials.
-  photo: "",
+  photo: "/blake.jpg",
 
   // The three tabs, then the rest.
   tabs: [
