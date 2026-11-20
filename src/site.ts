@@ -44,12 +44,23 @@ export const site = {
 
   // The three tabs, then the rest.
   tabs: [
-    { href: "/pixel/", label: "Pixel", blurb: "Websites" },
-    { href: "/tally/", label: "Tally", blurb: "Data + automation" },
+    {
+      href: "/pixel/",
+      label: "Pixel",
+      blurb: "Websites",
+      desc: "Websites that take bookings and orders, plus monthly care so they never go stale.",
+    },
+    {
+      href: "/tally/",
+      label: "Tally",
+      blurb: "Data + automation",
+      desc: "Dashboards for your numbers, plus workflows and app connections that do the busywork.",
+    },
     {
       href: "/pixel-and-tally/",
       label: "Pixel & Tally",
       blurb: "Pick your own",
+      desc: "Mix anything from both menus into one package, with a combo discount.",
     },
   ],
   nav: [
