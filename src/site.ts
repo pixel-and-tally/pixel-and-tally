@@ -244,9 +244,10 @@ export const terms = [
 export const work: WorkItem[] = [
   {
     name: "Mint Coupe",
-    kind: "Booking site",
-    summary: "Online booking for a mobile car detailing service, from picking a package to paying.",
-    url: "",
+    kind: "Booking marketplace",
+    summary:
+      "Mobile car detailing in Charlotte. Customers pick a package priced by their vehicle, choose a time, place and detailer, and their card is only charged once the detailer confirms. Gift certificates and referral credit are built in.",
+    url: "https://mintcoupe.com",
   },
   {
     name: "Visu Kitchen",
