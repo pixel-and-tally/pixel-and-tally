@@ -21,6 +21,6 @@ describe("price sheet", () => {
 
 describe("honest content", () => {
   it("lists only the real case studies", () => {
-    expect(work.map((w) => w.name)).toEqual(["Mint Coupe", "Visu Kitchen"]);
+    expect(work.map((w) => w.name)).toEqual(["Mint Coupe"]);
   });
 });
