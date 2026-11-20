@@ -3,10 +3,12 @@ import Logo from "./Logo.astro";
 import { site } from "../site";
 
 const path = Astro.url.pathname;
-const links = [...site.tabs, ...site.nav];
+const tone = ["bg-accent", "bg-accent-2", "bg-accent-3"];
+const onService = site.tabs.some((t) => path.startsWith(t.href));
+const help = { href: "/contact/", label: "Don't see what you need?", desc: "Tell me what's bugging you and we'll figure out the fix together." };
 ---
 
-<header class="border-b-[3px] border-ink bg-paper">
+<header class="relative z-40 border-b-[3px] border-ink bg-paper">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
     <a href="/" class="flex items-center gap-2 font-display text-xl font-black uppercase [font-stretch:125%]">
       <Logo class="h-8 w-8" />
@@ -14,8 +16,43 @@ const links = [...site.tabs, ...site.nav];
     </a>
 
     <nav aria-label="Main" class="hidden items-center gap-6 md:flex">
+      <details class="nav-menu relative" data-menu>
+        <summary
+          aria-current={onService ? "page" : undefined}
+          class="flex cursor-pointer list-none items-center gap-1.5 font-bold uppercase underline-offset-[6px] hover:underline aria-[current=page]:underline aria-[current=page]:decoration-[3px] aria-[current=page]:decoration-accent [&::-webkit-details-marker]:hidden"
+        >
+          Services
+          <svg aria-hidden="true" viewBox="0 0 12 8" class="chev h-2 w-3 transition-transform"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.5" /></svg>
+        </summary>
+        <div class="sticker absolute left-1/2 z-50 mt-4 w-[26rem] -translate-x-1/2 bg-card p-2">
+          <ul>
+            {
+              site.tabs.map((t, i) => (
+                <li>
+                  <a
+                    href={t.href}
+                    aria-current={path.startsWith(t.href) ? "page" : undefined}
+                    class="flex gap-3 rounded-xl p-3 hover:bg-sunk aria-[current=page]:bg-sunk"
+                  >
+                    <span aria-hidden="true" class:list={["mt-1 h-4 w-4 shrink-0 rounded-full border-[3px] border-ink", tone[i]]} />
+                    <span>
+                      <span class="block font-display text-lg leading-tight font-black uppercase [font-stretch:125%]">{t.label}</span>
+                      <span class="block font-mono text-xs uppercase">{t.blurb}</span>
+                      <span class="mt-1 block text-[15px] leading-snug text-muted">{t.desc}</span>
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <a href={help.href} class="mt-1 block rounded-xl border-t-2 border-dashed border-hairline p-3 hover:bg-sunk">
+            <span class="block font-bold">{help.label} Talk to me.</span>
+            <span class="mt-1 block text-[15px] leading-snug text-muted">{help.desc}</span>
+          </a>
+        </div>
+      </details>
       {
-        links.map((item) => (
+        site.nav.map((item) => (
           <a
             href={item.href}
             aria-current={path.startsWith(item.href) ? "page" : undefined}
@@ -30,14 +67,53 @@ const links = [...site.tabs, ...site.nav];
       </a>
     </nav>
 
-    <details class="relative md:hidden">
+    <details class="relative md:hidden" data-menu>
       <summary class="cursor-pointer list-none rounded-control border-[3px] border-ink bg-card px-4 py-1.5 font-extrabold uppercase [&::-webkit-details-marker]:hidden">
         Menu
       </summary>
-      <nav aria-label="Main" class="sticker absolute right-0 z-40 mt-3 flex w-60 flex-col bg-card p-2">
-        {links.map((item) => <a href={item.href} class="rounded-xl px-3 py-2 font-bold uppercase hover:bg-sunk">{item.label}</a>)}
+      <nav aria-label="Main" class="sticker absolute right-0 z-50 mt-3 flex max-h-[80vh] w-[min(20rem,calc(100vw-2rem))] flex-col overflow-y-auto bg-card p-2">
+        <p class="px-3 pt-2 font-mono text-xs font-bold uppercase text-muted">Services</p>
+        {
+          site.tabs.map((t, i) => (
+            <a href={t.href} class="flex gap-3 rounded-xl px-3 py-2 hover:bg-sunk">
+              <span aria-hidden="true" class:list={["mt-1 h-3.5 w-3.5 shrink-0 rounded-full border-[3px] border-ink", tone[i]]} />
+              <span>
+                <span class="block font-bold uppercase">{t.label}</span>
+                <span class="block text-sm leading-snug text-muted">{t.desc}</span>
+              </span>
+            </a>
+          ))
+        }
+        <a href={help.href} class="rounded-xl px-3 py-2 text-sm font-bold hover:bg-sunk">{help.label} Talk to me.</a>
+        <div class="my-1 border-t-2 border-dashed border-hairline" />
+        {site.nav.map((item) => <a href={item.href} class="rounded-xl px-3 py-2 font-bold uppercase hover:bg-sunk">{item.label}</a>)}
         <a href="/contact/" class="mt-1 rounded-control bg-ink px-3 py-2 text-center font-extrabold uppercase text-inverse">Book a call</a>
       </nav>
     </details>
   </div>
 </header>
+
+<style>
+  .nav-menu[open] .chev {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  // Close open menus on an outside click or Escape.
+  const menus = document.querySelectorAll<HTMLDetailsElement>("details[data-menu]");
+  document.addEventListener("click", (e) => {
+    menus.forEach((m) => {
+      if (m.open && !m.contains(e.target as Node)) m.open = false;
+    });
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    menus.forEach((m) => {
+      if (m.open) {
+        m.open = false;
+        m.querySelector("summary")?.focus();
+      }
+    });
+  });
+</script>
