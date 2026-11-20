@@ -8,7 +8,7 @@ import TicketRail from "../components/TicketRail.astro";
 import { site, availability, steps, shoutouts, expertise } from "../site";
 
 const tabs = [
-  { ...site.tabs[0], tone: "bg-accent", tilt: "md:-rotate-2", line: "A website that takes bookings and orders while you're busy.", price: "From $1,800" },
+  { ...site.tabs[0], tone: "bg-accent", tilt: "md:-rotate-2", line: "A website that takes bookings and orders while you're busy, and help with a logo that looks the part.", price: "From $1,800" },
   { ...site.tabs[1], tone: "bg-accent-2", tilt: "md:rotate-1", line: "Your numbers on one page, and your tools wired together so the busywork does itself.", price: "From $300" },
   { ...site.tabs[2], tone: "bg-accent-3", tilt: "md:-rotate-1", line: "Pick what you need from both sides of the menu and build your own package.", price: "Build your own" },
 ];
@@ -21,9 +21,9 @@ const tabs = [
         Get booked.<br /><span class="text-accent">Know your numbers.</span>
       </h1>
       <p class="mt-7 max-w-xl text-xl leading-relaxed">
-        I'm {site.firstName}, the owner. We build websites for Charlotte restaurants and small businesses, and we make
-        sense of their sales data. Most shops do one or the other. We do both, and you deal with me from the first call to
-        launch.
+        I'm {site.firstName}, the owner. We make Charlotte restaurants and small businesses better online: websites that
+        take bookings, a look that matches, and sales data that finally makes sense. Most shops do one or the other. We do
+        both, and you deal with me from the first call to launch.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
         <CtaLink href="/contact/">Book a {availability.callMinutes}-min video call</CtaLink>

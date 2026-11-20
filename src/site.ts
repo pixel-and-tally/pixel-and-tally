@@ -32,7 +32,7 @@ export const site = {
   firstName: "Blake",
   url: "https://pixelandtally.com",
   description:
-    "Blake Turner builds websites that take bookings and dashboards that show where the money goes, for Charlotte restaurants and small businesses.",
+    "Blake Turner makes Charlotte restaurants and small businesses better online: websites that take bookings, a look that matches, dashboards that show where the money goes, and automations that cut the busywork.",
   serviceArea: "Charlotte first, and any US business remotely.",
 
   // Contact. Empty values are hidden on the site.
@@ -47,8 +47,8 @@ export const site = {
     {
       href: "/pixel/",
       label: "Pixel",
-      blurb: "Websites",
-      desc: "Websites that take bookings and orders, plus monthly care so they never go stale.",
+      blurb: "Websites + design",
+      desc: "Websites that take bookings and orders, help with your logo if it needs it, and monthly care so it never goes stale.",
     },
     {
       href: "/tally/",
