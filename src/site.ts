@@ -48,7 +48,7 @@ export const site = {
       href: "/pixel/",
       label: "Pixel",
       blurb: "Websites + design",
-      desc: "Websites that take bookings and orders, a logo refresh if yours needs one, and monthly care so it never goes stale.",
+      desc: "Websites that take bookings and orders, help with your logo if it needs it, and monthly care so it never goes stale.",
     },
     {
       href: "/tally/",
@@ -115,20 +115,6 @@ export const pixel: Offer[] = [
       "First month of Care free",
     ],
     turnaround: "3 to 4 weeks",
-  },
-  {
-    name: "Logo Refresh",
-    price: "$450",
-    cadence: "one-time",
-    summary:
-      "A cleaner logo and a simple brand kit, so you look the same on your site, Google, social and your sign.",
-    includes: [
-      "2 to 3 logo directions, then 2 rounds of changes",
-      "Colors and fonts picked to match",
-      "Files for web, social, signs and print",
-      "Profile images for Google, Instagram and Facebook",
-    ],
-    turnaround: "about 1 week",
   },
 ];
 
