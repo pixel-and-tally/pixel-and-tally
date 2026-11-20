@@ -32,7 +32,7 @@ export const site = {
   firstName: "Blake",
   url: "https://pixelandtally.com",
   description:
-    "Blake Turner builds websites that take bookings and dashboards that show where the money goes, for Charlotte restaurants and small businesses.",
+    "Blake Turner makes Charlotte restaurants and small businesses better online: websites that take bookings, a look that matches, dashboards that show where the money goes, and automations that cut the busywork.",
   serviceArea: "Charlotte first, and any US business remotely.",
 
   // Contact. Empty values are hidden on the site.
@@ -47,8 +47,8 @@ export const site = {
     {
       href: "/pixel/",
       label: "Pixel",
-      blurb: "Websites",
-      desc: "Websites that take bookings and orders, plus monthly care so they never go stale.",
+      blurb: "Websites + design",
+      desc: "Websites that take bookings and orders, a logo refresh if yours needs one, and monthly care so it never goes stale.",
     },
     {
       href: "/tally/",
@@ -115,6 +115,20 @@ export const pixel: Offer[] = [
       "First month of Care free",
     ],
     turnaround: "3 to 4 weeks",
+  },
+  {
+    name: "Logo Refresh",
+    price: "$450",
+    cadence: "one-time",
+    summary:
+      "A cleaner logo and a simple brand kit, so you look the same on your site, Google, social and your sign.",
+    includes: [
+      "2 to 3 logo directions, then 2 rounds of changes",
+      "Colors and fonts picked to match",
+      "Files for web, social, signs and print",
+      "Profile images for Google, Instagram and Facebook",
+    ],
+    turnaround: "about 1 week",
   },
 ];
 

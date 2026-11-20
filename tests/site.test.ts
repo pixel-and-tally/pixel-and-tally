@@ -7,6 +7,7 @@ describe("price sheet", () => {
     expect(prices).toEqual({
       "Starter Site": "$1,800",
       "Booking Site": "$3,200",
+      "Logo Refresh": "$450",
       "Data Checkup": "$300",
       "Owner Dashboard": "$1,500",
       "Workflow Setup": "$450",
