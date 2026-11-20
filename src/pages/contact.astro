@@ -11,6 +11,7 @@ import { site, availability } from "../site";
       The first call is free, face to face on video, and there's no pitch deck. You tell me what's going on, I tell you
       what I'd do and what it would cost. If it's not a fit, I'll say so.
       {site.phone && <> You can also text me at <a href={`sms:${site.phone}`} class="font-bold underline">{site.phone}</a>.</>}
+      {site.email && <> Rather email? Write to <a href={`mailto:${site.email}`} class="font-bold underline">{site.email}</a>.</>}
     </p>
   </section>
 

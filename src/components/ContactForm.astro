@@ -148,6 +148,7 @@ const chip =
 
 <script>
   import { availableTimes, bookableDates, formatTime, type Availability } from "../lib/schedule";
+  import { site } from "../site";
 
   const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
   if (form) {
@@ -156,8 +157,9 @@ const chip =
     const controls = Array.from(
       form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("[required]"),
     );
-    const sendFailed =
-      "That didn't send. Please try again in a minute, or message me on LinkedIn if it keeps happening.";
+    const sendFailed = site.email
+      ? `That didn't send. Please try again in a minute, or email me at ${site.email}.`
+      : "That didn't send. Please try again in a minute, or message me on LinkedIn if it keeps happening.";
 
     // ----- Call picker -----
     const picker = form.querySelector<HTMLElement>("[data-call-picker]")!;
