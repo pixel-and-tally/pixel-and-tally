@@ -34,7 +34,7 @@ export const site = {
   serviceArea: "Charlotte first, and any US business remotely.",
 
   // Contact. Empty values are hidden on the site.
-  email: "",
+  email: "blake@pixelandtally.com",
   phone: "",
   linkedin: "https://www.linkedin.com/in/blakewturner",
   // Path under public/, e.g. "/blake.jpg". Until set, the site shows initials.
