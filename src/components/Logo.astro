@@ -1,5 +1,5 @@
 ---
-// The mark: a tally of five. Four strokes are Tally (mint), the slash is Pixel (tomato).
+// The mark: a tally of five. Four strokes are Tally (mint), the cross stroke is Pixel (tomato), drawn as a rising line chart.
 // Colors come from theme tokens.
 interface Props {
   class?: string;
@@ -14,5 +14,5 @@ const { class: className = "h-8 w-8" } = Astro.props;
     <line x1="19" y1="7" x2="19" y2="25"></line>
     <line x1="25" y1="7" x2="25" y2="25"></line>
   </g>
-  <line x1="3" y1="21" x2="29" y2="11" class="stroke-accent" stroke-width="3.4" stroke-linecap="square"></line>
+  <polyline points="3,23 8,18 12,21 18,13 22,16 29,8" fill="none" class="stroke-accent" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"></polyline>
 </svg>
