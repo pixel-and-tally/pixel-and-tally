@@ -282,7 +282,7 @@ export const steps = [
   },
   {
     title: "Launch",
-    body: "We launch it, I walk you through it, and we keep it running each month if you want.",
+    body: "We launch it, I walk you through it, and Care keeps it running and up to date every month.",
   },
 ] as const;
 
@@ -355,7 +355,8 @@ export const terms = [
   "One round of revisions on everything I deliver.",
   "Anything outside the package is $85/hour, and I quote it first.",
   "Monthly plans are month to month. Cancel with 30 days' notice.",
-  "You own your domain and your site. Always.",
+  "You own your domain and your content (words, photos, logo). Always.",
+  "The site, booking, payments and forms run on Care. If Care ends, they go offline and your domain is yours to point anywhere.",
 ];
 
 // Real projects only.
@@ -471,12 +472,12 @@ export const work: WorkItem[] = [
 // Questions a careful owner asks before hiring anyone for a website. Answers only say what is true today.
 export const faqs = [
   {
-    q: "Who owns the site and the domain?",
-    a: "You do. The domain is registered in your name, and the site is yours whether or not you stay on a monthly plan.",
+    q: "Who owns what?",
+    a: "Your domain and your content are yours: the name, the words, the photos and the logo. The site itself, with its booking, payments and forms, runs on our systems as part of Care.",
   },
   {
     q: "What if I stop paying for Care?",
-    a: "You keep the site. I hand over the files and help you move it to hosting in your name.",
+    a: "No hard feelings. Your domain stays yours and I help you point it wherever you like. The site, booking, payments and forms run on our systems, so they switch off when Care ends, with 30 days' notice so nothing surprises you.",
   },
   {
     q: "How do changes work after launch?",
