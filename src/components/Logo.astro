@@ -1,5 +1,6 @@
 ---
-// The mark: a pixel square beside four tally strokes. Colors come from theme tokens.
+// The mark: a tally of five. Four strokes are Tally (mint), the slash is Pixel (tomato).
+// Colors come from theme tokens.
 interface Props {
   class?: string;
 }
@@ -7,11 +8,11 @@ const { class: className = "h-8 w-8" } = Astro.props;
 ---
 
 <svg class={className} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-  <rect x="2" y="9" width="12" height="14" rx="2.5" class="fill-accent"></rect>
-  <g class="stroke-accent-2" stroke-width="2.6" stroke-linecap="round">
-    <line x1="18" y1="9" x2="18" y2="23"></line>
-    <line x1="22" y1="9" x2="22" y2="23"></line>
-    <line x1="26" y1="9" x2="26" y2="23"></line>
-    <line x1="16.5" y1="20.5" x2="29.5" y2="11.5"></line>
+  <g class="stroke-accent-2" stroke-width="3" stroke-linecap="square">
+    <line x1="7" y1="7" x2="7" y2="25"></line>
+    <line x1="13" y1="7" x2="13" y2="25"></line>
+    <line x1="19" y1="7" x2="19" y2="25"></line>
+    <line x1="25" y1="7" x2="25" y2="25"></line>
   </g>
+  <line x1="3" y1="21" x2="29" y2="11" class="stroke-accent" stroke-width="3.4" stroke-linecap="square"></line>
 </svg>
