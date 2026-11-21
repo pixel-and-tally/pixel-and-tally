@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { offers, plans, priceAmount, work } from "../src/site";
+import { buyout, offers, plans, priceAmount, work } from "../src/site";
 
 describe("price sheet", () => {
   it("matches the agreed prices", () => {
@@ -23,6 +23,12 @@ describe("price sheet", () => {
       "Dashboard Care": "$150",
       "Automation Care": "$75",
     });
+  });
+});
+
+describe("buyout", () => {
+  it("matches the agreed terms", () => {
+    expect(buyout).toEqual({ percent: 50, minimum: "$500" });
   });
 });
 

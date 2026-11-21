@@ -349,6 +349,9 @@ export const bundle = {
   items: ["Starter Site", "Data Checkup"],
 };
 
+// Leaving Care and keeping the site: a one-time copy of the files. Blake's accounts never go with it.
+export const buyout = { percent: 50, minimum: "$500" } as const;
+
 export const terms = [
   "The price is fixed and agreed before I start.",
   "Half to start, half at launch.",
@@ -357,6 +360,7 @@ export const terms = [
   "Monthly plans are month to month. Cancel with 30 days' notice.",
   "You own your domain and your content (words, photos, logo). Always.",
   "The site, booking, payments and forms run on Care. If Care ends, they go offline and your domain is yours to point anywhere.",
+  `Want to keep the site after Care? Buy a copy of the files for ${buyout.percent}% of your build price (${buyout.minimum} minimum). My accounts aren't included, so booking and payments get reconnected on your side.`,
 ];
 
 // Real projects only.
@@ -477,7 +481,7 @@ export const faqs = [
   },
   {
     q: "What if I stop paying for Care?",
-    a: "No hard feelings. Your domain stays yours and I help you point it wherever you like. The site, booking, payments and forms run on our systems, so they switch off when Care ends, with 30 days' notice so nothing surprises you.",
+    a: `No hard feelings. Your domain stays yours and I help you point it wherever you like. The site, booking, payments and forms run on our systems, so they switch off when Care ends, with 30 days' notice. Want to keep the site? Buy a copy of the files for ${buyout.percent}% of what you paid for the build (${buyout.minimum} minimum). My accounts don't come with it, so booking and payments get reconnected on your end.`,
   },
   {
     q: "How do changes work after launch?",
