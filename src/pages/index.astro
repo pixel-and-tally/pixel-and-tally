@@ -5,6 +5,7 @@ import HeroTicket from "../components/HeroTicket.astro";
 import CtaLink from "../components/CtaLink.astro";
 import Marquee from "../components/Marquee.astro";
 import TicketRail from "../components/TicketRail.astro";
+import Faq from "../components/Faq.astro";
 import { site, availability, steps, shoutouts, expertise, pixel, pixelPieces, work } from "../site";
 
 // Booking websites are the front door. Tally and the builder are what comes after.
@@ -12,11 +13,10 @@ const later = [
   { ...site.tabs[1], tone: "bg-accent-2", line: "Your numbers on one page, and your tools wired together so the busywork does itself.", price: "From $300" },
   { ...site.tabs[2], tone: "bg-accent-3", line: "Mix anything from both menus into one package, with a combo discount.", price: "Build your own" },
 ];
-const proof = work[0];
 const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price ?? "";
 ---
 
-<Base>
+<Base fullTitle={`Booking websites for Charlotte small businesses | ${site.name}`}>
   <section class="mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-10 sm:px-6 md:grid-cols-[1.35fr_1fr] md:items-center md:pt-16">
     <div>
       <h1 class="text-[clamp(3.25rem,9vw,7.5rem)] leading-[0.88]">
@@ -31,6 +31,7 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
         <CtaLink href="/contact/">Book a {availability.callMinutes}-min video call</CtaLink>
         <CtaLink href="#menu" variant="ghost">See what it costs</CtaLink>
       </div>
+      <p class="mt-6 font-mono text-sm font-bold uppercase">Prices on the page. Reply within one business day.</p>
     </div>
     <HeroTicket />
   </section>
@@ -46,14 +47,10 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
           Customers book, order and find your hours without calling. We build it, launch it, keep it running, and help
           with your logo if it needs it.
         </p>
-        {
-          proof && (
-            <p class="mt-6 max-w-xl text-lg leading-snug">
-              Proof: we built <a href={proof.url} class="font-bold underline decoration-[3px]">{proof.name}</a>, a
-              Charlotte detailing service with booking, payments, texts and a whole detailer app.
-            </p>
-          )
-        }
+        <p class="mt-6 max-w-xl text-lg leading-snug">
+          Most web shops won't give you a price until after a meeting. Ours are right here, fixed, and written into your
+          quote. <a href="#work" class="font-bold underline decoration-[3px]">See what we've built</a>.
+        </p>
         <div class="mt-8 flex flex-wrap gap-4">
           <CtaLink href="/pixel/" variant="secondary">See the website menu</CtaLink>
         </div>
@@ -99,6 +96,53 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
     </div>
   </section>
 
+  <section id="work" class="mx-auto max-w-6xl scroll-mt-6 px-4 pt-24 sm:px-6">
+    <p class="font-mono text-sm font-bold uppercase">Real sites, all running</p>
+    <h2 class="mt-3 text-[clamp(2.5rem,6vw,4.5rem)]">Built by <span class="text-accent">us.</span></h2>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed">
+      No mockups and no stock portfolio. Each of these is a working site for a real business, and you can click around
+      every one of them.
+    </p>
+    <ul class="mt-10 grid gap-8 md:grid-cols-3">
+      {
+        work.map((w, i) => (
+          <li class:list={["sticker flex flex-col overflow-hidden bg-card", i === 1 ? "md:translate-y-6" : ""]}>
+            {w.image && (
+              <img
+                src={w.image}
+                alt={`The ${w.name} home page`}
+                width="960"
+                height="540"
+                loading="lazy"
+                class="aspect-video w-full border-b-[3px] border-ink object-cover object-top"
+              />
+            )}
+            <div class="flex flex-1 flex-col p-5">
+              <p class="font-mono text-xs font-bold uppercase">{w.kind}</p>
+              <p class="mt-2 font-display text-2xl leading-none font-black uppercase [font-stretch:125%]">{w.name}</p>
+              {w.highlights && (
+                <ul class="mt-4 flex-1 space-y-2 font-mono text-sm">
+                  {w.highlights.map((h) => (
+                    <li class="flex gap-3">
+                      <span aria-hidden="true" class="font-bold">1x</span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <a href={w.url} class="mt-5 font-bold underline decoration-accent decoration-[3px]">
+                Visit {w.name}<span class="sr-only"> (opens the live site)</span>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-14 text-lg">
+      Want the full list of what went into each one? <a href="/pixel/#work" class="font-bold underline decoration-[3px]">See the build notes</a>.
+    </p>
+  </section>
+
   <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
     <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">How an order goes</h2>
     <div class="mt-12"><TicketRail steps={steps} /></div>
@@ -124,8 +168,8 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
   <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
     <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">What I'm good at</h2>
     <p class="mt-6 max-w-3xl text-lg leading-relaxed">
-      Charlotte native, NC State business and IT grad, and a business operations analyst by day, building the dashboards
-      sales directors use to run teams in four countries.
+      Charlotte native and NC State business and IT grad. Before Pixel & Tally I was a business operations analyst,
+      building the dashboards sales directors used to run teams in four countries.
     </p>
     <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
       {
@@ -139,13 +183,19 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
     </ul>
   </section>
 
+  <section id="questions" class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
+    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">Fair <span class="text-accent">questions.</span></h2>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed">What owners ask before they hire anyone to build their site.</p>
+    <div class="mt-10"><Faq /></div>
+  </section>
+
   <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
     <div class="sticker flex flex-col gap-6 bg-card p-8 md:flex-row md:items-center md:justify-between md:p-10">
       <div>
         <p class="font-mono text-sm font-bold uppercase">Reviews so far: 0</p>
         <p class="mt-3 max-w-2xl text-2xl leading-snug font-bold">
-          I'm new to doing this on my own, and I'm not going to make reviews up. Real ones will show up here as I earn
-          them.
+          I'm new to doing this on my own, and I'm not going to make reviews up. Until real ones show up here, judge me by
+          the sites above.
         </p>
       </div>
       <CtaLink href="/contact/" variant="secondary" class="shrink-0">Book a call</CtaLink>

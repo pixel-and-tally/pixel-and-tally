@@ -5,7 +5,7 @@ import CtaLink from "../components/CtaLink.astro";
 import { site, expertise } from "../site";
 ---
 
-<Base title="About" description={`${site.owner} builds websites and dashboards for Charlotte restaurants and small businesses.`}>
+<Base title="About Blake Turner" description={`${site.owner}, a Charlotte native, owns Pixel & Tally and is the person you talk to. We build booking websites and dashboards for Charlotte restaurants and small businesses.`}>
   <section class="mx-auto grid max-w-6xl gap-12 px-4 pt-12 sm:px-6 md:grid-cols-[1fr_1.4fr]">
     <Portrait class="aspect-[4/5] w-full max-w-sm" />
     <div>
@@ -13,8 +13,8 @@ import { site, expertise } from "../site";
       <div class="mt-8 flex flex-col gap-5 text-lg leading-relaxed">
         <p>I'm {site.owner}. I grew up in Charlotte and studied business and IT at NC State.</p>
         <p>
-          By day I'm a business operations analyst. I build the SQL and Tableau dashboards that sales directors use to run
-          teams across four countries, for Fortune 500 utility clients. Before that I did data work at UNC Health and spent
+          Before Pixel & Tally I was a business operations analyst. I built the SQL and Tableau dashboards that sales
+          directors used to run teams across four countries, for Fortune 500 utility clients. Before that I did data work at UNC Health and spent
           a summer in tax accounting at a Charlotte CPA firm.
         </p>
         <p>
@@ -41,7 +41,7 @@ import { site, expertise } from "../site";
         <p class="font-mono text-sm font-bold uppercase">Who I work with</p>
         <p class="mt-3 text-lg leading-relaxed">
           Owner-run restaurants, salons, barbers, detailers, cleaners, trades and studios, usually 1 to 20 people on staff.
-          {site.serviceArea}
+          {site.serviceArea} That includes {site.areas.slice(0, -1).join(", ")} and {site.areas.at(-1)}.
         </p>
       </div>
       <div class="mt-10 flex flex-wrap gap-4">

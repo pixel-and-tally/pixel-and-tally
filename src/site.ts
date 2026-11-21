@@ -23,6 +23,10 @@ export type WorkItem = {
   kind: string;
   summary: string;
   url: string;
+  // Screenshot under public/, 16:9. Empty hides the picture.
+  image?: string;
+  // Three short lines on what was built, for the home page card.
+  highlights?: string[];
   // What the build includes, grouped by who uses it. Only list what was actually shipped.
   features?: { group: string; items: string[] }[];
 };
@@ -34,8 +38,10 @@ export const site = {
   firstName: "Blake",
   url: "https://pixelandtally.com",
   description:
-    "Blake Turner makes Charlotte restaurants and small businesses better online: websites that take bookings, a look that matches, dashboards that show where the money goes, and automations that cut the busywork.",
+    "Websites that take bookings for Charlotte restaurants and small businesses, with fixed prices on the page and monthly care. Plus dashboards and a $300 Data Checkup. You deal with the owner, Blake Turner.",
   serviceArea: "Charlotte first, and any US business remotely.",
+  // Named on the about page and in search data. Places we can serve today, all over video.
+  areas: ["Charlotte", "Matthews", "Huntersville", "Concord", "Gastonia", "Belmont", "Fort Mill"],
 
   // Contact. Empty values are hidden on the site.
   email: "blake@pixelandtally.com",
@@ -283,7 +289,7 @@ export const steps = [
 export const shoutouts = [
   "Charlotte native",
   "Text me, I answer",
-  "Fixed prices",
+  "Prices on the page",
   "Websites that book",
   "Numbers that make sense",
   "Busywork on autopilot",
@@ -360,6 +366,8 @@ export const work: WorkItem[] = [
     summary:
       "Mobile car detailing in Charlotte. Customers pick a package priced by their vehicle, choose a time, place and detailer, and their card is only charged once the detailer confirms. Gift certificates and referral credit are built in.",
     url: "https://mintcoupe.com",
+    image: "/work/mint-coupe.webp",
+    highlights: ["Booking with prices by vehicle", "Card held until the detailer confirms", "Texts, reminders and a detailer app"],
     features: [
       {
         group: "Customer booking",
@@ -440,4 +448,58 @@ export const work: WorkItem[] = [
       },
     ],
   },
+  {
+    name: "Oogum Vending",
+    kind: "Family business site + owner hub",
+    summary:
+      "Refrigerated smart vending from a family in Belmont, NC. A light, friendly site built on the owners' own flier, a form for businesses that want a machine, and a private login where the owners track host requests and bulk prices.",
+    url: "https://oogum-vending.netlify.app",
+    image: "/work/oogum-vending.webp",
+    highlights: ["Built from the owners' flier", "Host-a-machine request form", "Private owner hub"],
+  },
+  {
+    name: "Resume Pro NC",
+    kind: "Wix rebuild + client portal",
+    summary:
+      "Nancy Turner's resume writing service, moved off Wix with nothing lost. A guided order form with resume upload, PayPal checkout tied to each order, a free resume review, and a dashboard where every order moves from paid to delivered, with her own emails one click away.",
+    url: "https://resumepronc.netlify.app",
+    image: "/work/resume-pro-nc.webp",
+    highlights: ["Order form with checkout", "Every old Wix link still works", "Owner dashboard and emails"],
+  },
 ];
+
+// Questions a careful owner asks before hiring anyone for a website. Answers only say what is true today.
+export const faqs = [
+  {
+    q: "Who owns the site and the domain?",
+    a: "You do. The domain is registered in your name, and the site is yours whether or not you stay on a monthly plan.",
+  },
+  {
+    q: "What if I stop paying for Care?",
+    a: "You keep the site. I hand over the files and help you move it to hosting in your name.",
+  },
+  {
+    q: "How do changes work after launch?",
+    a: "Text or email me what you want changed. Care includes 30 minutes of edits a month, Care Plus includes 2 hours, and anything bigger is $85 an hour, quoted before I start.",
+  },
+  {
+    q: "How long does it take?",
+    a: "A Starter Site takes about 2 weeks and a Booking Site 3 to 4 weeks. The clock starts once I have your logo, photos and hours. You get the launch date in writing.",
+  },
+  {
+    q: "What do you need from me?",
+    a: "A 20-minute call, your logo and photos if you have them, and the basics: hours, services, prices. Rough notes are fine. We shape the words together.",
+  },
+  {
+    q: "Why are your prices on the page?",
+    a: "Because you should know before you call. Most web shops quote after a meeting. Mine are fixed and written down, and the price I quote doesn't change later.",
+  },
+  {
+    q: "Do you meet in person?",
+    a: "Calls are face to face over video, so it works the same in Charlotte or anywhere in the US. I grew up in Charlotte and know the area.",
+  },
+  {
+    q: "Do you use AI?",
+    a: "We use good tools, like any shop. But you talk to me, I decide what goes on your site, and I check every page myself before it launches.",
+  },
+] as const;
