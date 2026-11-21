@@ -9,7 +9,7 @@ import { site } from "./src/site.ts";
 export default defineConfig({
   site: site.url,
   output: "static",
-  adapter: cloudflare({ platformProxy: { enabled: false } }),
+  adapter: cloudflare({ imageService: "compile", platformProxy: { enabled: false } }),
   trailingSlash: "ignore",
   build: { format: "directory" },
   vite: { plugins: [tailwindcss()] },
