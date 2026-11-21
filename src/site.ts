@@ -14,6 +14,8 @@ export type Offer = {
   summary: string;
   includes: string[];
   turnaround?: string;
+  // Priced per unit (e.g. "page"): the builder asks how many.
+  per?: string;
 };
 
 export type WorkItem = {
@@ -115,6 +117,58 @@ export const pixel: Offer[] = [
       "First month of Care free",
     ],
     turnaround: "3 to 4 weeks",
+  },
+];
+
+// Build a site piece by piece. The packages above are preset combos of these pieces that cost
+// the same or less (Starter = base + 4 pages, with booking thrown in).
+export const pixelPieces: Offer[] = [
+  {
+    name: "Base Site",
+    price: "$900",
+    cadence: "one-time",
+    summary:
+      "One page, designed for you (no template), built for phones first, with a contact form, basic local SEO and your Google Business Profile cleaned up.",
+    includes: [],
+  },
+  {
+    name: "Extra Page",
+    price: "$225",
+    cadence: "one-time",
+    summary: "Each extra page in the same design: a menu, services, about, gallery, whatever you need.",
+    includes: [],
+    per: "page",
+  },
+  {
+    name: "Booking Calendar",
+    price: "$350",
+    cadence: "one-time",
+    summary:
+      "Customers pick an open time on your site, and you get the booking by email with a calendar file.",
+    includes: [],
+  },
+  {
+    name: "Deposits or Payments",
+    price: "$400",
+    cadence: "one-time",
+    summary: "Card checkout on a booking or order, so you get paid up front and no-shows cost less.",
+    includes: [],
+  },
+  {
+    name: "Extra Form",
+    price: "$150",
+    cadence: "one-time",
+    summary:
+      "A second form with your own questions, like catering requests or job applications, sent straight to your email.",
+    includes: [],
+  },
+  {
+    name: "Signature Piece",
+    price: "$500",
+    cadence: "one-time",
+    summary:
+      "One interactive centerpiece that makes your site unlike anyone else's, built around what you do.",
+    includes: [],
   },
 ];
 
@@ -236,7 +290,7 @@ export const shoutouts = [
   "One real person",
 ] as const;
 
-export const offers = [...pixel, ...tally, ...automations];
+export const offers = [...pixel, ...pixelPieces, ...tally, ...automations];
 
 // What Blake is good at, for the owner section on the home and about pages.
 export const expertise = [
@@ -269,7 +323,8 @@ export const expertise = [
 
 // The pick-your-own builder: every item a visitor can add to an order, grouped like a menu.
 export const builderGroups = [
-  { title: "Pixel / Builds", tone: "pixel", items: pixel },
+  { title: "Pixel / Packages", tone: "pixel", items: pixel },
+  { title: "Pixel / By the piece", tone: "pixel", items: pixelPieces },
   { title: "Pixel / Monthly", tone: "pixel", items: pixelPlans },
   { title: "Tally / Numbers", tone: "tally", items: tally },
   { title: "Tally / Automation", tone: "tally", items: automations },

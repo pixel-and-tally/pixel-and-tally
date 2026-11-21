@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { offers, plans, work } from "../src/site";
+import { offers, plans, priceAmount, work } from "../src/site";
 
 describe("price sheet", () => {
   it("matches the agreed prices", () => {
@@ -7,6 +7,12 @@ describe("price sheet", () => {
     expect(prices).toEqual({
       "Starter Site": "$1,800",
       "Booking Site": "$3,200",
+      "Base Site": "$900",
+      "Extra Page": "$225",
+      "Booking Calendar": "$350",
+      "Deposits or Payments": "$400",
+      "Extra Form": "$150",
+      "Signature Piece": "$500",
       "Data Checkup": "$300",
       "Owner Dashboard": "$1,500",
       "Workflow Setup": "$450",
@@ -16,6 +22,13 @@ describe("price sheet", () => {
       "Dashboard Care": "$150",
       "Automation Care": "$75",
     });
+  });
+});
+
+describe("by the piece", () => {
+  it("keeps the Starter Site no pricier than base plus 4 pages", () => {
+    const price = (n: string) => priceAmount(offers.find((o) => o.name === n)!.price);
+    expect(price("Base Site") + 4 * price("Extra Page")).toBe(price("Starter Site"));
   });
 });
 

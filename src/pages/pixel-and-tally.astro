@@ -34,6 +34,7 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
             <legend class="font-mono text-sm font-bold uppercase">{g.title}</legend>
             <div class="mt-3 grid gap-4 sm:grid-cols-2">
               {g.items.map((o) => (
+                <div class="flex min-w-0 flex-col gap-2">
                 <label
                   class:list={[
                     "sticker group relative flex cursor-pointer flex-col bg-card p-5 transition-transform hover:-translate-y-0.5 has-[:checked]:-translate-y-1 has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-accent",
@@ -64,6 +65,26 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
                   </span>
                   <span class="mt-3 text-sm leading-relaxed">{o.summary}</span>
                 </label>
+                {o.per && (
+                  <div class="flex items-center gap-3 font-mono text-sm font-bold uppercase">
+                    <label for={`qty-${o.per}`}>How many {o.per}s?</label>
+                    <input
+                      id={`qty-${o.per}`}
+                      type="number"
+                      name={`${o.per}s`}
+                      min="1"
+                      max="30"
+                      value="1"
+                      inputmode="numeric"
+                      autocomplete="off"
+                      data-qty-for={o.name}
+                      aria-describedby={`qty-${o.per}-error`}
+                      class="w-20 rounded-xl border-[3px] border-ink bg-card px-3 py-2 outline-none focus:shadow-hard-sm aria-[invalid=true]:border-danger"
+                    />
+                    <span id={`qty-${o.per}-error`} hidden class="normal-case text-danger">Pick 1 to 30.</span>
+                  </div>
+                )}
+                </div>
               ))}
             </div>
           </fieldset>
@@ -136,6 +157,13 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
     const monthly = form.querySelector<HTMLElement>("[data-monthly]")!;
     const money = (n: number) => `$${n.toLocaleString("en-US")}`;
     const savings = Number(bundle.saves.replace(/[^0-9]/g, ""));
+    const qtyInputs = Array.from(form.querySelectorAll<HTMLInputElement>("input[data-qty-for]"));
+    const qtyOf = (b: HTMLInputElement) => {
+      const input = qtyInputs.find((q) => q.dataset.qtyFor === b.value);
+      if (!input) return 1;
+      const n = Math.round(Number(input.value));
+      return n >= 1 && n <= 30 ? n : 1;
+    };
 
     const render = () => {
       const picked = boxes.filter((b) => b.checked);
@@ -144,16 +172,16 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
           const li = document.createElement("li");
           li.className = "flex justify-between gap-3 uppercase";
           const name = document.createElement("span");
-          name.textContent = `1x ${b.value}`;
+          name.textContent = `${qtyOf(b)}x ${b.value}`;
           const price = document.createElement("span");
-          price.textContent = (b.dataset.from !== undefined ? "FROM " : "") + money(Number(b.dataset.price)) + (b.dataset.cadence === "monthly" ? "/mo" : "");
+          price.textContent = (b.dataset.from !== undefined ? "FROM " : "") + money(Number(b.dataset.price) * qtyOf(b)) + (b.dataset.cadence === "monthly" ? "/mo" : "");
           li.append(name, price);
           return li;
         }),
       );
       const hasCombo = bundle.items.every((n) => picked.some((b) => b.value === n));
       const sum = (cadence: string) =>
-        picked.filter((b) => b.dataset.cadence === cadence).reduce((t, b) => t + Number(b.dataset.price), 0);
+        picked.filter((b) => b.dataset.cadence === cadence).reduce((t, b) => t + Number(b.dataset.price) * qtyOf(b), 0);
       const fromPrice = picked.some((b) => b.dataset.from !== undefined);
       once.textContent = (fromPrice ? "FROM " : "") + money(sum("one-time") - (hasCombo ? savings : 0));
       monthly.textContent = `${money(sum("monthly"))}/mo`;
@@ -163,6 +191,26 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
     };
 
     boxes.forEach((b) => b.addEventListener("change", render));
+    qtyInputs.forEach((q) =>
+      q.addEventListener("input", () => {
+        const bad = !q.checkValidity() || q.value === "";
+        q.setAttribute("aria-invalid", String(bad));
+        document.getElementById(`${q.id}-error`)!.hidden = !bad;
+        // Typing a count means they want it: tick the matching item.
+        const box = boxes.find((b) => b.value === q.dataset.qtyFor);
+        if (box && !bad) box.checked = true;
+        render();
+      }),
+    );
+    form.addEventListener("submit", (e) => {
+      const bad = qtyInputs.find((q) => !q.checkValidity() || q.value === "");
+      if (bad) {
+        e.preventDefault();
+        bad.setAttribute("aria-invalid", "true");
+        document.getElementById(`${bad.id}-error`)!.hidden = false;
+        bad.focus();
+      }
+    });
     render();
   }
 </script>
