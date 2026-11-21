@@ -2,17 +2,52 @@
 import "../theme.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { site } from "../site";
+import { site, pixel, pixelPieces, pixelPlans, tally } from "../site";
 
 interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  // Use this exact <title> instead of "Title | Pixel & Tally".
+  fullTitle?: string;
 }
 
 const { title, description = site.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+const fullTitle = Astro.props.fullTitle ?? (title ? `${title} | ${site.name}` : `${site.name} | ${site.tagline}`);
+const base = Astro.site ?? site.url;
+const canonical = new URL(Astro.url.pathname, base).href;
+const ogImage = new URL("/og.png", base).href;
+
+// What search engines and AI answers read about the business. Only facts that are on the page.
+const offer = (o: { name: string; price: string; summary: string }) => ({
+  "@type": "Offer",
+  name: o.name,
+  description: o.summary,
+  price: String(Number(o.price.replace(/[^0-9.]/g, ""))),
+  priceCurrency: "USD",
+});
+const business = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${site.url}/#business`,
+  name: site.name,
+  slogan: site.tagline,
+  description: site.description,
+  url: site.url,
+  logo: new URL("/logo.png", base).href,
+  image: ogImage,
+  ...((site.email as string) ? { email: site.email } : {}),
+  ...((site.phone as string) ? { telephone: site.phone } : {}),
+  founder: { "@type": "Person", name: site.owner, ...(site.linkedin && { sameAs: [site.linkedin] }) },
+  areaServed: [...site.areas.map((name) => ({ "@type": "City", name })), { "@type": "Country", name: "United States" }],
+  knowsAbout: ["Web design", "Online booking", "Local SEO", "Dashboards", "Data analysis", "Workflow automation"],
+  ...(site.linkedin && { sameAs: [site.linkedin] }),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Menu",
+    itemListElement: [...pixel, pixelPieces[0], pixelPlans[0], ...tally].map(offer),
+  },
+};
 ---
 
 <!doctype html>
@@ -24,6 +59,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta property="og:type" content="website" />
@@ -31,7 +67,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name}: ${site.tagline}`} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(business)} />
     {noindex && <meta name="robots" content="noindex" />}
   </head>
   <body class="min-h-screen flex flex-col bg-paper text-ink">

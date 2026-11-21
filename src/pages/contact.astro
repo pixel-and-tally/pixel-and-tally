@@ -4,7 +4,7 @@ import ContactForm from "../components/ContactForm.astro";
 import { site, availability } from "../site";
 ---
 
-<Base title="Book a call" description={`Book a free ${availability.callMinutes}-minute video call with ${site.owner}, or send a note.`}>
+<Base title="Book a free call" description={`Book a free ${availability.callMinutes}-minute video call with ${site.owner}, or send a note.`}>
   <section class="mx-auto max-w-4xl px-4 pb-10 pt-12 sm:px-6">
     <h1 class="text-[clamp(3rem,9vw,6.5rem)]">Let's <span class="text-accent">talk.</span></h1>
     <p class="mt-6 max-w-2xl text-xl leading-relaxed">
@@ -13,6 +13,20 @@ import { site, availability } from "../site";
       {site.phone && <> You can also text me at <a href={`sms:${site.phone}`} class="font-bold underline">{site.phone}</a>.</>}
       {site.email && <> Rather email? Write to <a href={`mailto:${site.email}`} class="font-bold underline">{site.email}</a>.</>}
     </p>
+    <ol aria-label="What happens next" class="mt-10 grid gap-4 font-mono text-sm sm:grid-cols-3">
+      {
+        [
+          ["You", "pick a time", "Any open weekday slot below, or just send a note."],
+          ["I", "confirm", "You get a video link by email within one business day."],
+          ["We", "talk", `${availability.callMinutes} minutes. You leave with my honest take and a price.`],
+        ].map(([n, title, body]) => (
+          <li class="sticker bg-card p-4">
+            <p class="font-bold uppercase">{n} {title}</p>
+            <p class="mt-2 leading-snug">{body}</p>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
   <section class="mx-auto max-w-4xl px-4 sm:px-6">

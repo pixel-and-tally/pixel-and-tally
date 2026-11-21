@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { offers, plans, priceAmount, work } from "../src/site";
 
@@ -34,6 +35,9 @@ describe("by the piece", () => {
 
 describe("honest content", () => {
   it("lists only the real case studies", () => {
-    expect(work.map((w) => w.name)).toEqual(["Mint Coupe"]);
+    expect(work.map((w) => w.name)).toEqual(["Mint Coupe", "Oogum Vending", "Resume Pro NC"]);
+  });
+  it("has a screenshot on disk for every case study", () => {
+    for (const w of work) if (w.image) expect(existsSync(`public${w.image}`), w.image).toBe(true);
   });
 });
