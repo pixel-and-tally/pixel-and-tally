@@ -5,7 +5,7 @@ import HeroTicket from "../components/HeroTicket.astro";
 import CtaLink from "../components/CtaLink.astro";
 import Marquee from "../components/Marquee.astro";
 import TicketRail from "../components/TicketRail.astro";
-import { site, availability, steps, shoutouts, expertise, pixel, work } from "../site";
+import { site, availability, steps, shoutouts, expertise, pixel, pixelPieces, work } from "../site";
 
 // Booking websites are the front door. Tally and the builder are what comes after.
 const later = [
@@ -13,6 +13,7 @@ const later = [
   { ...site.tabs[2], tone: "bg-accent-3", line: "Mix anything from both menus into one package, with a combo discount.", price: "Build your own" },
 ];
 const proof = work[0];
+const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price ?? "";
 ---
 
 <Base>
@@ -69,11 +70,18 @@ const proof = work[0];
             </li>
           ))
         }
+        <li class="rounded-card border-[3px] border-dashed border-ink bg-card p-5">
+          <p class="font-mono font-bold uppercase">Or by the piece</p>
+          <p class="mt-2 leading-snug">
+            One page for {piece("Base Site")}, then {piece("Extra Page")} per extra page. Add booking, payments or forms
+            only if you need them.
+          </p>
+        </li>
       </ul>
     </div>
 
-    <h3 class="mt-16 font-display text-2xl font-black uppercase [font-stretch:125%]">Once you're set up</h3>
-    <p class="mt-2 max-w-2xl text-lg">Start with a site. When you're ready, we can also do this:</p>
+    <h3 class="mt-16 font-display text-2xl font-black uppercase [font-stretch:125%]">Beyond the website</h3>
+    <p class="mt-2 max-w-2xl text-lg">Already have a site you like? Start here instead. Or add these once your site is up:</p>
     <div class="mt-6 grid gap-6 md:grid-cols-2">
       {
         later.map((t) => (

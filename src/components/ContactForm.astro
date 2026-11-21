@@ -239,7 +239,11 @@ const chip =
     const interest = form.querySelector<HTMLSelectElement>("#interest")!;
     const match = Array.from(interest.options).find((o) => o.dataset.key === wanted);
     if (match) interest.value = match.value;
-    const order = params.getAll("order").filter(Boolean);
+    const pages = Math.round(Number(params.get("pages")));
+    const order = params
+      .getAll("order")
+      .filter(Boolean)
+      .map((o) => (o === "Extra Page" && pages > 1 && pages <= 30 ? `${pages} Extra Pages` : o));
     const details = form.querySelector<HTMLTextAreaElement>("#details")!;
     if (order.length && !details.value) {
       details.value = `My order: ${order.join(", ")}.\n\n`;
