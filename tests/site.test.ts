@@ -1,5 +1,6 @@
+import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { offers, plans, priceAmount, work } from "../src/site";
+import { buyout, offers, plans, priceAmount, work } from "../src/site";
 
 describe("price sheet", () => {
   it("matches the agreed prices", () => {
@@ -25,6 +26,12 @@ describe("price sheet", () => {
   });
 });
 
+describe("buyout", () => {
+  it("matches the agreed terms", () => {
+    expect(buyout).toEqual({ percent: 50, minimum: "$500" });
+  });
+});
+
 describe("by the piece", () => {
   it("keeps the Starter Site no pricier than base plus 4 pages", () => {
     const price = (n: string) => priceAmount(offers.find((o) => o.name === n)!.price);
@@ -34,6 +41,9 @@ describe("by the piece", () => {
 
 describe("honest content", () => {
   it("lists only the real case studies", () => {
-    expect(work.map((w) => w.name)).toEqual(["Mint Coupe"]);
+    expect(work.map((w) => w.name)).toEqual(["Mint Coupe", "Oogum Vending", "Resume Pro NC"]);
+  });
+  it("has a screenshot on disk for every case study", () => {
+    for (const w of work) if (w.image) expect(existsSync(`public${w.image}`), w.image).toBe(true);
   });
 });

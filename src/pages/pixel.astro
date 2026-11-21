@@ -3,10 +3,11 @@ import Base from "../layouts/Base.astro";
 import Tabs from "../components/Tabs.astro";
 import Receipt from "../components/Receipt.astro";
 import AskOwner from "../components/AskOwner.astro";
+import Faq from "../components/Faq.astro";
 import { pixel, pixelPieces, pixelPlans, work } from "../site";
 ---
 
-<Base title="Pixel: websites" description="Websites with online booking for Charlotte restaurants and small businesses, with fixed prices and monthly care.">
+<Base title="Charlotte websites with online booking" description="Websites that take bookings and orders for Charlotte restaurants and small businesses. Fixed prices from $900, launched in about 2 weeks, with $95 monthly care.">
   <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6"><Tabs /></div>
 
   <section class="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
@@ -32,12 +33,22 @@ import { pixel, pixelPieces, pixelPlans, work } from "../site";
     <Receipt title="Pixel / Monthly" ticket="No. 03" offers={pixelPlans} tone="pixel" footer="Cancel any time, 30 days' notice" />
   </section>
 
-  <section class="mx-auto mt-20 max-w-6xl px-4 sm:px-6">
-    <h2 class="text-[clamp(2rem,5vw,3.5rem)]">Sites I've built</h2>
+  <section id="work" class="mx-auto mt-20 max-w-6xl scroll-mt-6 px-4 sm:px-6">
+    <h2 class="text-[clamp(2rem,5vw,3.5rem)]">Sites we've built</h2>
     <ul class="mt-8 grid gap-6 md:grid-cols-2">
       {
         work.map((w, i) => (
           <li class:list={["sticker bg-card p-6", w.features ? "md:col-span-2" : i % 2 ? "md:rotate-1" : "md:-rotate-1"]}>
+            {w.image && (
+              <img
+                src={w.image}
+                alt={`The ${w.name} home page`}
+                width="960"
+                height="540"
+                loading="lazy"
+                class:list={["mb-6 aspect-video w-full rounded-card border-[3px] border-ink object-cover object-top", w.features && "md:max-w-xl"]}
+              />
+            )}
             <p class="font-mono text-xs font-bold uppercase">{w.kind}</p>
             <p class="mt-2 font-display text-3xl font-black uppercase [font-stretch:125%]">{w.name}</p>
             <p class="mt-3 max-w-3xl text-lg">{w.summary}</p>
@@ -63,6 +74,11 @@ import { pixel, pixelPieces, pixelPlans, work } from "../site";
         ))
       }
     </ul>
+  </section>
+
+  <section class="mx-auto mt-20 max-w-6xl px-4 sm:px-6">
+    <h2 class="text-[clamp(2rem,5vw,3.5rem)]">Fair questions</h2>
+    <div class="mt-8"><Faq /></div>
   </section>
 
   <section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
