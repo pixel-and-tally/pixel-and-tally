@@ -343,9 +343,6 @@ export const bundle = {
   items: ["Starter Site", "Data Checkup"],
 };
 
-export const foundingOffer =
-  "My first 3 clients get 15% off any build. In return I ask for an honest review and permission to write up how it went.";
-
 export const terms = [
   "The price is fixed and agreed before I start.",
   "Half to start, half at launch.",
