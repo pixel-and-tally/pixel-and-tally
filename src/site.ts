@@ -458,7 +458,7 @@ export const work: WorkItem[] = [
     kind: "Family business site + owner hub",
     summary:
       "Refrigerated smart vending from a family in Belmont, NC. A light, friendly site built on the owners' own flier, a form for businesses that want a machine, and a private login where the owners track host requests and bulk prices.",
-    url: "https://oogum-vending.netlify.app",
+    url: "https://oogum-vending.blake-499.workers.dev",
     image: "/work/oogum-vending.webp",
     highlights: ["Built from the owners' flier", "Host-a-machine request form", "Private owner hub"],
   },
@@ -467,7 +467,7 @@ export const work: WorkItem[] = [
     kind: "Wix rebuild + client portal",
     summary:
       "Nancy Turner's resume writing service, moved off Wix with nothing lost. A guided order form with resume upload, PayPal checkout tied to each order, a free resume review, and a dashboard where every order moves from paid to delivered, with her own emails one click away.",
-    url: "https://resumepronc.netlify.app",
+    url: "https://pixel-and-tally-resume-pro-nc.blake-499.workers.dev",
     image: "/work/resume-pro-nc.webp",
     highlights: ["Order form with checkout", "Every old Wix link still works", "Owner dashboard and emails"],
   },
