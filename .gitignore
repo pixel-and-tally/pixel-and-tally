@@ -7,3 +7,6 @@ dist/
 .netlify/
 .wrangler/
 .dev.vars*
+
+# private notes for Claude
+CLAUDE.local.md
