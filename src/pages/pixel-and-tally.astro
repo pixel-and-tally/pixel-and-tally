@@ -29,10 +29,16 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
 
     <div class="flex min-w-0 flex-col gap-10">
       {
-        builderGroups.map((g) => (
+        builderGroups.map((g, gi) => (
           <fieldset class="min-w-0">
-            <legend class="font-mono text-sm font-bold uppercase">{g.title}</legend>
-            <div class="mt-3 grid gap-4 sm:grid-cols-2">
+            <legend class="sr-only">{g.title}</legend>
+            {(gi === 0 || builderGroups[gi - 1].tone !== g.tone) && (
+              <p class:list={["sticker mb-6 inline-block px-4 py-2 font-display text-4xl leading-none font-black uppercase [font-stretch:125%]", stripe[g.tone]]}>
+                {g.title.split(" / ")[0]}
+              </p>
+            )}
+            <p aria-hidden="true" class="font-display text-xl font-black uppercase [font-stretch:110%]">{g.title.split(" / ")[1]}</p>
+            <div class:list={["mt-3 grid gap-4 sm:grid-cols-2", g.items.length === 3 && "md:grid-cols-3"]}>
               {g.items.map((o) => (
                 <div class="flex min-w-0 flex-col gap-2">
                 <label
@@ -61,7 +67,7 @@ const stripe = { pixel: "bg-accent", tally: "bg-accent-2" } as const;
                   </span>
                   <span class="mt-2 font-mono text-sm font-bold">
                     {o.price}
-                    {o.cadence === "monthly" ? "/mo" : ""}
+                    {o.cadence === "monthly" ? "/mo" : " one-time"}
                   </span>
                   <span class="mt-3 text-sm leading-relaxed">{o.summary}</span>
                 </label>

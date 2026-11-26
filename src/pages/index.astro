@@ -13,6 +13,18 @@ const later = [
   { ...site.tabs[1], tone: "bg-accent-2", line: "Your numbers on one page, and your tools wired together so the busywork does itself.", price: "From $300" },
   { ...site.tabs[2], tone: "bg-accent-3", line: "Mix anything from both menus into one package, with a combo discount.", price: "Build your own" },
 ];
+const wants = [
+  "Take bookings while I'm working",
+  "Collect deposits so no-shows cost me less",
+  "Show my menu and take orders",
+  "Show up when people search near me",
+  "Let me update prices and photos myself",
+  "Sell products online",
+  "Stop answering the same questions by phone",
+  "Show me which services make the most money",
+  "Send reminders without me texting",
+  "Look as good as the business actually is",
+];
 const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price ?? "";
 ---
 
@@ -39,7 +51,18 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
   <Marquee items={shoutouts} />
 
   <section id="menu" class="mx-auto max-w-6xl scroll-mt-6 px-4 pt-20 sm:px-6">
-    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">A website that <span class="text-accent">books.</span></h2>
+    <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">Your website. <span class="text-accent">Endless opportunities.</span></h2>
+    <ul class="mt-8 flex flex-wrap gap-3">
+      {
+        wants.map((w, i) => (
+          <li class:list={["sticker flex items-center gap-3 bg-card px-4 py-3 text-lg font-bold", i % 3 === 0 ? "-rotate-1" : i % 3 === 1 ? "rotate-1" : ""]}>
+            <span aria-hidden="true" class="grid h-6 w-6 shrink-0 place-items-center rounded-md border-[3px] border-ink text-sm">✕</span>
+            {w}
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-6 max-w-2xl text-lg">Pick what you need. If it's on this list, we've built it. If it isn't, ask anyway.</p>
     <div class="sticker mt-10 grid gap-8 bg-accent p-6 md:grid-cols-[1.2fr_1fr] md:p-10">
       <div>
         <p class="font-mono text-xs font-bold uppercase">Pixel / {site.tabs[0].blurb}</p>
@@ -98,10 +121,11 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
 
   <section id="work" class="mx-auto max-w-6xl scroll-mt-6 px-4 pt-24 sm:px-6">
     <p class="font-mono text-sm font-bold uppercase">Real sites, all running</p>
-    <h2 class="mt-3 text-[clamp(2.5rem,6vw,4.5rem)]">Built by <span class="text-accent">us.</span></h2>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed">
-      No mockups and no stock portfolio. Each of these is a working site for a real business, and you can click around
-      every one of them.
+    <h2 class="mt-3 text-[clamp(2.5rem,6vw,4.5rem)]">Imagining something for your business? <span class="text-accent">I can build it.</span></h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed">
+      These aren't just pretty pages. Under each one, data moves on its own: payments from Stripe and PayPal, prices
+      from Google Shopping, card details from PSA, texts through Twilio, scheduled jobs that email the owner every
+      morning. Every one is a working site for a real business, so click around.
     </p>
     <ul class="mt-10 grid gap-8 md:grid-cols-3">
       {
@@ -168,7 +192,7 @@ const piece = (name: string) => pixelPieces.find((o) => o.name === name)?.price 
   <section class="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
     <h2 class="text-[clamp(2.5rem,6vw,4.5rem)]">What I'm good at</h2>
     <p class="mt-6 max-w-3xl text-lg leading-relaxed">
-      Charlotte native and NC State business and IT grad. Before Pixel & Tally I was a business operations analyst,
+      Charlotte, NC native and NC State business and IT grad. Before Pixel & Tally I was a business operations analyst,
       building the dashboards sales directors used to run teams in four countries.
     </p>
     <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">

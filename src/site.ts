@@ -99,13 +99,13 @@ export const pixel: Offer[] = [
     price: "$1,800",
     cadence: "one-time",
     summary:
-      "Up to 5 pages. Customers can book, order or find your hours without calling.",
+      "Up to 5 pages with online booking or ordering built in. Bought piece by piece, the same site is $2,150.",
     includes: [
       "Built for phones first",
       "Online booking, or a menu and order link",
       "Google Business Profile cleaned up",
       "Basic local SEO",
-      "First month of Care free",
+      "First 2 months of Care free",
     ],
     turnaround: "about 2 weeks",
   },
@@ -114,13 +114,13 @@ export const pixel: Offer[] = [
     price: "$3,200",
     cadence: "one-time",
     summary:
-      "Up to 10 pages, for businesses that run on appointments and want deposits up front.",
+      "Up to 10 pages with booking, deposits and an extra form, for businesses that run on appointments. Piece by piece: $3,825.",
     includes: [
       "Booking with deposits or payments",
       "A reviews section (real ones only)",
       "Email signup",
       "Visitor analytics",
-      "First month of Care free",
+      "First 3 months of Care free",
     ],
     turnaround: "3 to 4 weeks",
   },
@@ -220,7 +220,7 @@ export const tally: Offer[] = [
     price: "$1,500",
     cadence: "one-time",
     summary:
-      "One live dashboard from up to 3 sources (say POS, booking and your labor sheet): weekly sales, best and worst sellers, labor %, busy hours. A private web page that updates every night and works on your phone, or built in Tableau or Power BI if you use them. Setup call and handoff included.",
+      "One live dashboard from up to 3 sources (say POS, booking and your labor sheet): weekly sales, best and worst sellers, labor %, busy hours. A private web page that updates as often as your tools allow, down to every few minutes, and works on your phone, or built in Tableau or Power BI if you use them. Setup call and handoff included.",
     includes: [],
     turnaround: "about 3 weeks",
   },
@@ -295,7 +295,7 @@ export const steps = [
 ] as const;
 
 export const shoutouts = [
-  "Charlotte native",
+  "Charlotte, NC native",
   "Text me, I answer",
   "Prices on the page",
   "Websites that book",
@@ -309,40 +309,40 @@ export const offers = [...pixel, ...pixelPieces, ...tally, ...automations];
 // What Blake is good at, for the owner section on the home and about pages.
 export const expertise = [
   {
-    area: "Websites & booking",
+    area: "Websites & apps",
     detail:
-      "HTML, CSS and JavaScript, built for phones, wired to booking and ordering.",
+      "Custom sites that look sharp on phones, tablets and big screens, plus owner hubs that install like an app. Built with TypeScript, Astro and Tailwind, hosted on Cloudflare.",
   },
   {
-    area: "SQL & data",
+    area: "Booking & payments",
     detail:
-      "Cleaning and joining messy exports from POS, booking and spreadsheet tools.",
+      "Booking calendars, deposits, held cards, gift certificates and checkout through Stripe and PayPal, with confirmations emailed on their own.",
   },
   {
-    area: "Dashboards",
+    area: "Data & dashboards",
     detail:
-      "Tableau and Power BI if you already pay for them. Otherwise a custom live dashboard we build and host, with no license to buy.",
+      "Custom live dashboards we build and host, with no license to buy, fed by SQL that cleans and joins your messy exports. Years of Tableau and Power BI too, if you already use them.",
   },
   {
     area: "Automation & APIs",
     detail:
-      "Python and workflow tools that move data between the apps you already pay for.",
+      "Twilio texts, Google Shopping prices, PSA card lookups, scheduled emails and Zapier workflows. If a tool has an API, we can make it talk.",
   },
   {
     area: "Money side",
     detail:
-      "Excel, QuickBooks and a summer at a Charlotte CPA firm, so a P&L makes sense to me.",
+      "Excel, QuickBooks and a summer at a Charlotte, NC CPA firm, so a P&L makes sense to me.",
   },
 ] as const;
 
 // The pick-your-own builder: every item a visitor can add to an order, grouped like a menu.
 export const builderGroups = [
   { title: "Pixel / Packages", tone: "pixel", items: pixel },
-  { title: "Pixel / By the piece", tone: "pixel", items: pixelPieces },
-  { title: "Pixel / Monthly", tone: "pixel", items: pixelPlans },
+  { title: "Pixel / Custom, by the piece", tone: "pixel", items: pixelPieces },
+  { title: "Pixel / Care", tone: "pixel", items: pixelPlans },
   { title: "Tally / Numbers", tone: "tally", items: tally },
   { title: "Tally / Automation", tone: "tally", items: automations },
-  { title: "Tally / Monthly", tone: "tally", items: tallyPlans },
+  { title: "Tally / Care", tone: "tally", items: tallyPlans },
 ] as const;
 
 /** "$1,800" -> 1800, "From $800" -> 800 */
@@ -380,7 +380,7 @@ export const work: WorkItem[] = [
       "Mobile car detailing in Charlotte. Customers pick a package priced by their vehicle, choose a time, place and detailer, and their card is only charged once the detailer confirms. Gift certificates and referral credit are built in.",
     url: "https://mintcoupe.com",
     image: "/work/mint-coupe.webp",
-    highlights: ["Customer, detailer and owner hubs, all connected", "Masked calls and texts, real numbers stay private", "Card held until the detailer confirms"],
+    highlights: ["Stripe holds the card, charges only when a detailer accepts", "Twilio masks every call and text so real numbers stay private", "Customer, detailer and owner apps on one live database"],
     features: [
       {
         group: "Customer booking",
@@ -468,7 +468,7 @@ export const work: WorkItem[] = [
       "Refrigerated smart vending from a family in Belmont, NC. A light, friendly site built on the owners' own flier, a form for businesses that want a machine, and a private login where the owners track host requests and bulk prices.",
     url: "https://oogum-vending.blake-499.workers.dev",
     image: "/work/oogum-vending.webp",
-    highlights: ["Bulk prices compared across 5 stores", "Online prices pulled in every Monday", "Fewest-stops shopping trip"],
+    highlights: ["Costco, Sam's, Walmart, Target and Amazon prices side by side, per unit", "A Google Shopping API pull every Monday flags the best deals", "Plans which stores to hit so restocking takes the fewest trips"],
     features: [
       {
         group: "Public site",
@@ -500,7 +500,7 @@ export const work: WorkItem[] = [
       "Nancy Turner's resume writing service, moved off Wix with nothing lost. A guided order form with resume upload, PayPal checkout tied to each order, a free resume review, and a dashboard where every order moves from paid to delivered, with her own emails one click away.",
     url: "https://resume-pro-nc.blake-499.workers.dev",
     image: "/work/resume-pro-nc.webp",
-    highlights: ["Order, pay and get on the schedule in one go", "Payment confirmed and emailed on its own", "A morning to-do list in her inbox"],
+    highlights: ["Order form, file upload and PayPal checkout in one flow", "PayPal confirms payment, the site emails both sides on its own", "Every morning a scheduled job emails her the day's to-do list"],
     features: [
       {
         group: "For clients",
@@ -541,7 +541,7 @@ export const work: WorkItem[] = [
     summary:
       "A Charlotte graded sports card seller. Every card sits in its own lit display case that flips to the back and shines like a refractor. The owner adds cards from his phone in seconds, and buyers can check out, make an offer or message him on Instagram.",
     url: "https://chromerabilia.blake-499.workers.dev",
-    highlights: ["Snap a photo, it crops itself", "PSA details fill in from the cert number", "Checkout, offers and Instagram DMs"],
+    highlights: ["Snap a phone photo, image processing crops it to the slab", "Type a PSA cert number, the PSA API fills in the card details", "PayPal checkout, offer inbox and Instagram DMs in one portal"],
     features: [
       {
         group: "Shop",
@@ -580,7 +580,7 @@ export const faqs = [
   },
   {
     q: "How does billing work?",
-    a: "Everything is on autopay with a card or bank account on file, so nothing gets missed. Three days before a monthly charge, and a month before a yearly one, you get an email with the amount and the date. Pay Care for the year and it's $1,000 instead of $1,140, or Care Plus for $2,500 instead of $2,940. Your first month of Care or Care Plus after launch is free: no charge, and you can cancel before it ends. Yearly starts after that free month. Switch to yearly or upgrade to Care Plus anytime, and you only pay the difference. Pay your build by bank transfer and take $50 off. If a payment fails and isn't fixed, service pauses until it's paid.",
+    a: "Everything is on autopay with a card or bank account on file, so nothing gets missed. Three days before a monthly charge, and a month before a yearly one, you get an email with the amount and the date. Pay Care for the year and it's $1,000 instead of $1,140, or Care Plus for $2,500 instead of $2,940. Your first month of Care or Care Plus after launch is free, or 2 months with a Starter Site and 3 with a Booking Site: no charge, and you can cancel before it ends. Yearly starts after the free months. Switch to yearly or upgrade to Care Plus anytime, and you only pay the difference. Pay your build by bank transfer and take $50 off. If a payment fails and isn't fixed, service pauses until it's paid.",
   },
   {
     q: "What if I stop paying for Care?",
@@ -604,10 +604,6 @@ export const faqs = [
   },
   {
     q: "Do you meet in person?",
-    a: "Calls are face to face over video, so it works the same in Charlotte or anywhere in the US. I grew up in Charlotte and know the area.",
-  },
-  {
-    q: "Do you use AI?",
-    a: "We use good tools, like any shop. But you talk to me, I decide what goes on your site, and I check every page myself before it launches.",
+    a: "Calls are face to face over video, so it works the same in Charlotte or anywhere in the US. I grew up in Charlotte, NC and love helping local businesses here.",
   },
 ] as const;
