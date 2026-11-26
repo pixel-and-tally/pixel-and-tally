@@ -580,7 +580,7 @@ export const faqs = [
   },
   {
     q: "How does billing work?",
-    a: "Everything is on autopay with a card or bank account on file, so nothing gets missed. Three days before a monthly charge, and a month before a yearly one, you get an email with the amount and the date. Pay Care for the year and it's $1,000 instead of $1,140, or Care Plus for $2,500 instead of $2,940. Pay your build by bank transfer and take $50 off. If a payment fails and isn't fixed, service pauses until it's paid.",
+    a: "Everything is on autopay with a card or bank account on file, so nothing gets missed. Three days before a monthly charge, and a month before a yearly one, you get an email with the amount and the date. Pay Care for the year and it's $1,000 instead of $1,140, or Care Plus for $2,500 instead of $2,940. Your first month of Care or Care Plus after launch is free: no charge, and you can cancel before it ends. Yearly starts after that free month. Switch to yearly or upgrade to Care Plus anytime, and you only pay the difference. Pay your build by bank transfer and take $50 off. If a payment fails and isn't fixed, service pauses until it's paid.",
   },
   {
     q: "What if I stop paying for Care?",
