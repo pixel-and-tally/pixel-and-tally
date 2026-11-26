@@ -338,7 +338,7 @@ export const expertise = [
 // The pick-your-own builder: every item a visitor can add to an order, grouped like a menu.
 export const builderGroups = [
   { title: "Pixel / Packages", tone: "pixel", items: pixel },
-  { title: "Pixel / Custom, by the piece", tone: "pixel", items: pixelPieces },
+  { title: "Pixel / Custom features", tone: "pixel", items: pixelPieces },
   { title: "Pixel / Care", tone: "pixel", items: pixelPlans },
   { title: "Tally / Numbers", tone: "tally", items: tally },
   { title: "Tally / Automation", tone: "tally", items: automations },
