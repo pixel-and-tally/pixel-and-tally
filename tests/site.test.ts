@@ -14,12 +14,13 @@ describe("price sheet", () => {
       "Deposits or Payments": "$400",
       "Extra Form": "$150",
       "Signature Piece": "$500",
+      "Hub as an App": "$500",
       "Data Checkup": "$300",
       "Owner Dashboard": "$1,500",
       "Workflow Setup": "$450",
       "API Connection": "From $800",
       Care: "$95",
-      "Care Plus": "$195",
+      "Care Plus": "$245",
       "Dashboard Care": "$150",
       "Automation Care": "$75",
     });
@@ -41,7 +42,7 @@ describe("by the piece", () => {
 
 describe("honest content", () => {
   it("lists only the real case studies", () => {
-    expect(work.map((w) => w.name)).toEqual(["Mint Coupe", "Oogum Vending", "Resume Pro NC"]);
+    expect(work.map((w) => w.name)).toEqual(["Mint Coupe", "Oogum Vending", "Resume Pro NC", "Chromerabilia"]);
   });
   it("has a screenshot on disk for every case study", () => {
     for (const w of work) if (w.image) expect(existsSync(`public${w.image}`), w.image).toBe(true);

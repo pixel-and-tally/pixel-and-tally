@@ -176,6 +176,14 @@ export const pixelPieces: Offer[] = [
       "One interactive centerpiece that makes your site unlike anyone else's, built around what you do.",
     includes: [],
   },
+  {
+    name: "Hub as an App",
+    price: "$500",
+    cadence: "one-time",
+    summary:
+      "Your private owner hub as an app on your phone's home screen, with alerts the moment a booking, order or message comes in. Add it to any site with an owner hub.",
+    includes: [],
+  },
 ];
 
 export const pixelPlans: Offer[] = [
@@ -184,15 +192,15 @@ export const pixelPlans: Offer[] = [
     price: "$95",
     cadence: "monthly",
     summary:
-      "Hosting, security updates, backups and uptime checks, plus 30 minutes of edits a month. Text me when something needs changing.",
+      "Hosting, security updates, backups and uptime checks, plus a 30 minute call each month to go over changes and 30 minutes of work on them.",
     includes: [],
   },
   {
     name: "Care Plus",
-    price: "$195",
+    price: "$245",
     cadence: "monthly",
     summary:
-      "Everything in Care, 2 hours of edits, one Google profile post a month, and a one-page report on visits, bookings and calls.",
+      "Everything in Care, but with up to an hour of calls (one hour or two half hours) and an hour of work on changes, plus one Google profile post a month, and a one-page report on visits, bookings and calls.",
     includes: [],
   },
 ];
@@ -372,7 +380,7 @@ export const work: WorkItem[] = [
       "Mobile car detailing in Charlotte. Customers pick a package priced by their vehicle, choose a time, place and detailer, and their card is only charged once the detailer confirms. Gift certificates and referral credit are built in.",
     url: "https://mintcoupe.com",
     image: "/work/mint-coupe.webp",
-    highlights: ["Booking with prices by vehicle", "Card held until the detailer confirms", "Texts, reminders and a detailer app"],
+    highlights: ["Customer, detailer and owner hubs, all connected", "Masked calls and texts, real numbers stay private", "Card held until the detailer confirms"],
     features: [
       {
         group: "Customer booking",
@@ -460,7 +468,30 @@ export const work: WorkItem[] = [
       "Refrigerated smart vending from a family in Belmont, NC. A light, friendly site built on the owners' own flier, a form for businesses that want a machine, and a private login where the owners track host requests and bulk prices.",
     url: "https://oogum-vending.blake-499.workers.dev",
     image: "/work/oogum-vending.webp",
-    highlights: ["Built from the owners' flier", "Host-a-machine request form", "Private owner hub"],
+    highlights: ["Bulk prices compared across 5 stores", "Online prices pulled in every Monday", "Fewest-stops shopping trip"],
+    features: [
+      {
+        group: "Public site",
+        items: [
+          "Built from the owners' own flier and its five cornerstones",
+          "Host-a-machine request form for businesses that want one",
+          "Call picker for a quick phone call, with an add-to-calendar file",
+        ],
+      },
+      {
+        group: "Owner hub",
+        items: [
+          "Private login for both owners, with passwords they change themselves",
+          "Every host request saved and tracked",
+          "Log bulk prices from Costco, Sam's Club, Walmart, Target and Amazon; it shows the cheapest store per unit",
+          "Watch list of up to 20 items, compared per unit even when pack sizes differ",
+          "Online store prices pulled in through a Google Shopping connection every Monday morning, or on a Refresh tap",
+          "Sales that beat every other price get called out",
+          "Shopping trip planner: the fewest store stops for the best prices, and what skipping a store would cost",
+          "Settings page so the owners update their own site details, no call to me needed",
+        ],
+      },
+    ],
   },
   {
     name: "Resume Pro NC",
@@ -469,7 +500,71 @@ export const work: WorkItem[] = [
       "Nancy Turner's resume writing service, moved off Wix with nothing lost. A guided order form with resume upload, PayPal checkout tied to each order, a free resume review, and a dashboard where every order moves from paid to delivered, with her own emails one click away.",
     url: "https://resume-pro-nc.blake-499.workers.dev",
     image: "/work/resume-pro-nc.webp",
-    highlights: ["Order form with checkout", "Every old Wix link still works", "Owner dashboard and emails"],
+    highlights: ["Order, pay and get on the schedule in one go", "Payment confirmed and emailed on its own", "A morning to-do list in her inbox"],
+    features: [
+      {
+        group: "For clients",
+        items: [
+          "Guided order form: pick services, answer the questionnaire, upload a resume",
+          "Checkout through PayPal for the exact total, tied to that order",
+          "Free resume review with upload",
+          "Free phone consultation picker on the contact form",
+          "Career Tips blog, and all 40+ old Wix links still land on the right page",
+        ],
+      },
+      {
+        group: "Billing and emails on autopilot",
+        items: [
+          "PayPal tells the site when a payment clears; the order is marked paid and the client gets a receipt email",
+          "Questionnaire-received email with a payment link, sent the moment an order comes in",
+          "One automatic payment reminder for orders left unpaid",
+          "Every client email is written in the owner's own words, with her signature",
+          "Send an order link after a phone call by email or one-tap text",
+        ],
+      },
+      {
+        group: "Owner dashboard",
+        items: [
+          "Today view: drafts due or overdue, unconfirmed calls, unanswered messages, unpaid orders",
+          "Every order moves from waiting on payment to queued, writing, draft sent and delivered, with the draft due date set automatically",
+          "Each client's orders, messages, files and notes on one page",
+          "A 30-day check-in reminder to ask how the job search is going",
+          "Weekday 7 AM email with the day's list",
+          "Settings to change her own prices, hours, turnaround and contact details",
+        ],
+      },
+    ],
+  },
+  {
+    name: "Chromerabilia",
+    kind: "Sports card shop + owner portal",
+    summary:
+      "A Charlotte graded sports card seller. Every card sits in its own lit display case that flips to the back and shines like a refractor. The owner adds cards from his phone in seconds, and buyers can check out, make an offer or message him on Instagram.",
+    url: "https://chromerabilia.blake-499.workers.dev",
+    highlights: ["Snap a photo, it crops itself", "PSA details fill in from the cert number", "Checkout, offers and Instagram DMs"],
+    features: [
+      {
+        group: "Shop",
+        items: [
+          "Display-case showcase: cards flip to their back photo and catch a refractor shine",
+          "Filters, including search by card color",
+          "PayPal checkout for cards that ship, plus a Make an Offer form",
+          "Inquire button copies a ready message and opens his Instagram DMs",
+          "A Vault page for cards he's keeping, never for sale",
+          "Real view and in-cart counts, hidden at zero and never made up",
+        ],
+      },
+      {
+        group: "Owner portal",
+        items: [
+          "Upload from a phone: the photo crops itself to the slab, even on a cluttered table",
+          "Type the PSA cert number and the card's name, year, set and grade fill in on their own",
+          "Choose per card: ship it, inquiry only, or Vault",
+          "Orders and offers each in their own inbox",
+          "Settings to change his own contact details, Instagram, Zelle, shipping and password",
+        ],
+      },
+    ],
   },
 ];
 
@@ -485,7 +580,7 @@ export const faqs = [
   },
   {
     q: "How do changes work after launch?",
-    a: "Text or email me what you want changed. Care includes 30 minutes of edits a month, Care Plus includes 2 hours, and anything bigger is $85 an hour, quoted before I start.",
+    a: "Each month we get on a call and go over what you want changed. Care includes a 30 minute call and 30 minutes of work. Care Plus includes up to an hour of calls and an hour of work. Small changes fit in that time; new features get quoted separately. Need more time? Extra work is $50 per 30 minutes, agreed before I start.",
   },
   {
     q: "How long does it take?",

@@ -6,7 +6,8 @@ Tagline: "Design & analytics. Sit back, I've got it."
 Two service lines: websites with booking plus monthly care plans (Pixel), and dashboards plus
 data advice (Tally). Clients are US small businesses only, starting with Charlotte restaurants
 and service businesses. The pitch is "you deal with one real person", not "no AI".
-App building is not offered on the site until one has been delivered for a paying client.
+Full custom app building is not offered on the site yet. The "Hub as an App" add-on ($500) is offered
+because owner hubs already run as apps for real clients (Chromerabilia, plus Blake's own Mint Coupe), per Blake 2026-11-25.
 
 This repo is also the template for client sites: a client re-skin should only touch
 `src/theme.css` (colors, fonts, shape) and `src/site.ts` (business facts, offers, copy).
