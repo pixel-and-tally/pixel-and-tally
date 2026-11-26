@@ -467,7 +467,7 @@ export const work: WorkItem[] = [
     kind: "Wix rebuild + client portal",
     summary:
       "Nancy Turner's resume writing service, moved off Wix with nothing lost. A guided order form with resume upload, PayPal checkout tied to each order, a free resume review, and a dashboard where every order moves from paid to delivered, with her own emails one click away.",
-    url: "https://pixel-and-tally-resume-pro-nc.blake-499.workers.dev",
+    url: "https://resume-pro-nc.blake-499.workers.dev",
     image: "/work/resume-pro-nc.webp",
     highlights: ["Order form with checkout", "Every old Wix link still works", "Owner dashboard and emails"],
   },
