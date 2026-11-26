@@ -575,6 +575,14 @@ export const faqs = [
     a: "Your domain and your content are yours: the name, the words, the photos and the logo. The site itself, with its booking, payments and forms, runs on our systems as part of Care.",
   },
   {
+    q: "Are domains and other app fees included?",
+    a: "No, and I don't mark them up. Your domain (about $10 a year) and any outside app you choose cost exactly what the company charges, nothing more. I suggest the free version whenever it does the job. I bill these once a year at cost and can show you the receipt for every one.",
+  },
+  {
+    q: "How does billing work?",
+    a: "Everything is on autopay with a card or bank account on file, so nothing gets missed. Three days before a monthly charge, and a month before a yearly one, you get an email with the amount and the date. Pay Care for the year and it's $1,000 instead of $1,140, or Care Plus for $2,500 instead of $2,940. Pay your build by bank transfer and take $50 off. If a payment fails and isn't fixed, service pauses until it's paid.",
+  },
+  {
     q: "What if I stop paying for Care?",
     a: `No hard feelings. Your domain stays yours and I help you point it wherever you like. The site, booking, payments and forms run on our systems, so they switch off when Care ends, with 30 days' notice. Want to keep the site? Buy a copy of the files for ${buyout.percent}% of what you paid for the build (${buyout.minimum} minimum). My accounts don't come with it, so booking and payments get reconnected on your end.`,
   },
